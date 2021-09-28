@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <hr class="line" />
+  <div class="path">
+    <div *ngFor="let path of paths; let id = index" class="path__iterator">
+      <a
+        class="path__link"
+        routerLink="{{path.routerLink}}"
+        routerLinkActive="path__link_active"
+        [routerLinkActiveOptions]="{exact: true}"
+      >
+        {{path.name}}
+      </a>
+      <div *ngIf="!(id === paths.length - 1)" class="path__separator">></div>
+    </div>
+  </div>
+</div>

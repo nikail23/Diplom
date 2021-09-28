@@ -1,0 +1,77 @@
+<div class="wrapper">
+  <div class="slider">
+    <div
+      *ngFor="let slide of slides; let id = index"
+      class="slider__content slider__content_fade"
+      [ngClass]="{
+        slider__content_active: slide === slides[activeSlideNumber]
+      }"
+    >
+      <div class="slider__info-part">
+        <div class="slider__header">
+          {{ slide.header }}
+        </div>
+        <div class="slider__subheader">
+          {{ slide.subheader }}
+        </div>
+        <div class="slider__navigation">
+          <div
+            class="slider__navbutton"
+            [ngClass]="{ slider__navbutton_active: id === 0 }"
+            (click)="setSlide(0)"
+          ></div>
+          <div
+            class="slider__navbutton"
+            [ngClass]="{ slider__navbutton_active: id === 1 }"
+            (click)="setSlide(1)"
+          ></div>
+          <div
+            class="slider__navbutton"
+            [ngClass]="{ slider__navbutton_active: id === 2 }"
+            (click)="setSlide(2)"
+          ></div>
+          <div
+            class="slider__navbutton"
+            [ngClass]="{ slider__navbutton_active: id === 3 }"
+            (click)="setSlide(3)"
+          ></div>
+        </div>
+      </div>
+      <img class="slider__image" src="{{ slide.imageUrl }}" />
+    </div>
+  </div>
+  <app-cards></app-cards>
+  <app-categories class="categories"></app-categories>
+  <div class="catalog-preview">
+    <div class="catalog-preview__header">Look at the these beauties!</div>
+    <div class="catalog-preview__content">
+      <app-flower-card *ngFor="let flower of randomEightflowers" [flower]="flower"></app-flower-card>
+    </div>
+    <app-button
+      class="catalog-preview__browse-button"
+      [filled]="false"
+      routerLink="/catalog"
+    >Browse catalog</app-button>
+  </div>
+  <div class="delivery-description">
+    <div class="delivery-description__header">Flower delivery in Minsk</div>
+    <div class="delivery-description__paragraph">
+      Flowers can and should be given not only for holidays, but also for no
+      reason. And flowers with delivery are convenient, fast and reliable. In
+      our online store, you can order stunning bouquets for your home or office,
+      which can not fail to impress. We will deliver them to any convenient
+      point in Minsk. If desired, the bouquet is supplemented with a postcard,
+      the text of which is chosen by the client. Flower delivery Minsk is a
+      service that is very popular in the Republic of Belarus. You can order a
+      ready-made composition or a thematic bouquet for a birthday, name day,
+      wedding, anniversary, congratulations and other occasions. Roses (peony,
+      bush), tulips, daisies, lilies, orchids, chrysanthemums, gerberas,
+      alstroemeria, irises, peonies, eustomas, carnations are only a part of
+      those flowers that are used for making bouquets. Forget about visiting a
+      florist. We will make a bouquet for you that meets your wishes and
+      requirements, and we will deliver it for free in Minsk and the Minsk
+      district: Central, Sovetsky, Pervomaysky, Partizansky, Zavodsky, Leninsky,
+      Oktyabrsky, Moskovsky, Frunzensky.
+    </div>
+  </div>
+</div>

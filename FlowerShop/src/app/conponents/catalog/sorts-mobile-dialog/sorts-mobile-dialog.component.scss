@@ -1,0 +1,117 @@
+@import '../../../../sass/vars.scss';
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 64px;
+
+    &__title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 22px;
+      line-height: 120%;
+      color: #404040;
+    }
+  }
+
+  .separator {
+    position: relative;
+    left: -30px;
+    width: calc(100% + 60px);
+    height: 1px;
+    background: #404040;
+    opacity: 0.2;
+    margin-bottom: 40px;
+  }
+
+  .sorts {
+    &__header {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 150%;
+      color: #404040;
+      margin-bottom: 22px;
+    }
+
+    .radio {
+      &__group {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 268px;
+      }
+    }
+
+    &__button {
+      width: 100%;
+      height: 57px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 110%;
+      text-align: center;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+
+      &_type_apply {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+        background-color: #5e9e5e;
+        color: #ffffff;
+        border: none;
+      }
+      &_type_apply:hover {
+        background-color: #4a804a;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-dialog-container {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0 !important;
+    padding: 0 30px !important;
+  }
+
+  .mat-radio-label {
+    .mat-radio-container {
+      .mat-radio-outer-circle {
+        border-color: #5E9E5E !important;
+      }
+
+      .mat-radio-inner-circle {
+        background: #5E9E5E !important;
+      }
+
+      .mat-ripple {
+        display: none !important;
+      }
+    }
+
+    .mat-radio-label-content {
+      font-style: normal !important;
+      font-weight: normal !important;
+      font-size: 18px !important;
+      line-height: 150% !important;
+      color: #404040 !important;
+      margin-left: 24px;
+      padding-left: 0;
+    }
+  }
+}

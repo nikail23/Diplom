@@ -1,0 +1,18 @@
+@mixin resolution_laptops-s {
+  @media (max-width: 1280px) { @content; }
+}
+
+@mixin resolution_tablets {
+  @media (max-width: 1024px) { @content; }
+}
+
+@mixin resolution_phones {
+  @media (max-width: 425px) { @content; }
+}
+
+@mixin gradient_text($color1, $color2) {
+  background: linear-gradient(90deg, $color1, $color2);;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

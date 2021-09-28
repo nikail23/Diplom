@@ -1,0 +1,61 @@
+@import "../../../../sass/vars.scss";
+@import "../../../../sass/mixins.scss";
+
+.paragraph {
+  width: 73%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $about-us-paragraph-color;
+  margin-bottom: 60px;
+}
+
+.images {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  background: #FAFAFA;
+  height: 380px;
+  width: 100%;
+
+  &__image {
+    width: 300px;
+    height: 300px;
+    mix-blend-mode: darken;
+  }
+
+  &__subtext {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    color: $about-us-medium-images-subtext-color;
+  }
+}
+
+@include resolution_tablets {
+  .paragraph {
+    width: 100%;
+  }
+
+  .images {
+    padding: 42px 0;
+    flex-direction: column;
+    height: 100%;
+    gap: 60px;
+  }
+}
+
+@include resolution_phones {
+  .images {
+    &__image {
+      width: 192px;
+      height: 192px;
+    }
+  }
+}

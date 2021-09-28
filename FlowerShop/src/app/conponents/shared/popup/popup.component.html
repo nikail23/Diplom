@@ -1,0 +1,19 @@
+<mat-card
+  class="popup"
+  [ngClass]="{
+    popup_type_active: this.isActive
+  }"
+>
+  <mat-card-content
+    class="popup__text"
+    [ngClass]="{
+      popup__text_color_error: this.isError,
+      popup__text_color_normal: !this.isError
+    }"
+  >
+    {{ this.response }}
+  </mat-card-content>
+  <mat-card-actions>
+    <a class="popup__button_type_close" (click)="this.close()"></a>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,23 @@
+<div class="news">
+  <div class="article" *ngFor="let article of currentArticles">
+    <div class="article__date">
+      {{ article.date }}
+    </div>
+    <a routerLink="/news/{{article.id}}" class="article__header" >
+      {{ article.header }}
+    </a>
+    <div class="article__paragraph">
+      {{ article.shortParagraph }}
+    </div>
+  </div>
+  <div class="navigation">
+    <button
+      class="navigation__button"
+      *ngFor="let page of pages"
+      (click)="this.pageClick(page)"
+      [ngClass]="{'navigation__button_active': this.currentPage === page}"
+    >
+      {{ page }}
+    </button>
+  </div>
+</div>

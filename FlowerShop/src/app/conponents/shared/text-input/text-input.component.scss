@@ -1,0 +1,103 @@
+@import "../../../../sass/vars.scss";
+@import "../../../../sass/mixins.scss";
+
+.label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $input-label-color;
+  left: 29px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 25px;
+
+  &_type_star {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 150%;
+    color: $registration-page-star-color;
+  }
+}
+
+.container {
+  position: relative;
+
+  &_style_error {
+    .input {
+      border-color: $registration-page-error-color;
+    }
+
+    .textarea {
+      border-color: $registration-page-error-color;
+    }
+
+    .label {
+      color: $registration-page-error-color;
+    }
+  }
+}
+
+.input {
+  outline: none;
+  background: $input-background-color;
+  border: $input-border;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $input-text-color;
+  padding: 0 29px;
+  height: 76px;
+  width: 100%;
+
+  &:focus ~ .label,
+  &:not(:placeholder-shown) ~ .label {
+    font-size: 14px;
+    transform: translateY(-18px);
+  }
+}
+
+.textarea {
+  outline: none;
+  background: $input-background-color;
+  border: $input-border;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $input-text-color;
+  padding: 0 29px;
+  padding-top: 29px;
+  resize: none;
+  overflow-y: none;
+  height: 173px;
+  width: 100%;
+
+  &:focus ~ .label,
+  &:not(:placeholder-shown) ~ .label {
+    font-size: 14px;
+    transform: translateY(-18px);
+  }
+}
+
+::ng-deep {
+  .error {
+    display: block;
+    margin-top: 7px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 150%;
+    color: $registration-page-error-color;
+  }
+}

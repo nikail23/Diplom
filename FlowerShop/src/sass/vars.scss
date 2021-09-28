@@ -1,0 +1,146 @@
+// home page
+
+$home-page-bottom-padding: 5%;
+$home-page-text-base-color: #404040;
+$home-page-text-second-color: #b4b4b4;
+$home-page-navigation-button-base-color: #ffffff;
+$home-page-navigation-button-active-color: #404040;
+$home-page-card-border-color: #E7E7E7;
+$home-page-slider-background: linear-gradient(90deg, #F8D7C4 0%, #FEDCE0 46.33%), #FEDCE0;
+$home-page-card-about-background: #F6F6F6;
+$home-page-card-about-subheader-color: #FF5D7D;
+$home-page-card-promo-backround: linear-gradient(101.17deg, rgba(123, 97, 255, 0.2) 0%, rgba(197, 224, 239, 0.2) 100%), #C5E0EF;
+$home-page-flower-border-color: #E7E7E7;
+$home-page-browse-button-first-color: #5E9E5E;
+$home-page-browse-button-second-color: #ffffff;
+$home-page-delivery-description-header-background-color-1: rgba(255, 93, 125, 1);
+$home-page-delivery-description-header-background-color-2: rgba(123, 97, 255, 1);
+
+// news page
+
+$news-page-description-header-background-color-1: rgba(255, 93, 125, 1);
+$news-page-description-header-background-color-2: rgba(123, 97, 255, 1);
+
+// news page -> pagination-list
+
+$news-page-pagination-list-article-date-text-color: #404040;
+$news-page-pagination-list-article-header-text-color: #404040;
+$news-page-pagination-list-article-paragraph-text-color: #404040;
+
+// about us
+
+$about-us-header-color-1: rgba(255, 93, 125, 1);
+$about-us-header-color-2: rgba(123, 97, 255, 1);
+$about-us-paragraph-color: #404040;
+$about-us-advantages-header-color: #FF5D7D;
+$about-us-medium-images-subtext-color: #B4B4B4;
+$about-us-advantage-text-color: #404040;
+
+// article
+
+$article-page-header-color-1: rgba(255, 93, 125, 1);
+$article-page-header-color-2: rgba(123, 97, 255, 1);
+$article-page-paragraph-color: #404040;
+$article-page-paragraph-black-color: #000000;
+
+// contacts
+
+$contacts-page-header-color-1: rgba(255, 93, 125, 1);
+$contacts-page-header-color-2: rgba(123, 97, 255, 1);
+$contacts-page-paragraph-color: #000000;
+$contacts-page-address-color: #000000;
+$contacts-page-phone-color: #000000;
+$contacts-page-email-color: #000000;
+$contacts-page-form-background-color: #FAFAFA;
+$contacts-page-header-color: #404040;
+$contacts-page-button-color-1: #5e9e5e;
+$contacts-page-button-color-2: #ffffff;
+
+// registration
+
+$registration-page-header-color: #404040;
+$registration-page-link-color: #FF5D7D;
+$registration-page-star-color: #FF5D7D;
+$registration-page-help-color: #000000;
+$registration-page-checkbox-border: 1px solid #B4B4B4;
+$registration-page-checkbox-color-1: #FFFFFF;
+$registration-page-checkbox-color-2: #5E9E5E;
+$registration-page-checks-text-color: #404040;
+$registration-page-checks-link-color: #FF5D7D;
+$registration-page-or-hr-color: #404040;
+$registration-page-or-text-color: #404040;
+$registration-page-other-ways-help-color: #000000;
+$registration-page-other-ways-button-facebook-color-1: #ffffff;
+$registration-page-other-ways-button-facebook-color-2: #4867AA;
+$registration-page-other-ways-button-google-color-1: #404040;
+$registration-page-other-ways-button-google-color-2: #FFFFFF;
+$registration-page-other-ways-button-google-border: 1px solid #F5F5F5;
+$registration-page-register-button-color-2: #ffffff;
+$registration-page-register-button-color-1: #5e9e5e;
+$registration-page-error-color: #eb5757;
+
+// login
+
+$log-in-page-header-color: #404040;
+$log-in-page-link-color: #FF5D7D;
+$log-in-page-star-color: #FF5D7D;
+$log-in-page-help-color: #000000;
+$log-in-page-checkbox-border: 1px solid #B4B4B4;
+$log-in-page-checkbox-color-1: #FFFFFF;
+$log-in-page-checkbox-color-2: #5E9E5E;
+$log-in-page-checks-text-color: #404040;
+$log-in-page-checks-link-color: #FF5D7D;
+$log-in-page-or-hr-color: #404040;
+$log-in-page-or-text-color: #404040;
+$log-in-page-other-ways-help-color: #000000;
+$log-in-page-other-ways-button-facebook-color-1: #ffffff;
+$log-in-page-other-ways-button-facebook-color-2: #4867AA;
+$log-in-page-other-ways-button-google-color-1: #404040;
+$log-in-page-other-ways-button-google-color-2: #FFFFFF;
+$log-in-page-other-ways-button-google-border: 1px solid #F5F5F5;
+$log-in-page-login-button-color-2: #ffffff;
+$log-in-page-login-button-color-1: #5e9e5e;
+$log-in-page-error-color: #eb5757;
+
+// catalog
+
+$catalog-page-separator-color: #404040;
+$catalog-page-header-color-1: rgba(255, 93, 125, 1);
+$catalog-page-header-color-2: rgba(123, 97, 255, 1);
+$catalog-page-paragraph-color: #000000;
+$catalog-page-filters-header-color: #404040;
+$catalog-page-filters-cost-header-color: #404040;
+$catalog-page-slider-color: #ff5d7d;
+$catalog-page-filters-subheader-color: #404040;
+$catalog-page-checkbox-border: 1px solid #B4B4B4;
+$catalog-page-checkbox-color-1: #FFFFFF;
+$catalog-page-checkbox-color-2: #5E9E5E;
+$catalog-page-catagory-text-active-color: #404040;
+$catalog-page-checks-text-color: #404040;
+$catalog-page-button-color-1: #5e9e5e;
+$catalog-page-button-color-2: #4a804a;
+
+// footer
+
+$footer-background-color: #404040;
+$footer-text-base-color: #b4b4b4;
+$footer-text-second-color: #ffffff;
+
+// header
+
+$header-text-base-color: #404040;
+$header-text-hover-color: #ff5d7d;
+
+// navigation
+
+$navigation-page-line-color: #404040;
+$navigation-page-separator-color: #BDBDBD;
+$navigation-page-link-color: #404040;
+$navigation-page-active-link-color: #BDBDBD;
+
+// input
+
+$input-text-color: #404040;
+$input-background-color: #FFFFFF;
+$input-border: 1px solid #E7E7E7;
+$input-label-color: #B4B4B4;

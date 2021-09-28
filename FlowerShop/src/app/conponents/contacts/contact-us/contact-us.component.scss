@@ -1,0 +1,54 @@
+@import "../../../../sass/vars.scss";
+@import "../../../../sass//mixins.scss";
+
+.wrapper {
+  background: $contacts-page-form-background-color;
+  width: 100%;
+  box-sizing: border-box;
+  height: 700px;
+  margin-bottom: 105px;
+  padding: 0 8%;
+  padding-top: 58px;
+
+  .header {
+    margin-bottom: 40px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 110%;
+    color: $contacts-page-header-color;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+
+    &__text, &__phone, &__name {
+      margin-bottom: 30px;
+    }
+
+    &__button {
+      height: 57px;
+      width: 131px;
+      margin-bottom: 68px;
+    }
+  }
+}
+
+@include resolution_tablets {
+  .wrapper {
+    width: 100%;
+    height: 606px;
+    padding: 0 7%;
+    padding-top: 45px;
+    margin-bottom: 53px;
+
+    .form {
+      &__button {
+        width: 100%;
+        margin-bottom: 29px;
+      }
+    }
+  }
+}

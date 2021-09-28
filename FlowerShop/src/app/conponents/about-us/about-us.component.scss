@@ -1,0 +1,90 @@
+@import '../../../sass/vars.scss';
+@import '../../../sass/mixins.scss';
+
+.wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 11%;
+  margin-bottom: 77px;
+
+  .header {
+    @include gradient_text($about-us-header-color-1, $about-us-header-color-2);
+    font-style: normal;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 120%;
+    margin-bottom: 40px;
+  }
+
+  .big-image {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .image-2 {
+    width: 100%;
+    margin-bottom: 76px;
+  }
+
+  .paragraph {
+    width: 73%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 150%;
+    color: $about-us-paragraph-color;
+    margin-bottom: 60px;
+  }
+
+  .advantages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__header {
+      margin-bottom: 56px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 28px;
+      line-height: 120%;
+      color: $about-us-advantages-header-color;
+    }
+
+    .advantage {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 40px;
+
+      &__image {
+        width: 45px;
+        height: 45px;
+      }
+
+      &__text {
+        width: 73%;
+        margin-left: 50px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 170%;
+        color: $about-us-advantage-text-color;
+      }
+    }
+  }
+}
+
+@include resolution_tablets {
+  .wrapper {
+    padding: 0 7%;
+
+    .paragraph {
+      width: 100%;
+    }
+
+    .advantage {
+      &__text {
+        width: 100%;
+      }
+    }
+  }
+}

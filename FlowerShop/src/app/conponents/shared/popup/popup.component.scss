@@ -1,0 +1,92 @@
+@import '../../../../sass/vars.scss';
+@import '../../../../sass/mixins.scss';
+
+.popup {
+  padding: 20px;
+  text-align: center;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 365px;
+  height: 163px;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background: #ffffff;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  z-index: 999;
+
+  &_type_active {
+    display: flex;
+  }
+
+  ::ng-deep .mat-card-content {
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  &__text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 120%;
+
+    &_color_normal {
+      color: #5e9e5e;
+    }
+
+    &_color_error {
+      color: #ff5d7d;
+    }
+  }
+
+  ::ng-deep .mat-card-actions {
+    position: absolute;
+    top: 7px;
+    right: 20px;
+    margin-bottom: 0;
+  }
+
+  &__button {
+    &_type_close {
+      display: block;
+      width: 10;
+      height: 10;
+      opacity: 1;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.3;
+      }
+
+      &:before,
+      &:after {
+        position: absolute;
+        right: 10px;
+        content: " ";
+        height: 15px;
+        width: 2px;
+        background-color: #333;
+      }
+
+      &:before {
+        transform: rotate(60deg);
+      }
+      &:after {
+        transform: rotate(-60deg);
+      }
+    }
+  }
+}
+
+@include resolution_phones {
+  .popup {
+    width: 200px;
+
+    &__text {
+      font-size: 18px;
+    }
+  }
+}

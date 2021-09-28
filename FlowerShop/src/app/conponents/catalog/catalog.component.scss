@@ -1,0 +1,38 @@
+@import "../../../sass/vars.scss";
+@import "../../../sass/mixins.scss";
+
+.wrapper {
+  padding: 0 11%;
+  box-sizing: border-box;
+
+  .separator {
+    height: 1px;
+    background: $catalog-page-separator-color;
+    opacity: 0.2;
+    margin-bottom: 40px;
+  }
+
+  .header {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 120%;
+    @include gradient_text($catalog-page-header-color-1, $catalog-page-header-color-2);
+    margin-bottom: 24px;
+  }
+
+  .paragraph {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 150%;
+    color: $catalog-page-paragraph-color;
+    margin-bottom: 26px;
+  }
+}
+
+@include resolution_tablets {
+  .wrapper {
+    padding: 0 7%;
+  }
+}

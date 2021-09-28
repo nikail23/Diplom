@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <div class="header">
+    <div class="header__title">
+      Sorting
+    </div>
+    <app-cross-button class="header__button_close" [isOnlyCross]="true" (click)="close()"></app-cross-button>
+  </div>
+  <div class="separator"></div>
+  <div class="sorts">
+    <div class="sorts__header">
+      Sort by
+    </div>
+    <mat-radio-group
+      class="radio__group"
+      [(ngModel)]="selectedSort">
+      <mat-radio-button class="radio__button" *ngFor="let sortName of sortsNames" [value]="sortName">
+        {{sortName}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <button class="sorts__button sorts__button_type_apply">
+      <img src="../../../../assets/registration/arrow.png" /> Apply sorting
+    </button>
+  </div>
+</div>

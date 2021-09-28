@@ -1,0 +1,50 @@
+@import '../../../../sass/vars.scss';
+@import '../../../../sass/mixins.scss';
+
+.wrapper {
+  width: 100%;
+  padding: 0 11%;
+  box-sizing: border-box;
+  margin-bottom: 44px;
+
+  .line {
+    color: $navigation-page-line-color;
+    size: 1px;
+    opacity: 0.2;
+  }
+
+  .path {
+    display: flex;
+    flex-direction: row;
+
+    &__iterator {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &__link {
+      text-decoration: none;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 150%;
+      color: $navigation-page-link-color;
+
+      &_active{
+        color: $navigation-page-active-link-color;
+      }
+    }
+
+    &__separator {
+      margin: 0 26px;
+      color: $navigation-page-separator-color;
+    }
+  }
+}
+
+@include resolution_tablets {
+  .wrapper {
+    padding: 0 7%;
+    margin-bottom: 20px;
+  }
+}

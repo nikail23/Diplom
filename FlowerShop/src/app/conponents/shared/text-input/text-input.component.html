@@ -1,0 +1,44 @@
+<div
+  class="container"
+  [ngClass]="{
+    container_style_error: errorCondiion ?? isFormControlInvalid(control)
+  }"
+  [formGroup]="form"
+>
+  <input
+    *ngIf="!(isTextArea || isPhone)"
+    class="input"
+    name="input"
+    id="input"
+    type="text"
+    placeholder=" "
+    maxlength="255"
+    formControlName="control"
+  />
+  <input
+    *ngIf="isPhone"
+    phoneMask
+    class="input"
+    name="input"
+    id="input"
+    type="text"
+    placeholder=" "
+    maxlength="255"
+    formControlName="control"
+  />
+  <textarea
+    *ngIf="isTextArea"
+    class="textarea"
+    name="input"
+    id="input"
+    type="email"
+    placeholder=" "
+    formControlName="control"
+    maxlength="255"
+  ></textarea>
+  <label for="input" class="label">
+    {{ labelText }}
+    <span *ngIf="required" class="label_type_star">*</span>
+  </label>
+  <ng-content #errors></ng-content>
+</div>

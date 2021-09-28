@@ -1,0 +1,219 @@
+@import '../../../../sass/vars.scss';
+@import '../../../../sass/mixins.scss';
+
+.wrapper {
+  position: relative;
+  min-height: 441px;
+  width: 100%;
+  background-color: $footer-background-color;
+  padding: 0 11%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 13% 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto 100px;
+
+  .logo {
+    &__image {
+      margin-top: 73px;
+      cursor: pointer;
+    }
+  }
+
+  .catalog-links {
+    grid-column: 2 / 4;
+    margin-top: 82px;
+
+    &__header {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 110%;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: $footer-text-base-color;
+      margin-bottom: 27px;
+    }
+
+    &__links-grid {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-rows: 63px;
+      row-gap: 24px;
+      column-gap: 8%;
+    }
+
+    &__link {
+      max-height: 63px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      color: $footer-text-second-color;
+      text-decoration: none;
+      max-width: 210px;
+    }
+  }
+
+  .store-links {
+    margin-top: 82px;
+
+    &__header {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 110%;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: $footer-text-base-color;
+      margin-bottom: 27px;
+    }
+
+    &__links-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 63px 63px 63px;
+      row-gap: 24px;
+      column-gap: 11%;
+    }
+
+    &__link {
+      max-height: 63px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      color: $footer-text-second-color;
+      text-decoration: none;
+      max-width: 210px;
+    }
+  }
+
+  .social-media-links {
+    margin-top: 82px;
+
+    &__header {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 110%;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: $footer-text-base-color;
+      margin-bottom: 2%;
+    }
+
+    &__links-flex {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      justify-content: space-between;
+    }
+
+    &__link {
+      cursor: pointer;
+    }
+  }
+
+  .copyrights {
+    grid-column: 1/6;
+    border-top: 1px solid $footer-text-second-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+
+    &__company-name {
+      display: flex;
+      align-items: center;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      color: $footer-text-base-color;
+    }
+
+    &__email {
+      display: flex;
+      align-items: center;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      color: $footer-text-second-color;
+    }
+  }
+}
+
+@include resolution_tablets {
+  .wrapper {
+    height: 586px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 80px 1fr 1fr 75px;
+    padding: 0 20px;
+
+    .logo {
+      grid-column: 1/3;
+      grid-row: 1/2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &__image {
+        margin-top: 0px;
+      }
+    }
+
+    .catalog-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+      grid-column: 1/2;
+      grid-row: 2/4;
+
+      &__links-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+    }
+
+    .store-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+      grid-column: 2/3;
+      grid-row: 2/3;
+
+      &__links-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+    }
+
+    .social-media-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+      grid-column: 2/3;
+      grid-row: 3/4;
+
+      &__header {
+        margin-bottom: 16px;
+      }
+
+      &__links-flex {
+        justify-content: flex-start;
+        align-content: center;
+        gap: 20px;
+      }
+    }
+
+    .copyrights {
+      grid-column: 1/3;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div class="flower__mask">
+  <div class="flower" [ngClass]="{'flower_type_in-cart': flower?.inCart}">
+    <img class="flower__image" [src]="flower?.loadedPhoto" />
+    <div
+      class="flower__header"
+      routerLink="/catalog/{{flower?.id}}"
+      (click)="productClicked()"
+    >
+      {{ flower?.name }}
+    </div>
+    <div class="flower__description">
+      {{ flower?.shortDescription }}
+    </div>
+    <div class="flower__price flower__price_active">
+      {{ flower?.priceDto?.price | price }}
+    </div>
+    <div class="flower__in-cart-text">
+      <img src="../../../../assets/catalog/in-cart-arrow.png">
+      In the cart
+    </div>
+    <app-button
+      class="flower__button"
+      (clicked)="addToCartButtonClicked(flower)"
+      [filled]="!flower?.inCart"
+    >
+      <div *ngIf="!flower?.inCart">
+        <img src="../../../assets/home/shopping_bag.png">
+        Add to cart
+      </div>
+      <div *ngIf="flower?.inCart">
+        <img src="../../../../assets/catalog/in-cart-arrow.png">
+        In the cart
+      </div>
+    </app-button>
+  </div>
+</div>

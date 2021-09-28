@@ -1,0 +1,172 @@
+<div class="wrapper__mask">
+  <div class="wrapper" [ngClass]="{ wrapper_effect_shadow: onWindowScroll() }">
+    <app-cross-button
+      class="button_cross"
+      #crossButton
+      (clicked)="crossButtonClick($event)"
+    ></app-cross-button>
+    <div class="sidebar" [ngClass]="{ sidebar_active: crossButton.checked }">
+      <div class="sidebar__content">
+        <a
+          class="link link_type_text"
+          routerLink="home"
+          routerLinkActive="link_active"
+          (click)="crossButton.checked = false; selectPage()"
+        >
+          HOME
+          <div class="link__hover-tile"></div>
+        </a>
+        <a
+          class="link link_type_text"
+          routerLink="catalog"
+          routerLinkActive="link_active"
+          (click)="crossButton.checked = false; selectPage()"
+        >
+          CATALOG
+          <div class="link__hover-tile"></div>
+        </a>
+        <a
+          class="link link_type_text"
+          routerLink="about-us"
+          routerLinkActive="link_active"
+          (click)="crossButton.checked = false; selectPage()"
+        >
+          ABOUT US
+          <div class="link__hover-tile"></div>
+        </a>
+        <a
+          class="link link_type_text"
+          routerLink="news"
+          routerLinkActive="link_active"
+          (click)="crossButton.checked = false; selectPage()"
+        >
+          NEWS
+          <div class="link__hover-tile"></div>
+        </a>
+        <a
+          class="link link_type_text"
+          routerLink="contacts"
+          routerLinkActive="link_active"
+          (click)="crossButton.checked = false; selectPage()"
+        >
+          CONTACTS
+          <div class="link__hover-tile"></div>
+        </a>
+      </div>
+    </div>
+    <img
+      class="logo"
+      src="../../../../assets/header/logo.png"
+      (click)="logoClick()"
+    />
+    <div class="links__group">
+      <a
+        class="link link_type_text link_hideable_true"
+        routerLink="home"
+        routerLinkActive="link_active"
+      >
+        HOME
+        <div class="link__hover-tile"></div>
+      </a>
+      <a
+        class="link link_type_text link_hideable_true"
+        routerLink="catalog"
+        routerLinkActive="link_active"
+      >
+        CATALOG
+        <div class="link__hover-tile"></div>
+      </a>
+      <a
+        class="link link_type_text link_hideable_true"
+        routerLink="about-us"
+        routerLinkActive="link_active"
+      >
+        ABOUT US
+        <div class="link__hover-tile"></div>
+      </a>
+      <a
+        class="link link_type_text link_hideable_true"
+        routerLink="news"
+        routerLinkActive="link_active"
+      >
+        NEWS
+        <div class="link__hover-tile"></div>
+      </a>
+      <a
+        class="link link_type_text link_hideable_true"
+        routerLink="contacts"
+        routerLinkActive="link_active"
+      >
+        CONTACTS
+        <div class="link__hover-tile"></div>
+      </a>
+      <a
+        class="link link_type_icon link_image_search"
+        (click)="openSearchDialog()"
+      >
+        <div class="link__hover-tile"></div>
+      </a>
+      <a
+        class="link link_type_icon link_image_bag"
+        routerLink="cart-and-order"
+        routerLinkActive="link_active"
+      >
+        <div class="link__hover-tile"></div>
+        <div class="link__icon_type_items-count">
+          {{ cartFlowersInfo?.length }}
+        </div>
+      </a>
+      <a
+        *ngIf="!isLogged"
+        class="link link_type_icon link_image_user"
+        [matMenuTriggerFor]="notLoggedMenu"
+        #notLoggedMenuTrigger="matMenuTrigger"
+        [ngStyle]="{ link_active: notLoggedMenuTrigger.menuOpen }"
+      >
+        <div class="link__hover-tile"></div>
+      </a>
+      <a
+        *ngIf="isLogged"
+        class="link link_type_icon link_image_user"
+        [matMenuTriggerFor]="loggedMenu"
+        #loggedMenuTrigger="matMenuTrigger"
+        [ngClass]="{ link_active: loggedMenuTrigger.menuOpen }"
+      >
+        <div class="link__hover-tile"></div>
+      </a>
+      <mat-menu class="profile__menu" #notLoggedMenu="matMenu">
+        <button
+          class="profile__button no-top-margin"
+          mat-menu-item
+          (click)="logInButtonClick()"
+        >
+          Log In
+        </button>
+        <button
+          class="profile__button no-bottom-margin"
+          mat-menu-item
+          routerLink="/registration"
+          routerLinkActive="link_active"
+        >
+          Register
+        </button>
+      </mat-menu>
+      <mat-menu class="profile__menu" #loggedMenu="matMenu">
+        <button class="profile__button no-top-margin" mat-menu-item>
+          My orders
+        </button>
+        <button class="profile__button" mat-menu-item routerLink="/profile">
+          Manage my account
+        </button>
+        <div class="profile__separator"></div>
+        <button
+          class="profile__button no-bottom-margin"
+          mat-menu-item
+          (click)="logOutButtonClick()"
+        >
+          Log out
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>

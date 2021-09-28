@@ -1,0 +1,47 @@
+<app-navigation [paths]="paths"></app-navigation>
+<div class="wrapper">
+  <div class="content__up">
+    <div class="images">
+      <img [src]="currentImage" class="images__image images__image_active" />
+      <img
+        *ngFor="let image of images"
+        [src]="image"
+        class="images__image"
+        (click)="currentImage = image"
+      />
+    </div>
+    <div class="info">
+      <div class="info__name">{{ currentFlower?.name }}</div>
+      <div class="info__description_short">
+        {{ currentFlower?.shortDescription }}
+      </div>
+      <div class="info__price">
+        {{ currentFlower?.priceDto?.price ?? 0 | price }}
+        <span class="info__price_type_changes">
+          <img src="../../../assets/product-details/price__changes.png" />
+          Price changes
+        </span>
+      </div>
+      <app-button class="info__button" [filled]="!currentFlower?.inCart" (clicked)="addToCartButtonClicked(currentFlower)">
+        <div *ngIf="!currentFlower?.inCart">
+          <img src="../../../assets/product-details/button_icon.png">
+          Add to cart
+        </div>
+        <div *ngIf="currentFlower?.inCart">
+          <img src="../../../assets/catalog/in-cart-arrow.png">
+          In the cart
+        </div>
+      </app-button>
+    </div>
+  </div>
+  <div class="content__bottom">
+    <div class="description">
+      <div class="description__header">Descriptions</div>
+      <div class="description__paragraph">
+        {{ currentFlower?.description }}
+      </div>
+    </div>
+    <app-work-examples></app-work-examples>
+  </div>
+  <app-cards></app-cards>
+</div>

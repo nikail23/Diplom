@@ -1,0 +1,179 @@
+<app-navigation></app-navigation>
+<div class="wrapper">
+  <div class="container-upper">
+    <div class="container-upper__header">Registration</div>
+    <a class="container-upper__sign-in-link" (click)="logInButtonClick()">
+      Sign in
+    </a>
+  </div>
+  <form class="form" [formGroup]="form">
+    <app-text-input
+      class="form__first-name"
+      [(control)]="form.controls.firstName"
+      [required]="true"
+      labelText="First name"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(firstNameControl, 'required')"
+      >
+        First name field can't be empty.
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="form__last-name"
+      [(control)]="form.controls.lastName"
+      [required]="true"
+      labelText="Last name"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(lastNameControl, 'required')"
+      >
+        Last name field can't be empty.
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="form__email"
+      [(control)]="form.controls.email"
+      [required]="true"
+      labelText="Email"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(emailControl, 'required')"
+      >
+        Email field can't be empty.
+      </div>
+      <div class="error" *ngIf="isFormControlHasError(emailControl, 'email')">
+        Email field must contain email.
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="form__phone"
+      [(control)]="form.controls.phone"
+      [required]="true"
+      [isPhone]="true"
+      labelText="Phone"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(phoneControl, 'required')"
+      >
+        Phone field can't be empty.
+      </div>
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(phoneControl, 'minlength')"
+      >
+        Phone field must contain all numbers.
+      </div>
+    </app-text-input>
+    <iframe
+      class="form__map"
+      loading="lazy"
+      allowfullscreen
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCH4Vnl0vn9wP15KkS6grvqDHJnprTNKFo
+        &q=Кальварийская+19"
+    >
+    </iframe>
+    <app-text-input
+      class="form__address"
+      [(control)]="form.controls.homeAddress"
+      [required]="true"
+      labelText="Address"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(homeAddressControl, 'required')"
+      >
+        Home address field can't be empty.
+      </div>
+    </app-text-input>
+    <div class="form__help">
+      You can enter the address manually or specify a point on the map
+    </div>
+    <app-text-input
+      class="form__password"
+      [(control)]="form.controls.password"
+      [required]="true"
+      labelText="Password"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(passwordControl, 'passwordValidator')"
+      >
+        Password must be at least 8 characters long, contain A-z, 0-9.
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="form__repeat-password"
+      [(control)]="form.controls.repeatPassword"
+      [required]="true"
+      labelText="Repeat password"
+      [errorCondiion]="
+        isFormControlInvalid(repeatPasswordControl) ||
+        form.hasError('checkPasswordsValidator')
+      "
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(repeatPasswordControl, 'required')"
+      >
+        Repeat password field field can't be empty.
+      </div>
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(form, 'checkPasswordsValidator')"
+      >
+        Passwords do not match.
+      </div>
+    </app-text-input>
+    <div class="container_checks">
+      <app-checkbox>
+        <div class="text">
+          I agree to the
+          <a href="#" class="container_checks__link"
+            >processing of personal data</a
+          >
+        </div>
+      </app-checkbox>
+    </div>
+    <button class="form__button" (click)="registerButtonClick()">
+      Register
+    </button>
+    <div class="or">
+      <hr />
+      <div class="or__text">or</div>
+    </div>
+    <div class="other-ways-container">
+      <div class="other-ways-container__help">
+        Use accounts of other services for quick login
+      </div>
+      <button
+        class="
+          other-ways-container__button
+          other-ways-container__button_type_facebook
+        "
+      >
+        <img
+          class="button__icon"
+          src="../../../assets/registration/facebook.png"
+        />
+        sign in with Facebook
+      </button>
+      <button
+        class="
+          other-ways-container__button other-ways-container__button_type_google
+        "
+      >
+        <img
+          class="button__icon"
+          src="../../../assets/registration/google.png"
+        />
+        sign in with Google
+      </button>
+    </div>
+  </form>
+  <app-popup></app-popup>
+</div>

@@ -1,0 +1,12 @@
+<div class="container">
+  <input
+    class="checkbox"
+    type="checkbox"
+    name="checkbox"
+    id="checkbox"
+    [checked]="isChecked"
+    (click)="inputChecked()"
+  />
+  <label for="checkbox"></label>
+  <ng-content></ng-content>
+</div>

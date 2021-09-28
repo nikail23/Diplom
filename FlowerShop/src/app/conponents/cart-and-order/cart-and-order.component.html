@@ -1,0 +1,179 @@
+<app-navigation [paths]="paths"></app-navigation>
+<div class="wrapper">
+  <div class="cart__content-header">Cart</div>
+  <div class="cart">
+    <div *ngFor="let flower of flowers; let i = index" class="cart__flower">
+      <div class="cart__checkbox">
+        <app-checkbox
+          (checked)="selectFlowerAsDeleted($event, i)"
+        ></app-checkbox>
+      </div>
+      <div class="cart__image">
+        <img [src]="flower.loadedPhoto" routerLink="/catalog/{{ flower.id }}" />
+      </div>
+      <div class="cart__text">
+        <div class="cart__header" routerLink="/catalog/{{ flower.id }}">
+          {{ flower.name }}
+        </div>
+        <div class="cart__category">
+          {{ flower.category.name }}
+        </div>
+      </div>
+      <div class="cart__counter">
+        <div class="cart__price">
+          {{ flower.priceDto.price | price }}
+        </div>
+        <div class="cart__x">x</div>
+        <div class="cart__input">
+          <input
+            type="number"
+            [(ngModel)]="cartFlowersInfo[i].quantity"
+            [min]="1"
+          />
+        </div>
+      </div>
+      <div class="cart__total-price">
+        {{ flower.priceDto.price * cartFlowersInfo[i].quantity | price }}
+      </div>
+      <div class="cart__delete-button">
+        <app-cross-button
+          [isOnlyCross]="true"
+          (clicked)="deleteFlower(flower)"
+        ></app-cross-button>
+      </div>
+    </div>
+    <div class="cart__ending">
+      <app-button
+        class="cart__delete-selected-button"
+        [filled]="false"
+        [mainColor]="'#E7E7E7'"
+        [hoverColor]="'#E7E7E7'"
+        [textColor]="'#000000'"
+        (clicked)="deleteSelected()"
+        >Delete selected</app-button
+      >
+      <div class="cart__total-items-price">
+        <div class="total-items-price__label">Total price -</div>
+        <div class="total-items-price__value">
+          {{ totalItemsPrice | price }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="separator" />
+  <div class="order__content-header">Order placement</div>
+  <div class="order">
+    <app-text-input
+      class="order__full-name"
+      [(control)]="orderForm.controls.fullName"
+      [required]="true"
+      labelText="Full name"
+    >
+      <div
+        *ngIf="isFormControlHasError(orderForm.controls.fullName, 'required')"
+        class="error"
+      >
+        Full name can't be empty!
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="order__email"
+      [(control)]="orderForm.controls.email"
+      [required]="true"
+      labelText="Email"
+    >
+      <div
+        *ngIf="isFormControlHasError(orderForm.controls.email, 'required')"
+        class="error"
+      >
+        Email can't be empty!
+      </div>
+      <div
+        *ngIf="isFormControlHasError(orderForm.controls.email, 'email')"
+        class="error"
+      >
+        Field must contain email string format!
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="order__phone"
+      [(control)]="orderForm.controls.phone"
+      [required]="true"
+      [isPhone]="true"
+      labelText="Phone"
+    >
+      <div
+        *ngIf="isFormControlHasError(orderForm.controls.phone, 'required')"
+        class="error"
+      >
+        Phone can't be empty!
+      </div>
+      <div
+        *ngIf="isFormControlHasError(orderForm.controls.phone, 'minlength')"
+        class="error"
+      >
+        Phone must be full!
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="order__text"
+      [(control)]="orderForm.controls.text"
+      labelText="Congratulatory message"
+      [isTextArea]="true"
+    >
+    </app-text-input>
+    <iframe
+      class="order__map"
+      loading="lazy"
+      allowfullscreen
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCH4Vnl0vn9wP15KkS6grvqDHJnprTNKFo
+        &q=Кальварийская+19"
+    ></iframe>
+    <app-text-input
+      class="order__address"
+      [(control)]="orderForm.controls.address"
+      [required]="true"
+      labelText="Address"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(orderForm.controls.address, 'required')"
+      >
+        Address field can't be empty.
+      </div>
+    </app-text-input>
+    <div class="order__help">
+      You can enter the address manually or specify a point on the map
+    </div>
+    <div class="order__payment-label">Choose a payment method:</div>
+    <div class="order__payment">
+      <app-radio-button [control]="paymentType" [value]="PaymentType.CASH">
+        <div class="text">In cash to the courier</div>
+      </app-radio-button>
+      <app-radio-button [control]="paymentType" [value]="PaymentType.CARD">
+        <div class="text">By bank card on the website</div>
+      </app-radio-button>
+      <div *ngIf="isFormControlHasError(paymentType, 'required')" class="order__payment_error">
+        You need to choose payment type.
+      </div>
+    </div>
+    <div class="order__actions">
+      <app-button
+        class="order__button"
+        (clicked)="confirmOrderClicked()"
+      >
+        Confirm order
+      </app-button>
+      <app-button
+        class="order__button"
+        [filled]="false"
+        [mainColor]="'#E7E7E7'"
+        [textColor]="'#404040'"
+        [hoverColor]="'#E7E7E7'"
+        (clicked)="continueShoppingClicked()"
+      >
+        Continue shopping
+      </app-button>
+    </div>
+  </div>
+</div>

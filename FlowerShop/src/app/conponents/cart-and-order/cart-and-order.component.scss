@@ -1,0 +1,355 @@
+@import '../../../sass/vars.scss';
+@import '../../../sass/mixins.scss';
+
+.wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 11%;
+
+  .cart {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    width: 74%;
+
+    &__content-header {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 36px;
+      line-height: 110%;
+      color: #404040;
+      margin-bottom: 32px;
+    }
+
+    &__flower {
+      position: relative;
+      height: 106px;
+      border: 1px solid #E7E7E7;
+      box-sizing: border-box;
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: 6% 10% 40% 22% 14% auto;
+      grid-template-rows: 1fr;
+    }
+
+    &__checkbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__image {
+      display: flex;
+      align-items: center;
+      margin-left: 1%;
+
+      img {
+        cursor: pointer;
+        width: 69px;
+        height: 69px;
+      }
+    }
+
+    &__text {
+      display: flex;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      row-gap: 4px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      margin-left: 2%;
+    }
+
+    &__header {
+      color: #404040;
+      cursor: pointer;
+    }
+
+    &__category {
+      color: #B4B4B4;
+    }
+
+    &__counter {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__price {
+      display: flex;
+      align-items: center;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 150%;
+      color: #404040;
+    }
+
+    &__x {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 150%;
+      color: #B4B4B4;
+    }
+
+    &__input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        width: 45px;
+        height: 33px;
+        background: #FFFFFF;
+        border: 1px solid #E7E7E7;
+        box-sizing: border-box;
+        border-radius: 4px;
+        outline: none;
+      }
+    }
+
+    &__total-price {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 150%;
+      color: #404040;
+    }
+
+    &__delete-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__ending {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &__delete-selected-button {
+      width: 302px;
+    }
+
+    &__total-items-price {
+      width: 210px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 10%;
+
+      .total-items-price {
+        &__label {
+          white-space: nowrap;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 150%;
+          color: #404040;
+        }
+
+        &__value {
+          white-space: nowrap;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 150%;
+          color: #404040;
+        }
+      }
+    }
+  }
+
+  .separator {
+    margin-top: 70px;
+    margin-bottom: 59px;
+    background: #404040;
+    opacity: 0.2;
+  }
+
+  .order {
+    display: flex;
+    flex-direction: column;
+    width: 74%;
+
+    &__content-header {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 28px;
+      line-height: 120%;
+      color: #404040;
+      margin-bottom: 32px;
+    }
+
+    &__full-name, &__email, &__phone, &__text {
+      margin-bottom: 30px;
+    }
+
+    &__map {
+      border-radius: 10px;
+      border: 0;
+      height: 396px;
+      margin-bottom: 8px;
+    }
+
+    &__address {
+      margin-bottom: 7px;
+    }
+
+    &__help {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 150%;
+      color: #000000;
+      margin-bottom: 32px;
+    }
+
+    &__payment {
+      display: flex;
+      flex-direction: column;
+      row-gap: 17px;
+      margin-bottom: 110px;
+
+      &-label {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 150%;
+        color: #000000;
+        margin-bottom: 20px;
+      }
+
+      &_error {
+        display: block;
+        margin-top: 7px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 150%;
+        color: $registration-page-error-color;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: row;
+      column-gap: 30px;
+      width: 100%;
+      margin-bottom: 141px;
+    }
+
+    &__button {
+      width: 100%;
+    }
+  }
+}
+
+@include resolution_tablets {
+  .wrapper {
+    padding: 0 7%;
+
+    .cart {
+      width: 100%;
+
+      &__flower {
+        height: 165px;
+        grid-template-columns: 10% 17% auto;
+        grid-template-rows: auto auto auto;
+      }
+
+      &__checkbox {
+        grid-column: 1/2;
+        grid-row: 1/5;
+        align-items: flex-start;
+        padding-top: 39px;
+      }
+
+      &__image {
+        grid-column: 2/3;
+        grid-row: 1/5;
+        align-items: flex-start;
+        padding-top: 23px;
+
+        img {
+          width: 53px;
+          height: 53px;
+        }
+      }
+
+      &__text {
+        padding-top: 23px;
+        margin-left: 0;
+      }
+
+      &__counter {
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+
+      &__x {
+        margin-left: 33px;
+      }
+
+      &__input {
+        margin-left: 11px;
+      }
+
+      &__total-price {
+        justify-content: flex-start;
+      }
+
+      &__delete-button {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+
+      &__ending {
+        display: grid;
+        grid-template-rows: auto auto;
+      }
+
+      &__delete-selected-button {
+        width: 100%;
+        grid-row: 2/3;
+      }
+
+      &__total-items-price {
+        grid-row: 1/2;
+        margin: none;
+        width: 100%;
+        margin-bottom: 58px;
+      }
+    }
+
+    .order {
+      width: 100%;
+
+      &__payment {
+        margin-bottom: 44px;
+      }
+
+      &__actions {
+        flex-direction: column;
+        row-gap: 30px;
+        margin-bottom: 44px;
+      }
+    }
+  }
+}

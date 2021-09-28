@@ -1,0 +1,49 @@
+@import '../../../../sass/vars.scss';
+@import '../../../../sass/mixins.scss';
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.radio {
+  position: absolute;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+
+  & + label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+  }
+  & + label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url(../../../../assets/radio-button/radiobutton_default.png);
+    // background: $catalog-page-checkbox-color-1;
+    // border: $catalog-page-checkbox-border;
+    // border-radius: 4px;
+    // background-repeat: no-repeat;
+    // background-position: center center;
+  }
+  &:checked + label::before {
+    // border-color: $catalog-page-checkbox-color-2;
+    // background-color: $catalog-page-checkbox-color-2;
+    background-image: url(../../../../assets/radio-button/radiobutton_active.png);
+  }
+}
+
+::ng-deep {
+  .text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 150%;
+    color: $catalog-page-checks-text-color;
+    margin-left: 24px;
+  }
+}

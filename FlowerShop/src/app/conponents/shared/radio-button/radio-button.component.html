@@ -1,0 +1,13 @@
+<div [formGroup]="form" class="container">
+  <input
+    class="radio"
+    type="radio"
+    name="radio"
+    id="radio"
+    [value]="value"
+    [formControl]="control"
+    (click)="inputChecked()"
+  />
+  <label for="radio"></label>
+  <ng-content></ng-content>
+</div>

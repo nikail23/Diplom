@@ -1,0 +1,50 @@
+<div class="wrapper">
+  <div class="header">Contact us</div>
+  <form class="form" [formGroup]="form">
+    <app-text-input
+      class="form__name"
+      [(control)]="form.controls.name"
+      labelText="Your name"
+    >
+      <div class="error" *ngIf="isFormControlHasError(nameControl, 'required')">
+        Name field can't be empty.
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="form__phone"
+      [(control)]="form.controls.phone"
+      labelText="Your phone"
+      [isPhone]="true"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(phoneControl, 'required')"
+      >
+        Phone field can't be empty.
+      </div>
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(phoneControl, 'minlength')"
+      >
+        Phone field must contain all numbers.
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="form__text"
+      [(control)]="form.controls.text"
+      labelText="Your text"
+      [isTextArea]="true"
+    >
+      <div class="error" *ngIf="isFormControlHasError(textControl, 'required')">
+        Text can't be empty.
+      </div>
+    </app-text-input>
+    <app-button
+      class="form__button"
+      (clicked)="sendMessageButtonClick()"
+      [filled]="false"
+      >Send</app-button
+    >
+  </form>
+  <app-popup></app-popup>
+</div>

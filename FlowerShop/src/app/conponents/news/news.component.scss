@@ -1,0 +1,42 @@
+@import '../../../sass/vars.scss';
+@import '../../../sass/mixins.scss';
+
+.wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 11%;
+  margin-bottom: 77px;
+
+  .description {
+    margin-bottom: 77px;
+
+    &__header {
+      @include gradient_text($news-page-description-header-background-color-1, $news-page-description-header-background-color-2);
+      margin-bottom: 23px;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 48px;
+      line-height: 120%;
+    }
+
+    &__paragraph {
+      width: 73%;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 150%;
+    }
+  }
+}
+
+@include resolution_tablets {
+  .wrapper {
+    padding: 0 7%;
+
+    .description {
+      &__paragraph {
+        width: 100%;
+      }
+    }
+  }
+}
