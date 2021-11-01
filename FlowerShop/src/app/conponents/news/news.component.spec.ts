@@ -1,4 +1,4 @@
-import { articles } from './article';
+import { articles } from '../../classes/article';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewsComponent } from './news.component';
@@ -10,10 +10,9 @@ describe('NewsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewsComponent ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-    .compileComponents();
+      declarations: [NewsComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {

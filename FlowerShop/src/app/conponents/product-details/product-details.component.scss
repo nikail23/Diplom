@@ -2,7 +2,7 @@
 @import '../../../sass/mixins.scss';
 
 .wrapper {
-  padding: 0 11%;
+  padding: 0 $laptop-padding;
 
   .content {
     &__up {
@@ -21,7 +21,7 @@
         &__image {
           width: 100%;
           height: 160px;
-          border: 1px solid #E7E7E7;
+          border: 1px solid $product-details-image-border-color;
           box-sizing: border-box;
           border-radius: 10px;
           cursor: pointer;
@@ -46,7 +46,7 @@
           font-weight: bold;
           font-size: 36px;
           line-height: 110%;
-          @include gradient_text(rgba(255, 93, 125, 1), rgba(123, 97, 255, 1));
+          @include gradient_text($product-details-info-name-color-1, $product-details-info-name-color-2);
           margin-bottom: 30px;
         }
 
@@ -56,7 +56,7 @@
             font-weight: normal;
             font-size: 18px;
             line-height: 150%;
-            color: #000000;
+            color: $product-details-short-description-color;
             margin-bottom: 61px;
           }
         }
@@ -69,7 +69,7 @@
           font-weight: bold;
           font-size: 36px;
           line-height: 110%;
-          color: #404040;
+          color: $product-details-price-color;
           margin-bottom: 49px;
 
           &_type_changes {
@@ -80,7 +80,7 @@
             font-weight: normal;
             font-size: 18px;
             line-height: 150%;
-            color: #FF5D7D;
+            color: $product-details-price-history-color;
             cursor: pointer;
           }
         }
@@ -103,7 +103,7 @@
           font-weight: bold;
           font-size: 28px;
           line-height: 120%;
-          color: #404040;
+          color: $product-details-description-header-color;
           margin-bottom: 30px;
         }
 
@@ -112,7 +112,7 @@
           font-weight: normal;
           font-size: 18px;
           line-height: 150%;
-          color: #404040;
+          color: $product-details-description-paragraph-color;
         }
       }
     }
@@ -121,7 +121,7 @@
 
 @include resolution_tablets {
   .wrapper {
-    padding: 0 7%;
+    padding: 0 $tablet-and-phone-padding;
 
     .content {
       &__up {

@@ -1,5 +1,5 @@
 <div class="wrapper__mask">
-  <div class="wrapper" [ngClass]="{ wrapper_effect_shadow: onWindowScroll() }">
+  <div class="wrapper" [ngClass]="{ wrapper_effect_shadow: isTop }">
     <app-cross-button
       class="button_cross"
       #crossButton
@@ -152,7 +152,7 @@
         </button>
       </mat-menu>
       <mat-menu class="profile__menu" #loggedMenu="matMenu">
-        <button class="profile__button no-top-margin" mat-menu-item>
+        <button class="profile__button no-top-margin" mat-menu-item routerLink="/orders">
           My orders
         </button>
         <button class="profile__button" mat-menu-item routerLink="/profile">

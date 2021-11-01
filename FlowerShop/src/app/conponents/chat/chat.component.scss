@@ -1,0 +1,146 @@
+@import '../../../sass/mixins.scss';
+@import '../../../sass/vars.scss';
+
+.chat {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 532px;
+    height: 732px;
+    background: $chat-content-background;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-right: 24px;
+  }
+
+  &__header {
+    height: 65px;
+    width: 100%;
+    background: $chat-header-background;
+    display: flex;
+    align-items: center;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  &__text-header {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 110%;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: $chat-header-text-color;
+    margin-left: 34px;
+  }
+
+  &__close-button {
+    margin-left: auto;
+    margin-right: 24px;
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+
+  &__message {
+    position: relative;
+    margin: 14px;
+    padding: 14px;
+    max-width: 50%;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 170%;
+
+    & > &-corner {
+      position: absolute;
+      top: 0;
+    }
+
+    &_type_in {
+      background: $chat-message-in-background;
+      align-self: flex-start;
+      color: $chat-message-in-color;
+      border-top-left-radius: 0;
+    }
+
+    &_type_in > &-corner {
+      left: -10px;
+    }
+
+    &_type_out {
+      background: $chat-message-out-background;
+      color: $chat-message-out-color;
+      align-self: flex-end;
+      border-top-right-radius: 0;
+    }
+
+    &_type_out > &-corner {
+      right: -10px;
+    }
+  }
+
+  &__send-input {
+    margin: 0 24px;
+    justify-self: flex-end;
+    margin-bottom: 24px;
+    margin-top: auto;
+  }
+
+  &__button {
+    width: 55px;
+    height: 55px;
+    background: $chat-message-button-background;
+    border-radius: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+@include resolution_laptops-m {
+  .chat {
+    &__content {
+      width: 363px;
+      height: 500px;
+    }
+  }
+}
+
+@include resolution_tablets {
+  .chat {
+    bottom: 12px;
+    right: 12px;
+
+    &__content {
+      width: 290px;
+      height: 400px;
+      margin-right: 12px;
+    }
+  }
+}
+
+@include resolution_phones {
+  .chat {
+    flex-direction: column;
+
+    &__content {
+      margin-bottom: 12px;
+      margin-right: none;
+    }
+  }
+}

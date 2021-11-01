@@ -1,7 +1,7 @@
 import { CartService } from '../../services/cart.service';
-import { Flower } from './flower';
+import { Flower } from '../../classes/flower';
 import { Component, OnInit } from '@angular/core';
-import { Slide, slides } from './slide';
+import { slides } from '../../classes/slide';
 import { CatalogService } from 'src/app/services/catalog.service';
 
 @Component({
@@ -12,12 +12,12 @@ import { CatalogService } from 'src/app/services/catalog.service';
 export class HomeComponent implements OnInit {
   public activeSlideNumber: number = 0;
 
-  public slides: Slide[] = slides;
+  public slides = slides;
   public randomEightflowers: Flower[] = [];
 
   constructor(
     private catalogService: CatalogService,
-    private cartManagerService: CartService
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -25,20 +25,22 @@ export class HomeComponent implements OnInit {
   }
 
   public setSlide(slideNumber: number): void {
-    if (slideNumber >= 0 && slideNumber <= 3) {
-      this.activeSlideNumber = slideNumber;
-    }
+    this.activeSlideNumber = slideNumber;
   }
 
   private getRandomProducts(count: number) {
-    this.catalogService.getAll().subscribe((result) => {
-      while (count > 0 && result.flowers.length > 0) {
-        const randomIndex = Math.floor(Math.random() * result.flowers.length);
-        this.randomEightflowers.push(result.flowers[randomIndex]);
-        result.flowers.splice(randomIndex, 1);
-        count--;
-      }
-      this.cartManagerService.setInCartFlowersState(this.randomEightflowers);
+    this.catalogService.getAll().subscribe((response) => {
+      this.randomCut(count, response.flowers);
+      this.cartService.setInCartFlowersState(this.randomEightflowers);
     });
+  }
+
+  private randomCut(count: number, flowers: Flower[]) {
+    while (count > 0 && flowers.length > 0) {
+      const randomIndex = Math.floor(Math.random() * flowers.length);
+      this.randomEightflowers.push(flowers[randomIndex]);
+      flowers.splice(randomIndex, 1);
+      count--;
+    }
   }
 }

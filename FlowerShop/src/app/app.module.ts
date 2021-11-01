@@ -1,3 +1,5 @@
+import { environment } from 'src/environments/environment.prod';
+import { ChartModule } from 'angular-highcharts';
 import { UserService } from './services/user.service';
 import { CartService } from './services/cart.service';
 import { ScrollService } from './services/scroll.service';
@@ -16,7 +18,7 @@ import { AboutUsComponent } from './conponents/about-us/about-us.component';
 import { ArticleComponent } from './conponents/article/article.component';
 import { ContactsComponent } from './conponents/contacts/contacts.component';
 import { ContactUsComponent } from './conponents/contacts/contact-us/contact-us.component';
-import { PhoneDirective } from './conponents/contacts/contact-us/phone.directive';
+import { PhoneDirective } from './directives/phone.directive';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './conponents/registration/registration.component';
 import { PopupComponent } from './conponents/shared/popup/popup.component';
@@ -31,7 +33,7 @@ import { CategoriesComponent } from './conponents/catalog/categories/categories.
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { MatSelectModule } from '@angular/material/select';
 import { FiltersMobileDialogComponent } from './conponents/catalog/filters-mobile-dialog/filters-mobile-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CrossButtonComponent } from './conponents/shared/cross-button/cross-button.component';
 import { SortsMobileDialogComponent } from './conponents/catalog/sorts-mobile-dialog/sorts-mobile-dialog.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -51,6 +53,16 @@ import { FlowerCardComponent } from './conponents/shared/flower-card/flower-card
 import { TextInputComponent } from './conponents/shared/text-input/text-input.component';
 import { RadioButtonComponent } from './conponents/shared/radio-button/radio-button.component';
 import { CookieService } from 'ngx-cookie-service';
+import { PriceHistoryDialogComponent } from './conponents/price-history-dialog/price-history-dialog.component';
+import { GoogleMapComponent } from './conponents/shared/google-map/google-map.component';
+import { AgmCoreModule } from '@agm/core';
+import { ChatComponent } from './conponents/chat/chat.component';
+import { SafePipe } from './pipes/safe.pipe';
+import { PaymentDialogComponent } from './conponents/payment-dialog/payment-dialog.component';
+import { OrdersComponent } from './conponents/orders/orders.component';
+import { OrderComponent } from './conponents/shared/order/order.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -88,6 +100,13 @@ import { CookieService } from 'ngx-cookie-service';
     FlowerCardComponent,
     TextInputComponent,
     RadioButtonComponent,
+    PriceHistoryDialogComponent,
+    GoogleMapComponent,
+    ChatComponent,
+    SafePipe,
+    PaymentDialogComponent,
+    OrdersComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +122,13 @@ import { CookieService } from 'ngx-cookie-service';
     MatSelectModule,
     MatDialogModule,
     MatRadioModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ChartModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleMapsApi.key,
+      libraries: ["places", "geometry"]
+    }),
+    MatExpansionModule
   ],
   exports: [PhoneDirective],
   providers: [
@@ -117,7 +142,11 @@ import { CookieService } from 'ngx-cookie-service';
     },
     CartService,
     CookieService,
-    UserService
+    UserService,
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

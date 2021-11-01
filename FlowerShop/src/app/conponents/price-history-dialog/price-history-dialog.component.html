@@ -1,0 +1,33 @@
+<div class="header">
+  <div class="header__text">Price changes</div>
+  <div class="header__actions">
+    <button
+      [ngClass]="{
+        'time-type__button_active':
+          selectedChartTimeType === ChartTimeType.ONE_MONTH
+      }"
+      class="time-type__button"
+      (click)="changeSelectedChartTimeType(ChartTimeType.ONE_MONTH)"
+    >
+      1 MONTH
+      <div class="active-tile"></div>
+    </button>
+    <button
+      [ngClass]="{
+        'time-type__button_active':
+          selectedChartTimeType === ChartTimeType.SIX_MONTH
+      }"
+      class="time-type__button"
+      (click)="changeSelectedChartTimeType(ChartTimeType.SIX_MONTH)"
+    >
+      6 MONTH
+      <div class="active-tile"></div>
+    </button>
+  </div>
+  <app-cross-button class="header__close-button" [isOnlyCross]="true" (clicked)="close()" [colorClass]="'black'"></app-cross-button>
+</div>
+<hr />
+<div class="current-price">
+  Current price: <span class="current-price__value">{{currentPrice.price | price}}</span>
+</div>
+<div [chart]="chart" class="chart"></div>

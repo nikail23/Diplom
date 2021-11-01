@@ -1,26 +1,16 @@
 import { CartService } from '../../../services/cart.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Flower } from '../../home/flower';
+import { Component, Input } from '@angular/core';
+import { Flower } from '../../../classes/flower';
 
 @Component({
   selector: 'app-flower-card',
   templateUrl: './flower-card.component.html',
-  styleUrls: ['./flower-card.component.scss']
+  styleUrls: ['./flower-card.component.scss'],
 })
-export class FlowerCardComponent implements OnInit {
-
+export class FlowerCardComponent {
   @Input() flower?: Flower;
 
-  @Output() flowerClicked = new EventEmitter<any>();
-
-  constructor(private cartService: CartService) { }
-
-  ngOnInit(): void {
-  }
-
-  public productClicked(): void {
-    this.flowerClicked.emit();
-  }
+  constructor(private cartService: CartService) {}
 
   public addToCartButtonClicked(flower?: Flower) {
     if (flower && !flower.inCart) {

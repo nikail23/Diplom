@@ -1,41 +1,38 @@
 import { ArticlesService } from 'src/app/services/articles.service';
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Article } from '../news/article';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Path } from '../shared/navigation/path';
+import { Path } from '../../classes/path';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-export class ArticleComponent implements OnInit, OnDestroy {
-
-  public paths: Path[] = []
+export class ArticleComponent implements OnInit {
+  public paths: Path[] = [];
   public htmlToAdd: string = '';
 
-  private subscription: Subscription = Subscription.EMPTY;
-
-  constructor(private articlesService: ArticlesService, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private articlesService: ArticlesService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.subscription = this.activatedRoute.params.subscribe(params => {
-      const id = Number(params['id']);
-      if (id || id === 0) {
-        const currentArticle = this.articlesService.get(id);
+    const id = Number(this.activatedRoute.snapshot.params.id);
+    if (id || id === 0) {
+      const currentArticle = this.articlesService.get(id);
+      if (currentArticle) {
         this.paths = [
-          {name: 'Home', routerLink: '/home'},
-          {name: 'News', routerLink: '/news'},
-          {name: currentArticle.header, routerLink: `/news/${currentArticle.id}`},
-        ]
+          { name: 'Home', routerLink: '/home' },
+          { name: 'News', routerLink: '/news' },
+          {
+            name: currentArticle.header,
+            routerLink: `/news/${currentArticle.id}`,
+          },
+        ];
         this.htmlToAdd = currentArticle.fullContent;
       }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    }
   }
 }

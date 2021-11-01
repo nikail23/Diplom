@@ -5,34 +5,42 @@
   position: relative;
   display: flex;
   flex-direction: row;
-}
 
-.checkbox {
-  position: absolute;
-  opacity: 0;
-  width: 20px;
-  height: 20px;
-
-  & + label {
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
-  }
-  & + label::before {
-    content: "";
-    display: inline-block;
+  .checkbox {
+    position: absolute;
+    opacity: 0;
     width: 20px;
     height: 20px;
-    background: $catalog-page-checkbox-color-1;
-    border: $catalog-page-checkbox-border;
-    border-radius: 4px;
-    background-repeat: no-repeat;
-    background-position: center center;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+
+    &:checked + label::before {
+      border-color: $checkbox-color-2;
+      background-color: $checkbox-color-2;
+      background-image: url(../../../../assets/registration/arrow.png);
+    }
   }
-  &:checked + label::before {
-    border-color: $catalog-page-checkbox-color-2;
-    background-color: $catalog-page-checkbox-color-2;
-    background-image: url(../../../../assets/registration/arrow.png);
+
+  label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    width: 20px;
+    height: 20px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background: $checkbox-color-1;
+      border: $checkbox-border;
+      border-radius: 4px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
 }
 

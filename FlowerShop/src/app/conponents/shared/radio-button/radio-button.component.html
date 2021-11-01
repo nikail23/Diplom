@@ -1,12 +1,23 @@
-<div [formGroup]="form" class="container">
+<div class="container">
   <input
+    *ngIf="radio"
     class="radio"
     type="radio"
     name="radio"
     id="radio"
     [value]="value"
-    [formControl]="control"
-    (click)="inputChecked()"
+    [formControl]="$any(radio)"
+  />
+  <input
+    *ngIf="!radio"
+    class="radio"
+    type="radio"
+    name="radio"
+    id="radio"
+    [value]="value"
+    [ngModel]="model"
+    [checked]="value == model"
+    (ngModelChange)="modelChanged($event)"
   />
   <label for="radio"></label>
   <ng-content></ng-content>

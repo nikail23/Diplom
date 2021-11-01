@@ -1,6 +1,10 @@
 @import "../../../../sass/vars.scss";
 @import "../../../../sass/mixins.scss";
 
+.empty {
+  margin-bottom: 110px;
+}
+
 .content {
   display: grid;
   grid-template-columns: 255px auto;
@@ -68,8 +72,7 @@
       }
     }
 
-    .category,
-    .additional {
+    .category {
       &__header {
         font-style: normal;
         font-weight: bold;
@@ -117,7 +120,7 @@
       font-weight: bold;
       font-size: 18px;
       line-height: 150%;
-      color: #404040;
+      color: $catalog-page-found-text-color;
     }
 
     &__sorts {
@@ -144,22 +147,22 @@
       &__button {
         width: 57px;
         height: 57px;
-        background: #ffffff;
-        border: 1px solid #e7e7e7;
+        background: $catalog-page-nav-button-background;
+        border: 1px solid $catalog-page-nav-button-border-color;
         box-sizing: border-box;
         border-radius: 10px;
         cursor: pointer;
 
         &_active {
-          border: 1px solid #ff5d7d;
+          border: 1px solid $catalog-page-nav-button-active-color;
         }
       }
     }
 
     ::ng-deep {
       .mat-form-field-flex {
-        background-color: #ffffff;
-        border: 1px solid #e7e7e7;
+        background-color: $catalog-page-form-field-background;
+        border: 1px solid $catalog-page-form-field-border-color;
         box-sizing: border-box;
         border-radius: 4px;
         padding: 0 29px;
@@ -174,85 +177,20 @@
         font-weight: normal;
         font-size: 18px;
         line-height: 150%;
-        color: #404040;
+        color: $catalog-page-form-field-label-color;
       }
 
       .mat-select {
-        background-color: #ffffff;
+        background-color: $catalog-page-mat-select-background;
 
         .mat-select-arrow-wrapper {
           transform: none;
 
           .mat-select-arrow {
-            color: #404040;
+            color: $catalog-page-mat-select-arrow-color;
           }
         }
       }
-    }
-  }
-}
-
-.form {
-  &__label {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 150%;
-    color: $input-label-color;
-    pointer-events: none;
-    position: absolute;
-    transform-origin: 0 50%;
-    transition: transform 200ms, color 200ms;
-    left: 16px;
-    top: 16px;
-  }
-
-  &__container {
-    position: relative;
-
-    &_style_error {
-      .form__input {
-        border-color: #eb5757;
-      }
-
-      .form__label {
-        color: #eb5757;
-      }
-
-      .form__error {
-        position: absolute;
-        display: block;
-        margin-top: 7px;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 150%;
-        color: #eb5757;
-      }
-    }
-  }
-
-  &__input {
-    outline: none;
-    background: $input-background-color;
-    border: $input-border;
-    box-sizing: border-box;
-    border-radius: 4px;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 150%;
-    color: $input-text-color;
-    padding: 0 16px;
-    padding-top: 20px;
-    width: 120px;
-    height: 50px;
-
-    &:focus ~ .form__label,
-    &:not(:placeholder-shown) ~ .form__label {
-      font-size: 14px;
-      transform: translateY(-10px);
     }
   }
 }

@@ -10,15 +10,22 @@
     <div class="sorts__header">
       Sort by
     </div>
-    <mat-radio-group
-      class="radio__group"
-      [(ngModel)]="selectedSort">
-      <mat-radio-button class="radio__button" *ngFor="let sortName of sortsNames" [value]="sortName">
-        {{sortName}}
-      </mat-radio-button>
-    </mat-radio-group>
-    <button class="sorts__button sorts__button_type_apply">
+    <div class="radio__group">
+      <app-radio-button [(model)]="sortParameters" [value]="sorts.nameAsc">
+        By name (A - Z)
+      </app-radio-button>
+      <app-radio-button [(model)]="sortParameters" [value]="sorts.nameDesc">
+        By name (Z - A)
+      </app-radio-button>
+      <app-radio-button [(model)]="sortParameters" [value]="sorts.priceAsc">
+        By cost (ascending)
+      </app-radio-button>
+      <app-radio-button [(model)]="sortParameters" [value]="sorts.priceDesc">
+        By cost (descdending)
+      </app-radio-button>
+    </div>
+    <app-button class="sorts__button sorts__button_type_apply" (clicked)="applySorts()">
       <img src="../../../../assets/registration/arrow.png" /> Apply sorting
-    </button>
+    </app-button>
   </div>
 </div>

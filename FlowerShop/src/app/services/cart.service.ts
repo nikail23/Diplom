@@ -1,16 +1,19 @@
 import { CatalogService } from './catalog.service';
-import { CartServerService } from './server/cart-server.service';
-import { ItemOrderDto, ShoppingCartDto } from './cart';
+import { ItemOrderDto, ShoppingCartDto } from '../classes/cart';
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Flower } from '../conponents/home/flower';
+import { Flower } from '../classes/flower';
 import { UserService } from './user.service';
-import { Observable, of } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, forkJoin } from 'rxjs';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  public isLoggedIn: boolean = false;
+
   private cart?: ShoppingCartDto;
 
   @Output() cartRefreshed = new EventEmitter<ItemOrderDto[]>();
@@ -20,11 +23,14 @@ export class CartService {
   }
 
   constructor(
-    private cartServerService: CartServerService,
     private userService: UserService,
-    private catalogService: CatalogService
+    private catalogService: CatalogService,
+    private http: HttpClient
   ) {
-    this.loadCart();
+    this.loadCart().subscribe((cart) => {
+      this.cart = cart;
+      this.cartRefreshed.emit(this.cartFlowers);
+    });
   }
 
   private checkInFlowers(id: number) {
@@ -49,26 +55,26 @@ export class CartService {
     }
   }
 
-  private loadCart(): void {
-    this.userService.getLoggedState().subscribe((isLogged: boolean) => {
-      this.cartServerService.get().subscribe(
-        (response: any) => {
-          this.cart = response;
-          this.cartRefreshed.emit(this.cart?.orderItems);
-        },
-        (error: HttpErrorResponse) => {
-          if (error.status === 404) {
-            this.cartServerService.postCard({
-              finished: false,
-              orderItems: [],
-              text: ''
-            }).subscribe((cart: ShoppingCartDto) => {
-              this.cart = cart;
-              this.cartRefreshed.emit(this.cart?.orderItems);
-            });
-          }
-        });
-    });
+  public loadCart(): Observable<ShoppingCartDto | undefined> {
+    const emptyCart = {
+      finished: false,
+      orderItems: [],
+      text: '',
+    };
+    return this.userService.getLoggedState().pipe(
+      tap((isLoggedIn) => (this.isLoggedIn = isLoggedIn)),
+      mergeMap(() => this.http.get(environment.api.url + 'cart') as Observable<ShoppingCartDto>),
+      tap((cart) => {
+        this.cart = cart;
+        this.cartRefreshed.emit(this.cart?.orderItems);
+      }),
+      catchError((error) => {
+        if (error.status === 404) {
+          return this.http.post(environment.api.url + 'cart', emptyCart) as Observable<ShoppingCartDto>;
+        }
+        return of(undefined);
+      })
+    );
   }
 
   public get(id: number): ItemOrderDto | undefined {
@@ -81,50 +87,52 @@ export class CartService {
     return result;
   }
 
-  public add(id: number): Observable<any> {
-    return new Observable((subscriber) => {
-      this.catalogService.get(id).subscribe((flower: Flower) => {
-        this.cartServerService
-          .addItem({
-            itemId: flower.id,
-            priceId: flower.priceDto.id,
-            quantity: 1,
-          })
-          .subscribe((cart) => {
-            this.cart = cart;
-            this.cartRefreshed.emit(this.cart?.orderItems);
-            subscriber.next();
-          });
-      });
-    });
+  public add(id: number): Observable<ShoppingCartDto> {
+    return this.catalogService.get(id).pipe(
+      mergeMap((flower) => {
+        const flowerDto = {
+          itemId: flower.id,
+          priceId: flower.priceDto.id,
+          quantity: 1,
+        };
+        return this.http.post(environment.api.url + 'cart/item', flowerDto) as Observable<ShoppingCartDto>;
+      }),
+      tap((cart) => {
+        this.cart = cart;
+        this.cartRefreshed.emit(this.cart?.orderItems);
+      })
+    );
   }
 
   private getItemId(flowerId: number): number {
     let result;
     this.cart?.orderItems.forEach((item) => {
-      if ((item.itemId === flowerId)) {
+      if (item.itemId === flowerId) {
         result = item.id;
       }
     });
     return result ?? -1;
   }
 
-  // private getItem(flowerId: number)
-
-  public delete(flowerId: number): void {
+  public delete(flowerId: number): Observable<ShoppingCartDto> {
     const itemId = this.getItemId(flowerId);
-    this.cartServerService.delete(itemId).subscribe((cart) => {
-      this.cart = cart;
-      this.cartRefreshed.emit(this.cart?.orderItems);
-    });
-  }
-
-  public updateCart() {
-    if (this.cart) {
-      this.cartServerService.update(this.cart).subscribe((cart: any) => {
+    return (this.http.delete(environment.api.url + `cart/item/${itemId}`) as Observable<ShoppingCartDto>).pipe(
+      tap((cart) => {
         this.cart = cart;
         this.cartRefreshed.emit(this.cart?.orderItems);
       })
+    );
+  }
+
+  public updateCart(): Observable<ShoppingCartDto | undefined> {
+    if (this.cart) {
+      return (this.http.put(environment.api.url + 'cart', this.cart) as Observable<ShoppingCartDto>).pipe(
+        tap((cart: ShoppingCartDto) => {
+          this.cart = cart;
+          this.cartRefreshed.emit(this.cart?.orderItems);
+        })
+      );
     }
+    return of(undefined);
   }
 }

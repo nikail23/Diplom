@@ -1,82 +1,58 @@
 <div class="wrapper">
   <div class="header">
-    <div class="header__title">
-      Filter
-    </div>
-    <app-cross-button class="header__button_close" [isOnlyCross]="true" (click)="close()"></app-cross-button>
+    <div class="header__title">Filter</div>
+    <app-cross-button
+      class="header__button_close"
+      [isOnlyCross]="true"
+      (click)="close()"
+    ></app-cross-button>
   </div>
   <div class="separator"></div>
   <div class="filters">
     <div class="cost">
       <div class="cost__header">Cost</div>
       <div class="cost__inputs">
-        <div class="form__container">
-          <input
-            class="form__input"
-            name="min"
-            id="min"
-            type="text"
-            placeholder=" "
-            [(ngModel)]="fromValue"
-          />
-          <label for="min" class="form__label">From</label>
-        </div>
-        <div class="form__container">
-          <input
-            class="form__input"
-            name="max"
-            id="max"
-            type="text"
-            placeholder=" "
-            [(ngModel)]="toValue"
-          />
-          <label for="max" class="form__label">To</label>
-        </div>
+        <app-text-input
+          [labelText]="'From'"
+          [(value)]="sliderData.fromValue"
+          [isNumbersOnly]="true"
+          [maxValue]="sliderData.options.ceil"
+        ></app-text-input>
+        <app-text-input
+          [labelText]="'To'"
+          [(value)]="sliderData.toValue"
+          [isNumbersOnly]="true"
+          [maxValue]="sliderData.options.ceil"
+        ></app-text-input>
       </div>
       <ngx-slider
         class="cost__slider"
-        [(value)]="fromValue"
-        [(highValue)]="toValue"
-        [options]="options"
+        [(value)]="sliderData.fromValue"
+        [(highValue)]="sliderData.toValue"
+        [options]="sliderData.options"
       ></ngx-slider>
     </div>
     <div class="category">
       <div class="category__header">Category</div>
       <div class="category__checkboxes">
-        <div class="category__container" *ngFor="let categoryName of categoriesNames; let i = index">
-          <input
-            class="category__checkbox"
-            type="checkbox"
-            name="category_{{i}}"
-            id="category_{{i}}"
-          />
-          <label for="category_{{i}}"></label>
-          <div class="category__text">
-            {{categoryName}}
+        <app-radio-button
+          *ngFor="let category of categories; let i = index"
+          [value]="category.id"
+          [(model)]="selectedCategoryId"
+        >
+          <div class="text">
+            {{ category.name }}
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="additional">
-      <div class="additional__header">Additional filters</div>
-      <div class="additional__checkboxes">
-        <div class="additional__container" *ngFor="let additionalFilterName of additionalFiltersNames; let i = index">
-          <input
-            class="additional__checkbox"
-            type="checkbox"
-            name="additional_{{i}}"
-            id="additional_{{i}}"
-          />
-          <label for="additional_{{i}}"></label>
-          <div class="additional__text">
-            {{additionalFilterName}}
-          </div>
-        </div>
+        </app-radio-button>
       </div>
     </div>
     <div class="actions">
-      <app-button [filled]='true'>Apply filter</app-button>
-      <app-button [filled]='false'>Clear filter</app-button>
+      <app-button [filled]="true" (clicked)="applyFilters()"
+        >Apply filter</app-button
+      >
+      <app-button [filled]="false" (clicked)="clearFilters()"
+        >Clear filter</app-button
+      >
     </div>
   </div>
 </div>

@@ -1,10 +1,6 @@
 <button
-  #button
   class="button"
-  [ngStyle]="{
-    width: width,
-    height: height
-  }"
+  [ngClass]="styleClass"
   (click)="buttonClicked()"
 >
   <ng-content></ng-content>

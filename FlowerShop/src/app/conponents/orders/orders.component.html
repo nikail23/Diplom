@@ -1,0 +1,10 @@
+<app-navigation [paths]="paths"></app-navigation>
+<div class="orders">
+  <div class="orders__header">
+    My orders
+  </div>
+  <app-order class="orders__order" *ngFor="let order of orders" [order]="order"></app-order>
+  <div class="orders__empty" *ngIf="orders?.length === 0">
+    You have not any orders!
+  </div>
+</div>

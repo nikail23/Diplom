@@ -1,111 +1,108 @@
-<div class="content">
+<div *ngIf="!isEmpty && !isLoading" class="content">
   <div class="filters">
     <div class="filters__header">Filter</div>
     <div class="cost">
       <div class="cost__header">Cost</div>
       <div class="cost__inputs">
-        <div class="form__container">
-          <input
-            class="form__input"
-            name="min"
-            id="min"
-            type="text"
-            placeholder=" "
-            [(ngModel)]="fromValue"
-          />
-          <label for="min" class="form__label">From</label>
-        </div>
-        <div class="form__container">
-          <input
-            class="form__input"
-            name="max"
-            id="max"
-            type="text"
-            placeholder=" "
-            [(ngModel)]="toValue"
-          />
-          <label for="max" class="form__label">To</label>
-        </div>
+        <app-text-input
+          [labelText]="'From'"
+          [(value)]="sliderData.fromValue"
+          [isNumbersOnly]="true"
+          [maxValue]="sliderData.options.ceil"
+        ></app-text-input>
+        <app-text-input
+          [labelText]="'To'"
+          [(value)]="sliderData.toValue"
+          [isNumbersOnly]="true"
+          [maxValue]="sliderData.options.ceil"
+        ></app-text-input>
       </div>
       <ngx-slider
         class="cost__slider"
-        [(value)]="fromValue"
-        [(highValue)]="toValue"
-        [options]="options"
+        [(value)]="sliderData.fromValue"
+        [(highValue)]="sliderData.toValue"
+        [options]="sliderData.options"
       ></ngx-slider>
     </div>
     <div class="category">
       <div class="category__header">Category</div>
       <div class="category__checkboxes">
-        <app-checkbox
-          *ngFor="let categoryName of categoriesNames; let i = index"
+        <app-radio-button
+          *ngFor="let category of categoriesResponse?.content; let i = index"
+          [value]="category.id"
+          [(model)]="selectedCategoryId"
         >
           <div class="text">
-            {{ categoryName }}
+            {{ category.name }}
           </div>
-        </app-checkbox>
-      </div>
-    </div>
-    <div class="additional">
-      <div class="additional__header">Additional filters</div>
-      <div class="additional__checkboxes">
-        <app-checkbox
-          *ngFor="let additionalFilterName of additionalFiltersNames"
-        >
-          <div class="text">
-            {{ additionalFilterName }}
-          </div>
-        </app-checkbox>
+        </app-radio-button>
       </div>
     </div>
     <div class="actions">
-      <app-button [filled]="true">Apply filter</app-button>
-      <app-button [filled]="false">Clear filter</app-button>
+      <app-button (clicked)="applyFilters()">Apply filter</app-button>
+      <app-button
+        styleClass="button_type_unfilled-green"
+        (clicked)="cancelFilters()"
+        >Clear filter</app-button
+      >
     </div>
   </div>
   <div class="products">
     <div class="products__container_upper">
-      <div class="products__found">{{ flowers.length }} products found</div>
+      <div class="products__found">
+        {{ flowersResponse?.flowers?.length }} products found
+      </div>
       <app-button
         class="products__button_filter"
-        [filled]="false"
+        styleClass="button_type_unfilled-green"
         (clicked)="openFiltersDialog($event)"
         >Filter</app-button
       >
       <app-button
         class="products__button_sorts"
-        [filled]="false"
-        (clicked)="openSortsDialog($event)"
+        styleClass="button_type_unfilled-green"
+        (clicked)="openSortsDialog()"
         >Sorting</app-button
       >
       <mat-form-field class="products__sorts" appearance="fill">
         <mat-label>Sort by...</mat-label>
         <mat-select
-          [(ngModel)]="selectedSortFunctionId"
-          (ngModelChange)="sortChange()"
+          [ngModel]="currentSort"
+          (ngModelChange)="setSort($event)"
           name="sorts"
         >
-          <mat-option
-            *ngFor="let sortName of sortsNames; let i = index"
-            [value]="i"
-          >
-            {{ sortName }}
+          <mat-option [value]="sorts.nameAsc"> By name (A - Z) </mat-option>
+          <mat-option [value]="sorts.nameDesc"> By name (Z - A) </mat-option>
+          <mat-option [value]="sorts.priceAsc">
+            By cost (ascending)
+          </mat-option>
+          <mat-option [value]="sorts.priceDesc">
+            By cost (descending)
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div class="products__content">
-      <app-flower-card *ngFor="let flower of currentFlowers" [flower]="flower"></app-flower-card>
+      <app-flower-card
+        *ngFor="let flower of flowersResponse?.flowers"
+        [flower]="flower"
+      ></app-flower-card>
     </div>
     <div class="navigation">
       <button
         class="navigation__button"
         *ngFor="let page of pages"
-        (click)="this.pageClick(page)"
-        [ngClass]="{ navigation__button_active: this.currentPage === page }"
+        (click)="this.pageClick(page - 1)"
+        [ngClass]="{
+          navigation__button_active: this.productsParameters.page === page - 1
+        }"
       >
         {{ page }}
       </button>
     </div>
   </div>
+</div>
+<app-loading-indicator *ngIf="isLoading"></app-loading-indicator>
+<div class="empty" *ngIf="isEmpty">
+  Unfortunately, nothing found on your request
 </div>

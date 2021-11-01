@@ -1,8 +1,8 @@
-import { articles } from './../article';
+import { articles } from '../../../classes/article';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PaginationListComponent } from './pagination-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('PaginationListComponent', () => {
   let component: PaginationListComponent;
@@ -10,10 +10,10 @@ describe('PaginationListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaginationListComponent ],
-      imports: [RouterTestingModule]
-    })
-    .compileComponents();
+      declarations: [PaginationListComponent],
+      imports: [RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -49,7 +49,7 @@ describe('PaginationListComponent', () => {
   it('should change perPage', () => {
     component.perPageChange(2);
     expect(component.perPage).toBe(2);
-    expect(component.pages).toEqual([1, 2, 3, 4, 5])
+    expect(component.pages).toEqual([1, 2, 3, 4, 5]);
     expect(component.currentArticles).toEqual(articles.slice(0, 2));
   });
 });

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Article } from '../article';
+import { Article } from '../../../classes/article';
 
 @Component({
   selector: 'app-pagination-list',
   templateUrl: './pagination-list.component.html',
-  styleUrls: ['./pagination-list.component.scss']
+  styleUrls: ['./pagination-list.component.scss'],
 })
 export class PaginationListComponent implements OnInit {
   @Input() articles: Article[] = [];
@@ -22,7 +22,10 @@ export class PaginationListComponent implements OnInit {
   }
 
   private refreshCurrentArticles() {
-    this.currentArticles = this.articles.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage);
+    this.currentArticles = this.articles.slice(
+      (this.currentPage - 1) * this.perPage,
+      this.currentPage * this.perPage
+    );
   }
 
   private refreshPagesCount() {

@@ -4,7 +4,8 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jasmine"
+      "jasmine",
+      "googlemaps"
     ]
   },
   "files": [
@@ -13,6 +14,8 @@
   ],
   "include": [
     "src/**/*.spec.ts",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "src/**/*.mock.ts",
+    "src/**/payment.mock.ts"
   ]
 }

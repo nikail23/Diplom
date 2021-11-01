@@ -1,22 +1,48 @@
 <div
   class="container"
   [ngClass]="{
-    container_style_error: errorCondiion ?? isFormControlInvalid(control)
+    container_style_error: errorCondiion ?? isFormControlInvalid(control),
+    container_type_stripe: isStripe
   }"
-  [formGroup]="form"
 >
   <input
-    *ngIf="!(isTextArea || isPhone)"
+    *ngIf="!control && !isNumbersOnly"
     class="input"
+    [ngClass]="{input_type_stripe: isStripe}"
     name="input"
     id="input"
     type="text"
-    placeholder=" "
+    [placeholder]="isStripe ? labelText : ' '"
     maxlength="255"
-    formControlName="control"
+    [ngModel]="value"
+    (ngModelChange)="valueChanges($event)"
   />
   <input
-    *ngIf="isPhone"
+    *ngIf="!control && isNumbersOnly"
+    class="input"
+    [ngClass]="{input_type_stripe: isStripe}"
+    name="input"
+    id="input"
+    type="number"
+    [placeholder]="isStripe ? labelText : ' '"
+    maxlength="255"
+    [max]="maxValue ?? DefaultNumberMaxValue"
+    [ngModel]="value"
+    (ngModelChange)="valueChanges($event)"
+  />
+  <input
+    *ngIf="control && !(isTextArea || isPhone)"
+    class="input"
+    [ngClass]="{input_type_stripe: isStripe}"
+    name="input"
+    id="input"
+    type="text"
+    [placeholder]="isStripe ? labelText : ' '"
+    maxlength="255"
+    [formControl]="$any(control)"
+  />
+  <input
+    *ngIf="control && isPhone"
     phoneMask
     class="input"
     name="input"
@@ -24,21 +50,21 @@
     type="text"
     placeholder=" "
     maxlength="255"
-    formControlName="control"
+    [formControl]="$any(control)"
   />
   <textarea
-    *ngIf="isTextArea"
+    *ngIf="control && isTextArea"
     class="textarea"
     name="input"
     id="input"
     type="email"
     placeholder=" "
-    formControlName="control"
+    [formControl]="$any(control)"
     maxlength="255"
   ></textarea>
-  <label for="input" class="label">
+  <label for="input" class="label" *ngIf="!isStripe">
     {{ labelText }}
     <span *ngIf="required" class="label_type_star">*</span>
   </label>
-  <ng-content #errors></ng-content>
+  <ng-content></ng-content>
 </div>

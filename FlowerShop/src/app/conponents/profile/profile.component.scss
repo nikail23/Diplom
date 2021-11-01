@@ -3,7 +3,7 @@
 
 .wrapper {
   box-sizing: border-box;
-  padding: 0 11%;
+  padding: 0 $laptop-padding;
   width: 74%;
 
   .header {
@@ -11,7 +11,7 @@
     font-weight: bold;
     font-size: 36px;
     line-height: 110%;
-    color: #404040;
+    color: $profile-header-color;
     margin-bottom: 44px;
   }
 
@@ -78,7 +78,7 @@
       font-weight: bold;
       font-size: 36px;
       line-height: 110%;
-      color: #404040;
+      color: $profile-password-change-label-color;
       margin-bottom: 44px;
     }
 
@@ -101,7 +101,7 @@
       font-weight: bold;
       font-size: 36px;
       line-height: 110%;
-      color: #404040;
+      color: $profile-sign-out-label-color;
       margin-bottom: 44px;
     }
 
@@ -115,7 +115,7 @@
 @include resolution_tablets {
   .wrapper {
     width: 100%;
-    padding: 0 7%;
+    padding: 0 $tablet-and-phone-padding;
 
     .save-changes {
       &__button {

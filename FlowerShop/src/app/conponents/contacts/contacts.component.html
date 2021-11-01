@@ -2,36 +2,31 @@
 <div class="wrapper">
   <iframe
     class="map"
+    [src]="GoogleMapUrl | safe:'resourceUrl'"
     loading="lazy"
-    allowfullscreen
-    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCH4Vnl0vn9wP15KkS6grvqDHJnprTNKFo
-      &q=Кальварийская+19">
+  >
   </iframe>
-  <div class="header">
-    Contacts
-  </div>
+  <div class="header">Contacts</div>
   <div class="paragraph">
-    For several years now, our company has been delighting customers with the delivery of flowers and congratulations.
-    We are really proud of the clear and well-coordinated work of our employees and are always confident that your order will be delivered at the right time to the right place.
+    For several years now, our company has been delighting customers with the
+    delivery of flowers and congratulations. We are really proud of the clear
+    and well-coordinated work of our employees and are always confident that
+    your order will be delivered at the right time to the right place.
   </div>
   <div class="address">
-    <img class="address__image" src="../../../assets/contacts/address__image.png">
-    <div class="address__text">
-      Kalvariyskaya str., 19, room 45
-    </div>
+    <img
+      class="address__image"
+      src="../../../assets/contacts/address__image.png"
+    />
+    <div class="address__text">Kalvariyskaya str., 19, room 45</div>
   </div>
   <div class="phone">
-    <img class="phone__image" src="../../../assets/contacts/phone__image.png">
-    <div class="phone__text">
-      +375 29 123-45-67
-    </div>
+    <img class="phone__image" src="../../../assets/contacts/phone__image.png" />
+    <div class="phone__text">+375 29 123-45-67</div>
   </div>
   <div class="email">
-    <img class="email__image" src="../../../assets/contacts/email__image.png">
-    <div class="email__text">
-      info@flowershop.by
-    </div>
+    <img class="email__image" src="../../../assets/contacts/email__image.png" />
+    <div class="email__text">info@flowershop.by</div>
   </div>
   <app-contact-us></app-contact-us>
 </div>
-

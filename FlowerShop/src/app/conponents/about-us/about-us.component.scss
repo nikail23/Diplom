@@ -4,7 +4,7 @@
 .wrapper {
   width: 100%;
   box-sizing: border-box;
-  padding: 0 11%;
+  padding: 0 $laptop-padding;
   margin-bottom: 77px;
 
   .header {
@@ -75,7 +75,7 @@
 
 @include resolution_tablets {
   .wrapper {
-    padding: 0 7%;
+    padding: 0 $tablet-and-phone-padding;
 
     .paragraph {
       width: 100%;

@@ -1,11 +1,15 @@
 import { PopupComponent } from './../../shared/popup/popup.component';
-import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { ContactsServerService } from 'src/app/services/server/contacts-server.service';
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ContactsService } from 'src/app/services/contacts.service';
 import {
   isFormControlHasError,
   isFormControlInvalid,
-} from '../../shared/forms';
+} from '../../../classes/forms';
 
 @Component({
   selector: 'app-contact-us',
@@ -16,30 +20,30 @@ export class ContactUsComponent {
   public isFormControlHasError = isFormControlHasError;
   public isFormControlInvalid = isFormControlInvalid;
 
-  public nameControl: AbstractControl = new FormControl('', [Validators.required]);
-  public phoneControl: AbstractControl = new FormControl('', [Validators.required, Validators.minLength(17)]);
-  public textControl: AbstractControl = new FormControl('', [Validators.required]);
-
   public form: FormGroup = new FormGroup({
-    name: this.nameControl,
-    phone: this.phoneControl,
-    text: this.textControl,
+    name: new FormControl('', [
+      Validators.required,
+    ]),
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.minLength(17),
+    ]),
+    text: new FormControl('', [
+      Validators.required,
+    ]),
   });
 
-  @ViewChild(PopupComponent, { static: false })
-  popup: PopupComponent | undefined;
+  constructor(private contactsService: ContactsService) {}
 
-  constructor(private contactsService: ContactsServerService) {}
-
-  public sendMessageButtonClick(): void {
+  public sendMessageButtonClick(popup: PopupComponent): void {
     this.form.updateValueAndValidity();
     if (this.form.valid) {
       this.contactsService.sendMessage(this.form.value).subscribe(
         (response) => {
-          this.popup?.show(response, false);
+          popup?.show(response, false);
         },
         () => {
-          this.popup?.show(
+          popup?.show(
             'An error occurred while sending the message. Please, try again.',
             true
           );

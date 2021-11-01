@@ -9,12 +9,6 @@
     and well-coordinated work of our employees and are always confident that
     your order will be delivered at the right time to the right place.
   </div>
-  <app-loading-indicator *ngIf="isLoading"></app-loading-indicator>
-  <app-products-content
-    [flowers]="flowers"
-    [response]="response"
-    [perPage]="16"
-    *ngIf="!isLoading"
-  ></app-products-content>
+  <app-products-content></app-products-content>
   <app-cards></app-cards>
 </div>

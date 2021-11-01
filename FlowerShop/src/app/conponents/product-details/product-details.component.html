@@ -17,18 +17,26 @@
       </div>
       <div class="info__price">
         {{ currentFlower?.priceDto?.price ?? 0 | price }}
-        <span class="info__price_type_changes">
+        <span class="info__price_type_changes" (click)="openPriceHistoryDialog()">
           <img src="../../../assets/product-details/price__changes.png" />
           Price changes
         </span>
       </div>
-      <app-button class="info__button" [filled]="!currentFlower?.inCart" (clicked)="addToCartButtonClicked(currentFlower)">
+      <app-button
+        class="info__button"
+        [styleClass]="
+          currentFlower?.inCart
+            ? 'button_type_unfilled-green'
+            : 'button_type_filled-green'
+        "
+        (clicked)="addToCartButtonClicked(currentFlower)"
+      >
         <div *ngIf="!currentFlower?.inCart">
-          <img src="../../../assets/product-details/button_icon.png">
+          <img src="../../../assets/product-details/button_icon.png" />
           Add to cart
         </div>
         <div *ngIf="currentFlower?.inCart">
-          <img src="../../../assets/catalog/in-cart-arrow.png">
+          <img src="../../../assets/catalog/in-cart-arrow.png" />
           In the cart
         </div>
       </app-button>

@@ -1,22 +1,26 @@
 @import '../../../../sass/vars.scss';
 @import '../../../../sass/mixins.scss';
 
-.small-cards {
+.categories {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 2%;
   margin-bottom: 65px !important;
+  margin: 0 $laptop-padding;
 
-  .small-card {
+  .category {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-width: 100px;
     max-width: 160px;
+    height: 100%;
 
     &__image {
       margin-bottom: 16px;
+      width: 40px;
+      height: 40px;
     }
 
     &__header {
@@ -29,19 +33,23 @@
       text-align: center;
     }
 
-    &__subheader {
+    &__description {
       font-style: normal;
       font-weight: normal;
       font-size: 12px;
       line-height: 150%;
+      height: 40px;
       color: $home-page-text-second-color;
       text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
 
 @include resolution_tablets {
-  .small-cards {
+  .categories {
     overflow-x: auto;
+    margin: 0 $tablet-and-phone-padding;
   }
 }

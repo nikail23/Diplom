@@ -1,0 +1,53 @@
+<agm-map
+  [latitude]="mapOptions.latitude"
+  [longitude]="mapOptions.longitude"
+  [zoom]="mapOptions.zoom"
+  [fullscreenControl]="false"
+  [rotateControl]="false"
+  [streetViewControl]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClickEventHandler($event)"
+>
+  <div class="legend">
+    <img src="../../../../assets/google-maps/legend__icon.png" class="legend__icon">
+    <div class="legend__text">
+      Delivery area — Minsk
+    </div>
+  </div>
+  <agm-marker
+    *ngIf="mapOptions.marker.isPlaced"
+    [latitude]="mapOptions.marker.latitude"
+    [longitude]="mapOptions.marker.longitude"
+    [iconUrl]="mapOptions.marker.icon.url"
+  ></agm-marker>
+  <agm-kml-layer [url]="KmlLayerUrl" [clickable]="false"> </agm-kml-layer>
+</agm-map>
+<div
+  class="container"
+  [ngClass]="{
+    container_style_error: isFormControlInvalid(control)
+  }"
+>
+  <input
+    #search
+    class="input"
+    name="input"
+    id="input"
+    type="text"
+    placeholder=" "
+    maxlength="255"
+    [formControl]="$any(control)"
+    ngDefaultControl
+  />
+  <label for="input" class="label">
+    Address
+    <span class="label_type_star">*</span>
+  </label>
+  <div
+    class="error"
+    *ngIf="isFormControlHasError(control, 'required')"
+  >
+    Home address field can't be empty.
+  </div>
+</div>
+<app-popup></app-popup>

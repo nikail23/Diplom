@@ -6,131 +6,111 @@
       Sign in
     </a>
   </div>
-  <form class="form" [formGroup]="form">
+  <form class="form" [formGroup]="registrationForm">
     <app-text-input
       class="form__first-name"
-      [(control)]="form.controls.firstName"
+      [(control)]="registrationForm.controls.firstName"
       [required]="true"
       labelText="First name"
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(firstNameControl, 'required')"
+        *ngIf="isFormControlHasError(registrationForm.controls.firstName, 'required')"
       >
         First name field can't be empty.
       </div>
     </app-text-input>
     <app-text-input
       class="form__last-name"
-      [(control)]="form.controls.lastName"
+      [(control)]="registrationForm.controls.lastName"
       [required]="true"
       labelText="Last name"
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(lastNameControl, 'required')"
+        *ngIf="isFormControlHasError(registrationForm.controls.lastName, 'required')"
       >
         Last name field can't be empty.
       </div>
     </app-text-input>
     <app-text-input
       class="form__email"
-      [(control)]="form.controls.email"
+      [(control)]="registrationForm.controls.email"
       [required]="true"
       labelText="Email"
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(emailControl, 'required')"
+        *ngIf="isFormControlHasError(registrationForm.controls.email, 'required')"
       >
         Email field can't be empty.
       </div>
-      <div class="error" *ngIf="isFormControlHasError(emailControl, 'email')">
+      <div class="error" *ngIf="isFormControlHasError(registrationForm.controls.email, 'email')">
         Email field must contain email.
       </div>
     </app-text-input>
     <app-text-input
       class="form__phone"
-      [(control)]="form.controls.phone"
+      [(control)]="registrationForm.controls.phone"
       [required]="true"
       [isPhone]="true"
       labelText="Phone"
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(phoneControl, 'required')"
+        *ngIf="isFormControlHasError(registrationForm.controls.phone, 'required')"
       >
         Phone field can't be empty.
       </div>
       <div
         class="error"
-        *ngIf="isFormControlHasError(phoneControl, 'minlength')"
+        *ngIf="isFormControlHasError(registrationForm.controls.phone, 'minlength')"
       >
         Phone field must contain all numbers.
       </div>
     </app-text-input>
-    <iframe
-      class="form__map"
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCH4Vnl0vn9wP15KkS6grvqDHJnprTNKFo
-        &q=Кальварийская+19"
-    >
-    </iframe>
-    <app-text-input
-      class="form__address"
-      [(control)]="form.controls.homeAddress"
-      [required]="true"
-      labelText="Address"
-    >
-      <div
-        class="error"
-        *ngIf="isFormControlHasError(homeAddressControl, 'required')"
-      >
-        Home address field can't be empty.
-      </div>
-    </app-text-input>
+    <app-google-map [control]="registrationForm.controls.homeAddress"></app-google-map>
     <div class="form__help">
       You can enter the address manually or specify a point on the map
     </div>
     <app-text-input
       class="form__password"
-      [(control)]="form.controls.password"
+      [(control)]="registrationForm.controls.password"
       [required]="true"
       labelText="Password"
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(passwordControl, 'passwordValidator')"
+        *ngIf="isFormControlHasError(registrationForm.controls.password, 'passwordValidator')"
       >
         Password must be at least 8 characters long, contain A-z, 0-9.
       </div>
     </app-text-input>
     <app-text-input
       class="form__repeat-password"
-      [(control)]="form.controls.repeatPassword"
+      [(control)]="registrationForm.controls.repeatPassword"
       [required]="true"
       labelText="Repeat password"
       [errorCondiion]="
-        isFormControlInvalid(repeatPasswordControl) ||
-        form.hasError('checkPasswordsValidator')
+        isFormControlInvalid(registrationForm.controls.repeatPassword) ||
+        registrationForm.hasError('checkPasswordsValidator')
       "
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(repeatPasswordControl, 'required')"
+        *ngIf="isFormControlHasError(registrationForm.controls.repeatPassword, 'required')"
       >
         Repeat password field field can't be empty.
       </div>
       <div
         class="error"
-        *ngIf="isFormControlHasError(form, 'checkPasswordsValidator')"
+        *ngIf="isFormControlHasError(registrationForm, 'checkPasswordsValidator')"
       >
         Passwords do not match.
       </div>
     </app-text-input>
     <div class="container_checks">
-      <app-checkbox>
+      <app-checkbox (checked)="isRulesCheckedChange($event)">
         <div class="text">
           I agree to the
           <a href="#" class="container_checks__link"
@@ -138,8 +118,11 @@
           >
         </div>
       </app-checkbox>
+      <div *ngIf="!isRulesChecked" class="error">
+        You need to agree with the terms of processing data
+      </div>
     </div>
-    <button class="form__button" (click)="registerButtonClick()">
+    <button class="form__button" (click)="registerButtonClick(popup)">
       Register
     </button>
     <div class="or">
@@ -155,6 +138,7 @@
           other-ways-container__button
           other-ways-container__button_type_facebook
         "
+        (click)="logIn()"
       >
         <img
           class="button__icon"
@@ -166,6 +150,7 @@
         class="
           other-ways-container__button other-ways-container__button_type_google
         "
+        (click)="logIn()"
       >
         <img
           class="button__icon"
@@ -175,5 +160,5 @@
       </button>
     </div>
   </form>
-  <app-popup></app-popup>
+  <app-popup #popup></app-popup>
 </div>

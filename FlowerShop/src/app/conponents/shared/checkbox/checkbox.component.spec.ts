@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckboxComponent } from './checkbox.component';
@@ -8,9 +9,9 @@ describe('CheckboxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckboxComponent ]
-    })
-    .compileComponents();
+      declarations: [CheckboxComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +22,13 @@ describe('CheckboxComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit checked event', () => {
+    spyOn(component.checked, 'emit');
+    component.inputChecked();
+    fixture.detectChanges();
+    expect(component.isChecked).toBeTrue();
+    expect(component.checked.emit).toHaveBeenCalled();
   });
 });

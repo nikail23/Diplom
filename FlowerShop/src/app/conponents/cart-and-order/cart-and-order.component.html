@@ -27,29 +27,27 @@
         <div class="cart__input">
           <input
             type="number"
-            [(ngModel)]="cartFlowersInfo[i].quantity"
+            [value]="cartFlowersInfo[i] ? cartFlowersInfo[i].quantity : 0"
+            (valueChange)="setCount(i, $event)"
             [min]="1"
           />
         </div>
       </div>
       <div class="cart__total-price">
-        {{ flower.priceDto.price * cartFlowersInfo[i].quantity | price }}
+        {{ flower.priceDto.price * (cartFlowersInfo[i] ? cartFlowersInfo[i].quantity : 0) | price }}
       </div>
       <div class="cart__delete-button">
         <app-cross-button
           [isOnlyCross]="true"
-          (clicked)="deleteFlower(flower)"
+          (clicked)="deleteFlowerButtonClicked(flower)"
         ></app-cross-button>
       </div>
     </div>
     <div class="cart__ending">
       <app-button
         class="cart__delete-selected-button"
-        [filled]="false"
-        [mainColor]="'#E7E7E7'"
-        [hoverColor]="'#E7E7E7'"
-        [textColor]="'#000000'"
-        (clicked)="deleteSelected()"
+        styleClass="button_type_unfilled-gray"
+        (clicked)="deleteSelectedFlowersButtonClicked()"
         >Delete selected</app-button
       >
       <div class="cart__total-items-price">
@@ -63,19 +61,6 @@
   <hr class="separator" />
   <div class="order__content-header">Order placement</div>
   <div class="order">
-    <app-text-input
-      class="order__full-name"
-      [(control)]="orderForm.controls.fullName"
-      [required]="true"
-      labelText="Full name"
-    >
-      <div
-        *ngIf="isFormControlHasError(orderForm.controls.fullName, 'required')"
-        class="error"
-      >
-        Full name can't be empty!
-      </div>
-    </app-text-input>
     <app-text-input
       class="order__email"
       [(control)]="orderForm.controls.email"
@@ -122,38 +107,22 @@
       [isTextArea]="true"
     >
     </app-text-input>
-    <iframe
-      class="order__map"
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCH4Vnl0vn9wP15KkS6grvqDHJnprTNKFo
-        &q=Кальварийская+19"
-    ></iframe>
-    <app-text-input
-      class="order__address"
-      [(control)]="orderForm.controls.address"
-      [required]="true"
-      labelText="Address"
-    >
-      <div
-        class="error"
-        *ngIf="isFormControlHasError(orderForm.controls.address, 'required')"
-      >
-        Address field can't be empty.
-      </div>
-    </app-text-input>
+    <app-google-map [control]="orderForm.controls.deliveryAddress"></app-google-map>
     <div class="order__help">
       You can enter the address manually or specify a point on the map
     </div>
     <div class="order__payment-label">Choose a payment method:</div>
     <div class="order__payment">
-      <app-radio-button [control]="paymentType" [value]="PaymentType.CASH">
+      <app-radio-button [radio]="orderForm.controls.paymentType" [value]="PaymentType.CASH">
         <div class="text">In cash to the courier</div>
       </app-radio-button>
-      <app-radio-button [control]="paymentType" [value]="PaymentType.CARD">
+      <app-radio-button [radio]="orderForm.controls.paymentType" [value]="PaymentType.CARD">
+        <div class="text">By bank card to the courier</div>
+      </app-radio-button>
+      <app-radio-button [radio]="orderForm.controls.paymentType" [value]="PaymentType.ONLINE">
         <div class="text">By bank card on the website</div>
       </app-radio-button>
-      <div *ngIf="isFormControlHasError(paymentType, 'required')" class="order__payment_error">
+      <div *ngIf="isFormControlHasError(orderForm.controls.paymentType, 'required')" class="order__payment_error">
         You need to choose payment type.
       </div>
     </div>
@@ -166,10 +135,7 @@
       </app-button>
       <app-button
         class="order__button"
-        [filled]="false"
-        [mainColor]="'#E7E7E7'"
-        [textColor]="'#404040'"
-        [hoverColor]="'#E7E7E7'"
+        styleClass="button_type_unfilled-gray"
         (clicked)="continueShoppingClicked()"
       >
         Continue shopping
@@ -177,3 +143,4 @@
     </div>
   </div>
 </div>
+<app-popup></app-popup>

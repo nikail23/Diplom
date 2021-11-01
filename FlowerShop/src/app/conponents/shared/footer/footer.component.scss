@@ -6,7 +6,7 @@
   min-height: 441px;
   width: 100%;
   background-color: $footer-background-color;
-  padding: 0 11%;
+  padding: 0 $laptop-padding;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 13% 1fr 1fr 1fr 1fr;
@@ -73,7 +73,7 @@
       grid-template-columns: 1fr;
       grid-template-rows: 63px 63px 63px;
       row-gap: 24px;
-      column-gap: 11%;
+      column-gap: $laptop-padding;
     }
 
     &__link {

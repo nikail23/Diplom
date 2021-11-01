@@ -1,29 +1,11 @@
 <div class="wrapper">
-  <div class="search__container" [formGroup]="form">
-    <input
-      class="search__input"
-      name="search"
-      id="search"
-      type="text"
-      placeholder=" "
-      formControlName="search"
-    />
-    <label for="search" class="search__label">Enter your search request</label>
-    <img src="../../../../../assets/search/search.png" class="search__icon" />
-  </div>
+  <app-text-input class="search__input" [labelText]="'Enter your search request'" [control]="searchControl">
+    <div class="text">
+      <img src="../../../../../assets/search/search.png" class="search__icon" />
+    </div>
+  </app-text-input>
   <div class="results">
     <div class="results__header">Search results</div>
-    <div *ngIf="flowers.length === 0 && !(isNotFoundError || isLoading)" class="results__hint">
-      The search results will appear here
-    </div>
-    <div *ngIf="isNotFoundError" class="results__hint">
-      Unfortunately, nothing found on your request
-    </div>
-    <app-loading-indicator class="results__indicator" *ngIf="isLoading"></app-loading-indicator>
-    <app-products-content
-      *ngIf="!isLoading && flowers.length > 0"
-      [flowers]="flowers"
-      [perPage]="8"
-    ></app-products-content>
+    <app-products-content [isSearch]="true"></app-products-content>
   </div>
 </div>

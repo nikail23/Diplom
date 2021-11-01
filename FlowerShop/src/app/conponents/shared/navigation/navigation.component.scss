@@ -3,7 +3,7 @@
 
 .wrapper {
   width: 100%;
-  padding: 0 11%;
+  padding: 0 $laptop-padding;
   box-sizing: border-box;
   margin-bottom: 44px;
 
@@ -44,7 +44,7 @@
 
 @include resolution_tablets {
   .wrapper {
-    padding: 0 7%;
+    padding: 0 $tablet-and-phone-padding;
     margin-bottom: 20px;
   }
 }

@@ -1,0 +1,187 @@
+@import 'https://code.highcharts.com/css/highcharts.css';
+@import '../../../sass/vars.scss';
+@import '../../../sass/mixins.scss';
+
+.header {
+  height: 101px;
+  padding: 0 6%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  &__text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 120%;
+    color: $price-history-header-text-color;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 37px;
+
+    .time-type__button {
+      position: relative;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 110%;
+      text-align: center;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: $price-history-time-type-button-text-color;
+      border: 0;
+      background: 0;
+      outline: 0;
+      cursor: pointer;
+
+      .active-tile {
+        display: none;
+        position: absolute;
+        bottom: -16px;
+        left: 24px;
+        width: 32px;
+        height: 4px;
+        background: $price-history-time-type-active-tile-color;
+        border-radius: 4px 4px 0px 0px;
+      }
+
+      &_active {
+        color: $price-history-time-type-active-button-text-color;
+
+        .active-tile {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+hr {
+  margin: 0;
+  background: $price-history-hr-color;
+  opacity: 0.2;
+}
+
+.current-price {
+  margin-top: 23px;
+  padding: 0 6%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 150%;
+  color: $price-history-current-price-text-color;
+
+  &__value {
+    font-weight: bold;
+  }
+}
+
+.chart {
+  display: block;
+  height: calc(100% - 149px);
+  width: 100%;
+}
+
+::ng-deep {
+  .highcharts-tooltip {
+    &-box {
+      stroke-width: 0;
+      fill: $price-history-chart-tooltip-fill-color;
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .tooltip {
+    font-family: Montserrat;
+    display: flex;
+    flex-direction: column;
+
+    &__date {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 170%;
+      text-align: center;
+      color: $price-history-chart-tooltip-date-text-color;
+    }
+
+    &__price {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 170%;
+      text-align: center;
+      color: $price-history-chart-tooltip-price-text-color;
+    }
+  }
+
+  .mat-dialog-container {
+    padding: 0;
+  }
+
+  .highcharts-yaxis-grid {
+    display: none;
+  }
+
+  .highcharts-point {
+    stroke-width: 2px;
+    stroke: $price-history-chart-point-stroke-color;
+    fill: $price-history-chart-point-fill-color;
+  }
+
+  .highcharts-label {
+    text {
+      font-family: Montserrat !important;
+      font-style: normal !important;
+      font-weight: normal !important;
+      font-size: 14px !important;
+      line-height: 150% !important;
+      text-align: center !important;
+      color: $price-history-chart-label-text-color !important;
+    }
+  }
+
+  .highcharts-axis-labels {
+    text {
+      font-family: Montserrat !important;
+      font-style: normal !important;
+      font-weight: normal !important;
+      font-size: 14px !important;
+      line-height: 150% !important;
+      text-align: center !important;
+      color: $price-history-chart-label-text-color !important;
+    }
+  }
+}
+
+@include resolution_tablets {
+  .header {
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding-right: 0;
+
+    &__text {
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+
+    &__actions {
+      justify-content: center;
+      grid-column: 1/3;
+      grid-row: 2/3;
+    }
+  }
+}

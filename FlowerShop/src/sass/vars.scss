@@ -1,3 +1,8 @@
+// global paddings
+
+$laptop-padding: 11%;
+$tablet-and-phone-padding: 7%;
+
 // home page
 
 $home-page-bottom-padding: 5%;
@@ -7,10 +12,6 @@ $home-page-navigation-button-base-color: #ffffff;
 $home-page-navigation-button-active-color: #404040;
 $home-page-card-border-color: #E7E7E7;
 $home-page-slider-background: linear-gradient(90deg, #F8D7C4 0%, #FEDCE0 46.33%), #FEDCE0;
-$home-page-card-about-background: #F6F6F6;
-$home-page-card-about-subheader-color: #FF5D7D;
-$home-page-card-promo-backround: linear-gradient(101.17deg, rgba(123, 97, 255, 0.2) 0%, rgba(197, 224, 239, 0.2) 100%), #C5E0EF;
-$home-page-flower-border-color: #E7E7E7;
 $home-page-browse-button-first-color: #5E9E5E;
 $home-page-browse-button-second-color: #ffffff;
 $home-page-delivery-description-header-background-color-1: rgba(255, 93, 125, 1);
@@ -23,9 +24,12 @@ $news-page-description-header-background-color-2: rgba(123, 97, 255, 1);
 
 // news page -> pagination-list
 
-$news-page-pagination-list-article-date-text-color: #404040;
-$news-page-pagination-list-article-header-text-color: #404040;
-$news-page-pagination-list-article-paragraph-text-color: #404040;
+$news-page-article-date-text-color: #404040;
+$news-page-article-header-text-color: #404040;
+$news-page-article-paragraph-text-color: #404040;
+$news-page-nav-button-background: #ffffff;
+$news-page-nav-button-border-color: #E7E7E7;
+$news-page-nav-button-active-border-color: #FF5D7D;
 
 // about us
 
@@ -60,7 +64,6 @@ $contacts-page-button-color-2: #ffffff;
 
 $registration-page-header-color: #404040;
 $registration-page-link-color: #FF5D7D;
-$registration-page-star-color: #FF5D7D;
 $registration-page-help-color: #000000;
 $registration-page-checkbox-border: 1px solid #B4B4B4;
 $registration-page-checkbox-color-1: #FFFFFF;
@@ -69,6 +72,7 @@ $registration-page-checks-text-color: #404040;
 $registration-page-checks-link-color: #FF5D7D;
 $registration-page-or-hr-color: #404040;
 $registration-page-or-text-color: #404040;
+$registration-page-or-text-background: #ffffff;
 $registration-page-other-ways-help-color: #000000;
 $registration-page-other-ways-button-facebook-color-1: #ffffff;
 $registration-page-other-ways-button-facebook-color-2: #4867AA;
@@ -77,7 +81,6 @@ $registration-page-other-ways-button-google-color-2: #FFFFFF;
 $registration-page-other-ways-button-google-border: 1px solid #F5F5F5;
 $registration-page-register-button-color-2: #ffffff;
 $registration-page-register-button-color-1: #5e9e5e;
-$registration-page-error-color: #eb5757;
 
 // login
 
@@ -112,13 +115,134 @@ $catalog-page-filters-header-color: #404040;
 $catalog-page-filters-cost-header-color: #404040;
 $catalog-page-slider-color: #ff5d7d;
 $catalog-page-filters-subheader-color: #404040;
-$catalog-page-checkbox-border: 1px solid #B4B4B4;
-$catalog-page-checkbox-color-1: #FFFFFF;
-$catalog-page-checkbox-color-2: #5E9E5E;
 $catalog-page-catagory-text-active-color: #404040;
 $catalog-page-checks-text-color: #404040;
 $catalog-page-button-color-1: #5e9e5e;
 $catalog-page-button-color-2: #4a804a;
+$catalog-page-nav-button-background: #ffffff;
+$catalog-page-nav-button-border-color: #e7e7e7;
+$catalog-page-nav-button-active-color: #ff5d7d;
+$catalog-page-form-field-background: #ffffff;
+$catalog-page-form-field-border-color: #e7e7e7;
+$catalog-page-form-field-label-color: #404040;
+$catalog-page-mat-select-background: #ffffff;
+$catalog-page-mat-select-arrow-color: #404040;
+$catalog-page-found-text-color: #404040;
+
+// filters dialog
+
+$filters-header-color: #404040;
+$filters-separator-color: #404040;
+$filters-cost-header-color: #404040;
+$filters-slider-selection-color: rgba(255, 93, 125, 1);
+$filters-slider-pointer-color: #ff5d7d;
+$filters-category-header-color: #404040;
+
+// sorts dialog
+
+$sorts-header-color: #404040;
+$sorts-separator-color: #404040;
+$sorts-group-color: #404040;
+$sorts-radio-border-color: #5E9E5E;
+$sorts-radio-background-color: #5E9E5E;
+$sorts-radio-label-text-color: #404040;
+
+// cart and order component
+$cart-and-order-error-color: #eb5757;
+$cart-and-order-cart-flower-border-color: #E7E7E7;
+$cart-and-order-cart-category-color: #B4B4B4;
+$cart-and-order-cart-price-color: #404040;
+$cart-and-order-cart-x-color: #B4B4B4;
+$cart-and-order-cart-input-background: #FFFFFF;
+$cart-and-order-cart-input-border-color: #E7E7E7;
+$cart-and-order-cart-total-price-color: #404040;
+$cart-and-order-cart-total-items-price-color: #404040;
+$cart-and-order-cart-separator-color: #404040;
+$cart-and-order-cart-content-header-text-color: #404040;
+$cart-and-order-cart-header-text-color: #404040;
+$cart-and-order-order-header-color: #404040;
+$cart-and-order-order-help-color: #000000;
+$cart-and-order-order-payment-label-color: #000000;
+
+// product details
+
+$product-details-image-border-color: #E7E7E7;
+$product-details-info-name-color-1: rgba(255, 93, 125, 1);
+$product-details-info-name-color-2: rgba(123, 97, 255, 1);
+$product-details-short-description-color: #000000;
+$product-details-price-color: #404040;
+$product-details-price-history-color: #FF5D7D;
+$product-details-description-header-color: #404040;
+$product-details-description-paragraph-color: #404040;
+
+// profile
+
+$profile-header-color: #404040;
+$profile-password-change-label-color: #404040;
+$profile-sign-out-label-color: #404040;
+
+// search
+
+$search-content-header-color: #404040;
+$search-results-header-color: #404040;
+
+// price history dialog component
+
+$price-history-header-text-color: #404040;
+$price-history-time-type-button-text-color: #404040;
+$price-history-time-type-active-button-text-color: #FF5D7D;
+$price-history-time-type-active-tile-color: #FF5D7D;
+$price-history-hr-color: #404040;
+$price-history-current-price-text-color: #404040;
+$price-history-chart-tooltip-fill-color: #ffffff;
+$price-history-chart-tooltip-date-text-color: #404040;
+$price-history-chart-tooltip-price-text-color: #404040;
+$price-history-chart-point-stroke-color: #5E9E5E;
+$price-history-chart-point-fill-color: #ffffff;
+$price-history-chart-label-text-color: #404040;
+
+// google map component
+
+$google-map-legend-background: #ffffff;
+$google-map-legend-text-color: #404040;
+
+// chat
+
+$chat-content-background: #ffffff;
+$chat-header-background: #5E9E5E;
+$chat-header-text-color: #ffffff;
+$chat-message-in-background: #F5F5F5;
+$chat-message-in-color: #404040;
+$chat-message-out-background: #5E9E5E;
+$chat-message-out-color: #FFFFFF;
+$chat-message-button-background: #5E9E5E;
+
+// payment dialog
+
+$payment-card-border-color: #E7E7E7;
+$payment-header-text-color: #000000;
+$payment-error-color: #EB1C26;
+
+// orders
+
+$orders-header-text-color: #404040;
+$orders-order-header-text-color: #404040;
+$orders-order-address-text-color: #404040;
+$orders-order-price-text-color: #404040;
+$orders-order-details-border-color: #e7e7e7;
+$orders-order-details-header-text-color: #404040;
+$orders-flower-name-text-color: #404040;
+$orders-flower-category-text-color: #B4B4B4;
+$orders-flower-price-text-color: #404040;
+$orders-flower-x-text-color: #B4B4B4;
+$orders-flower-count-text-color: #404040;
+$orders-flower-total-price-text-color: #404040;
+$orders-flower-hr-color: #E7E7E7;
+$orders-flower-email-text-color: #B4B4B4;
+$orders-flower-phone-text-color: #B4B4B4;
+$orders-flower-additional-text-color: #404040;
+$orders-flower-payment-text-color: #404040;
+$orders-mat-expansion-panel-border-color: #e7e7e7;
 
 // footer
 
@@ -128,8 +252,20 @@ $footer-text-second-color: #ffffff;
 
 // header
 
+$header-wrapper-background: #ffffff;
+$header-sidebar-background: rgba(255, 255, 255, 0.8);
 $header-text-base-color: #404040;
 $header-text-hover-color: #ff5d7d;
+$header-tile-color: #ff5d7d;
+$header-items-count-icon-background: #FF5D7D;
+$header-items-count-icon-text-color: #FFFFFF;
+$header-profile-button-text-color: #404040;
+$header-profile-button-hover-background: #ffffff;
+$header-profile-separator-color: #E7E7E7;
+
+// loading indicator
+
+$loading-indicator-stroke-color: #b4b4b4;
 
 // navigation
 
@@ -138,9 +274,58 @@ $navigation-page-separator-color: #BDBDBD;
 $navigation-page-link-color: #404040;
 $navigation-page-active-link-color: #BDBDBD;
 
-// input
+// button component
 
+$button-green-first-color: #5e9e5e;
+$button-green-second-color: #ffffff;
+$button-green-hover-color: #4A804A;
+$button-gray-first-color: #E7E7E7;
+$button-gray-second-color: #ffffff;
+$button-gray-text-color: #000000;
+$button-darkblue-background: #0B253F;
+$button-darkblue-text-color: #ffffff;
+
+
+// cards component
+
+$cards-card-border-color: #E7E7E7;
+$cards-text-base-color: #404040;
+$cards-card-about-background: #F6F6F6;
+$cards-card-about-subheader-color: #FF5D7D;
+$cards-card-promo-backround: linear-gradient(101.17deg, rgba(123, 97, 255, 0.2) 0%, rgba(197, 224, 239, 0.2) 100%), #C5E0EF;
+
+// checkbox component
+
+$checkbox-border: 1px solid #B4B4B4;
+$checkbox-color-1: #FFFFFF;
+$checkbox-color-2: #5E9E5E;
+
+// cross button component
+$cross-button-first-color: #404040;
+$cross-button-second-color: #ffffff;
+
+// flower component
+$flower-border-color: #E7E7E7;
+$flower-text-base-color: #404040;
+$flower-text-second-color: #b4b4b4;
+$flower-in-cart-text-color: #5E9E5E;
+$flower-hover-background: #ffffff;
+
+// popup component
+$popup-background-color: #ffffff;
+$popup-confirm-color: #5e9e5e;
+$popup-error-color: #ff5d7d;
+$popup-close-button-background: #333;
+
+// text input component
 $input-text-color: #404040;
 $input-background-color: #FFFFFF;
 $input-border: 1px solid #E7E7E7;
 $input-label-color: #B4B4B4;
+$input-star-color: #FF5D7D;
+$input-error-color: #eb5757;
+
+// work examples
+$work-examples-paragraph-color: #404040;
+$work-examples-medium-images-subtext-color: #B4B4B4;
+$work-examples-images-background: #FAFAFA;

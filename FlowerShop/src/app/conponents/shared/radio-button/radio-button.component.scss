@@ -12,28 +12,27 @@
   opacity: 0;
   width: 20px;
   height: 20px;
+  margin: 0;
 
-  & + label {
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
+  &:checked + label::before {
+    background-image: url(../../../../assets/radio-button/radiobutton_active.png);
   }
-  & + label::before {
+}
+
+label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  width: 20px;
+  height: 20px;
+
+  &::before {
     content: "";
     display: inline-block;
     width: 20px;
     height: 20px;
     background-image: url(../../../../assets/radio-button/radiobutton_default.png);
-    // background: $catalog-page-checkbox-color-1;
-    // border: $catalog-page-checkbox-border;
-    // border-radius: 4px;
-    // background-repeat: no-repeat;
-    // background-position: center center;
-  }
-  &:checked + label::before {
-    // border-color: $catalog-page-checkbox-color-2;
-    // background-color: $catalog-page-checkbox-color-2;
-    background-image: url(../../../../assets/radio-button/radiobutton_active.png);
   }
 }
 

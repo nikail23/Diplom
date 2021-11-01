@@ -1,7 +1,14 @@
+import { CatalogService } from './../../services/catalog.service';
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { HomeComponent } from './home.component';
+import { KeycloakService } from 'keycloak-angular';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+import { keycloakSpy } from 'src/app/testing/keycloak.mock';
+import { catalogServiceSpy } from 'src/app/testing/catalog.mock';
+import { cartServiceSpy } from 'src/app/testing/cart.mock';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -9,9 +16,15 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule],
+      declarations: [HomeComponent],
+      providers: [
+        { provide: KeycloakService, useValue: keycloakSpy },
+        { provide: CatalogService, useValue: catalogServiceSpy },
+        { provide: CartService, useValue: cartServiceSpy },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -32,20 +45,10 @@ describe('HomeComponent', () => {
   it('should render slides', () => {
     let i = 0;
     const headers = fixture.debugElement.queryAll(By.css('.slider__header'));
-    component.slides.forEach(slide => {
+    component.slides.forEach((slide) => {
       component.setSlide(i);
       fixture.detectChanges();
       expect(headers[i].nativeElement.innerText).toBe(slide.header);
-      i++;
-    });
-  });
-
-  it('should render catalog preview', () => {
-    let i = 0;
-    fixture.detectChanges();
-    const names = fixture.debugElement.queryAll(By.css('.flower__header'));
-    component.randomEightflowers.forEach(flower => {
-      expect(names[i].nativeElement.innerText).toBe(flower.name);
       i++;
     });
   });

@@ -1,68 +1,66 @@
-import { ImagesServerService } from './server/images-server.service';
+import { Flower } from 'src/app/classes/flower';
+import { FlowersResponseDto } from './../classes/flower';
+import { ProductsParameters } from '../classes/products-parameters';
+import { ImagesService } from './images.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CatalogServerService } from 'src/app/services/server/catalog-server.service';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Flower } from '../conponents/home/flower';
+import { forkJoin, Observable } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CatalogService {
-  constructor(private catalogServerService: CatalogServerService, private sanitazer: DomSanitizer, private imagesService: ImagesServerService) { }
+  constructor(
+    private sanitazer: DomSanitizer,
+    private imagesService: ImagesService,
+    private http: HttpClient
+  ) {}
 
   public getAll(
-    direction?: string,
-    page?: number,
-    size?: number,
-    sortProperty?: string
-  ): Observable<{flowers: Flower[], response: any}> {
-    return new Observable((subscriber) => {
-      this.catalogServerService.getAll(direction, page, size, sortProperty).subscribe(
-        (response: any) => {
-          this.convertGetResponseToFlowersList(response).subscribe((flowers: Flower[]) => {
-            subscriber.next({flowers, response});
-            subscriber.complete();
-          });
-        },
-        (error) => {
-          subscriber.error(error);
-        });
-    });
+    parameters?: ProductsParameters
+  ): Observable<FlowersResponseDto> {
+    const params = parameters ?? {};
+
+    return this.http.get(environment.api.url + 'items', { params })
+      .pipe(
+        mergeMap((response) =>
+          this.convertGetResponseToFlowersResponse(response)
+        )
+      );
   }
 
   public get(id: number): Observable<Flower> {
-    return new Observable((subscriber) => {
-      this.catalogServerService.get(id).subscribe(
-        (response: any) => {
-          this.convertGetResponseToFlower(response).subscribe((flower: Flower) => {
-            subscriber.next(flower);
-            subscriber.complete();
-          });
-        },
-        (error) => {
-          subscriber.error(error);
-        });
-    });
+    return this.http.get(environment.api.url + `items/${id}`)
+      .pipe(mergeMap((result) => this.convertGetResponseToFlower(result)));
   }
 
-  public search(name: string): Observable<any> {
-    return new Observable((subscriber) => {
-      this.catalogServerService.search(name).subscribe(
-        (response: any) => {
-          this.convertSearchResponseToFlowerList(response).subscribe((flowerList: Flower[]) => {
-            subscriber.next(flowerList);
-            subscriber.complete();
-          });
-        },
-        (error) => {
-          subscriber.error(error);
-        });
-    });
+  public search(name: string): Observable<FlowersResponseDto> {
+    return this.http.get(environment.api.url + 'items/search', { params: {name} })
+      .pipe(
+        mergeMap((result) =>
+          this.convertSearchResponseToFlowerResponseDto(result)
+        )
+      );
   }
 
-  private convertGetResponseToFlowersList(response: any): Observable<Flower[]> {
-    return new Observable((subscriber) => {
+  private getFlowersLoadImagesObservable(flowers: Flower[]) {
+    const observables$: Observable<any>[] = [];
+
+    flowers.forEach(flower => {
+      observables$.push(this.imagesService.getImage(flower.photo).pipe(
+        mergeMap((blob) => this.setFlowerImage(blob, flower))
+      ));
+    });
+
+    return forkJoin(observables$);
+  }
+
+  private convertGetResponseToFlowersResponse(
+    response: any
+  ): Observable<FlowersResponseDto> {
       const flowers: Flower[] = response.content.map((value: any) => {
         const flower: Flower = {
           category: value.category,
@@ -74,58 +72,61 @@ export class CatalogService {
           thumbnail: value.thumbnail,
           photo: value.photo,
           loadedPhoto: '',
-          inCart: false
+          inCart: false,
         };
         return flower;
       });
-      flowers.forEach(flower => {
-        this.imagesService.getImage(flower.photo).subscribe((blob: Blob) => {
-          this.setFlowerImage(blob, flower).subscribe(() => {});
-        });
-      });
-      subscriber.next(flowers);
-      subscriber.complete();
-    });
+      return this.getFlowersLoadImagesObservable(flowers).pipe(
+        map(() => {
+          return { flowers, response };
+        })
+      );
   }
 
   private convertGetResponseToFlower(value: any): Observable<Flower> {
-    return new Observable((subscriber) => {
-      const flower: Flower = {
-        category: value.category,
-        id: value.id,
-        name: value.name,
-        description: value.description,
-        shortDescription: value.shortDescription,
-        priceDto: value.priceDto,
-        thumbnail: value.thumbnail,
-        photo: value.photo,
-        loadedPhoto: '',
-        inCart: false
-      };
-      this.imagesService.getImage(flower.photo).subscribe((blob: Blob) => {
-        this.setFlowerImage(blob, flower).subscribe(() => {
-          subscriber.next(flower);
-          subscriber.complete();
-        });
-      });
-    });
+    const flower: Flower = {
+      category: value.category,
+      id: value.id,
+      name: value.name,
+      description: value.description,
+      shortDescription: value.shortDescription,
+      priceDto: value.priceDto,
+      thumbnail: value.thumbnail,
+      photo: value.photo,
+      loadedPhoto: '',
+      inCart: false,
+    };
+    return this.imagesService
+      .getImage(flower.photo)
+      .pipe(
+        mergeMap((blob) => this.setFlowerImage(blob, flower)),
+        map(() => flower)
+      );
   }
 
-  private convertSearchResponseToFlowerList(response: any): Observable<Flower[]> {
-    const fakeGetResponse = {content: response};
-    return this.convertGetResponseToFlowersList(fakeGetResponse);
+  private convertSearchResponseToFlowerResponseDto(
+    response: any
+  ): Observable<FlowersResponseDto> {
+    const fakeGetResponse = { content: response };
+    return this.convertGetResponseToFlowersResponse(fakeGetResponse);
   }
 
   private setFlowerImage(blob: Blob, flower: Flower): Observable<any> {
     return new Observable((subscriber) => {
       const reader = new FileReader();
-      reader.addEventListener("load", () => {
-        const base64data = reader.result;
-        const safeSrc = this.sanitazer.bypassSecurityTrustUrl('' + base64data);
-        flower.loadedPhoto = safeSrc;
-        subscriber.next();
-        subscriber.complete();
-      }, false);
+      reader.addEventListener(
+        'load',
+        () => {
+          const base64data = reader.result;
+          const safeSrc = this.sanitazer.bypassSecurityTrustUrl(
+            '' + base64data
+          );
+          flower.loadedPhoto = safeSrc;
+          subscriber.next();
+          subscriber.complete();
+        },
+        false
+      );
       if (blob) {
         reader.readAsDataURL(blob);
       }

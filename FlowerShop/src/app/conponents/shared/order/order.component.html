@@ -1,0 +1,40 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <div class="order__header">
+      <div class="order__icon">
+        <img src="../../../../assets/orders/green_icon.png" *ngIf="order?.orderStatus !== OrderStatus.PENDING_PAYMENT">
+        <img src="../../../../assets/orders/orange_icon.png" *ngIf="order?.orderStatus === OrderStatus.PENDING_PAYMENT">
+      </div>
+      <div class="order__name">{{order?.deliveryName}}</div>
+      <div class="order__address">{{order?.deliveryAddress}}</div>
+      <div class="order__price">{{orderAmountCalculating | price}}</div>
+    </div>
+  </mat-expansion-panel-header>
+  <div class="details">
+    <div class="details__header">
+      Order Details
+    </div>
+    <div class="details__flowers">
+      <div *ngFor="let flower of flowers; let i = index" class="flower">
+        <img class="flower__image" [src]="flower.loadedPhoto">
+        <div class="flower__name">{{flower.name}}</div>
+        <div class="flower__category">{{flower.category.name}}</div>
+        <div class="flower__price">{{flowersCalculatings[i].price | price}}</div>
+        <div class="flower__x">x</div>
+        <div class="flower__count">{{flowersCalculatings[i].count}}</div>
+        <div class="flower__total-price">{{flowersCalculatings[i].amount | price}}</div>
+      </div>
+    </div>
+    <hr class="details__hr">
+    <div class="details__header details__header_type_additional">Contact person</div>
+    <div class="details__email">{{order?.email}}</div>
+    <div class="details__phone">{{order?.phone}}</div>
+    <div class="details__header details__header_type_additional">Additional information</div>
+    <div class="details__additional">{{order?.text}}</div>
+    <hr class="details__hr">
+    <div class="details__header details__header_type_additional">Payment method</div>
+    <div class="details__payment" *ngIf="order?.paymentType === PaymentType.CARD">By bank card to the courier</div>
+    <div class="details__payment" *ngIf="order?.paymentType === PaymentType.CASH">In cash to the courier</div>
+    <div class="details__payment" *ngIf="order?.paymentType === PaymentType.ONLINE">Online by bank card</div>
+  </div>
+</mat-expansion-panel>

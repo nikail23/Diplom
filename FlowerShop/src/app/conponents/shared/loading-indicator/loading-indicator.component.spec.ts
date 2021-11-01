@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoadingIndicatorComponent } from './loading-indicator.component';
@@ -8,9 +9,9 @@ describe('LoadingIndicatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoadingIndicatorComponent ]
-    })
-    .compileComponents();
+      declarations: [LoadingIndicatorComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {

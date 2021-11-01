@@ -1,3 +1,4 @@
+import { OrdersComponent } from './conponents/orders/orders.component';
 import { SearchComponent } from './conponents/search/search.component';
 import { SearchDialogComponent } from './conponents/shared/header/search-dialog/search-dialog.component';
 import { ProductDetailsComponent } from './conponents/product-details/product-details.component';
@@ -14,7 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth-guard.guard';
 import { CartAndOrderComponent } from './conponents/cart-and-order/cart-and-order.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'news', component: NewsComponent},
   {path: 'news/:id', component: ArticleComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'catalog/:id', component: ProductDetailsComponent},
   {path: 'search', component: SearchComponent},
   {path: 'cart-and-order', component: CartAndOrderComponent},
+  {path: 'orders', component: OrdersComponent},
   {path: '**', redirectTo: 'home'},
 ];
 

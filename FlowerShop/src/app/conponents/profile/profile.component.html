@@ -10,7 +10,7 @@
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(firstNameControl, 'required')"
+        *ngIf="isFormControlHasError(accountForm.controls.firstName, 'required')"
       >
         First name field can't be empty.
       </div>
@@ -23,7 +23,7 @@
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(lastNameControl, 'required')"
+        *ngIf="isFormControlHasError(accountForm.controls.lastName, 'required')"
       >
         Last name field can't be empty.
       </div>
@@ -36,11 +36,11 @@
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(emailControl, 'required')"
+        *ngIf="isFormControlHasError(accountForm.controls.email, 'required')"
       >
         Email field can't be empty.
       </div>
-      <div class="error" *ngIf="isFormControlHasError(emailControl, 'email')">
+      <div class="error" *ngIf="isFormControlHasError(accountForm.controls.email, 'email')">
         Email field must contain email.
       </div>
     </app-text-input>
@@ -53,56 +53,45 @@
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(phoneControl, 'required')"
+        *ngIf="isFormControlHasError(accountForm.controls.phone, 'required')"
       >
         Phone field can't be empty.
       </div>
       <div
         class="error"
-        *ngIf="isFormControlHasError(phoneControl, 'minlength')"
+        *ngIf="isFormControlHasError(accountForm.controls.phone, 'minlength')"
       >
         Phone field must contain all numbers.
       </div>
     </app-text-input>
-    <iframe
-      class="form__map"
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCH4Vnl0vn9wP15KkS6grvqDHJnprTNKFo
-        &q=Кальварийская+19"
-    >
-    </iframe>
-    <app-text-input
-      class="form__address"
-      [(control)]="accountForm.controls.homeAddress"
-      [required]="true"
-      labelText="Address"
-    >
-      <div
-        class="error"
-        *ngIf="isFormControlHasError(homeAddressControl, 'required')"
-      >
-        Home address field can't be empty.
-      </div>
-    </app-text-input>
+    <app-google-map [control]="accountForm.controls.homeAddress"></app-google-map>
     <div class="form__help">
       You can enter the address manually or specify a point on the map
     </div>
   </form>
   <div class="save-changes__button">
-    <app-button (clicked)="updateCurrentUser()">Save changes</app-button>
+    <app-button (clicked)="saveChangesClick(popup)">Save changes</app-button>
   </div>
   <div class="password-change__label">Password</div>
   <form [formGroup]="changePasswordForm" class="password-change">
     <div class="password-change__inputs" *ngIf="isChangePasswordInputsShow">
       <app-text-input
         class="password-change__input"
+        [(control)]="changePasswordForm.controls.oldPassword"
+        labelText="Old password"
+      >
+        <div class="error" *ngIf="isFormControlHasError(changePasswordForm.controls.oldPassword, 'passwordValidator')">
+          Old password must be at least 8 characters long, contain A-z, 0-9.
+        </div>
+        <div class="error" *ngIf="isFormControlHasError(changePasswordForm.controls.oldPassword, 'wrongPassword')">
+          Wrong old password.
+        </div>
+      </app-text-input>
+      <app-text-input
+        class="password-change__input"
         [(control)]="changePasswordForm.controls.newPassword"
         labelText="New password"
       >
-        <div class="error" *ngIf="isFormControlHasError(changePasswordForm.controls.newPassword, 'required')">
-          New password can't be empty!
-        </div>
         <div class="error" *ngIf="isFormControlHasError(changePasswordForm.controls.newPassword, 'passwordValidator')">
           Password must be at least 8 characters long, contain A-z, 0-9.
         </div>
@@ -121,18 +110,17 @@
       </app-text-input>
     </div>
     <div class="password-change__button">
-      <app-button [filled]="isChangePasswordInputsShow" (clicked)="changePasswordClick()">Change password</app-button>
+      <app-button [filled]="isChangePasswordInputsShow" (clicked)="changePasswordClick(popup)">Change password</app-button>
     </div>
   </form>
   <div class="sign-out__label">Sign out</div>
   <div class="sign-out__button">
     <app-button
-      [filled]="false"
-      [mainColor]="'#EB5757'"
-      [hoverColor]="'#EB5757'"
+      styleClass="button_type_unfilled-green"
       (clicked)="logOutClick()"
     >
       Sign out
     </app-button>
   </div>
 </div>
+<app-popup #popup></app-popup>

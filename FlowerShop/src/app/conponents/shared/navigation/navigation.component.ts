@@ -1,4 +1,4 @@
-import { Path } from './path';
+import { Path } from '../../../classes/path';
 import { Component, Input } from '@angular/core';
 
 @Component({

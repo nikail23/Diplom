@@ -19,7 +19,7 @@
     font-weight: normal;
     font-size: 18px;
     line-height: 150%;
-    color: $registration-page-star-color;
+    color: $input-star-color;
   }
 }
 
@@ -28,15 +28,15 @@
 
   &_style_error {
     .input {
-      border-color: $registration-page-error-color;
+      border-color: $input-error-color;
     }
 
     .textarea {
-      border-color: $registration-page-error-color;
+      border-color: $input-error-color;
     }
 
     .label {
-      color: $registration-page-error-color;
+      color: $input-error-color;
     }
   }
 }
@@ -56,6 +56,16 @@
   padding: 0 29px;
   height: 76px;
   width: 100%;
+
+  &_type_stripe {
+    height: 38px;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2em;
+    color: inherit;
+    padding: 0 10px;
+  }
 
   &:focus ~ .label,
   &:not(:placeholder-shown) ~ .label {
@@ -91,13 +101,26 @@
 }
 
 ::ng-deep {
-  .error {
-    display: block;
-    margin-top: 7px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 150%;
-    color: $registration-page-error-color;
+  .container {
+    .error {
+      display: block;
+      margin-top: 7px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 150%;
+      color: $input-error-color;
+    }
+
+    .button {
+      position: absolute;
+      outline: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+      right: 26px;
+      top: 26px;
+    }
   }
+
 }

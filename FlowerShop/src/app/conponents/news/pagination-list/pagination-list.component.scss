@@ -8,7 +8,7 @@
     margin-bottom: 60px;
 
     &__date {
-      color: $news-page-pagination-list-article-date-text-color;
+      color: $news-page-article-date-text-color;
       font-style: normal;
       font-weight: normal;
       font-size: 18px;
@@ -17,7 +17,7 @@
     }
 
     &__header {
-      color: $news-page-pagination-list-article-header-text-color;
+      color: $news-page-article-header-text-color;
       font-style: normal;
       font-weight: bold;
       font-size: 28px;
@@ -27,7 +27,7 @@
 
     &__paragraph {
       margin-top: 17px;
-      color: $news-page-pagination-list-article-paragraph-text-color;
+      color: $news-page-article-paragraph-text-color;
       font-style: normal;
       font-weight: normal;
       font-size: 18px;
@@ -43,14 +43,14 @@
     &__button {
       width: 57px;
       height: 57px;
-      background: #FFFFFF;
-      border: 1px solid #E7E7E7;
+      background: $news-page-nav-button-background;
+      border: 1px solid $news-page-nav-button-border-color;
       box-sizing: border-box;
       border-radius: 10px;
       cursor: pointer;
 
       &_active {
-        border: 1px solid #FF5D7D;
+        border: 1px solid $news-page-nav-button-active-border-color;
       }
     }
   }

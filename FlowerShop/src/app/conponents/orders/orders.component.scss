@@ -1,0 +1,35 @@
+@import '../../../sass/vars.scss';
+@import '../../../sass/mixins.scss';
+
+.orders {
+  box-sizing: border-box;
+  padding: 0 $laptop-padding;
+  width: 74%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 120px;
+
+  &__header {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 110%;
+    color: $orders-header-text-color;
+  }
+
+  &__empty {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 150%;
+    color: #404040;
+  }
+}
+
+@include resolution_tablets {
+  .orders {
+    padding: 0 $tablet-and-phone-padding;
+    width: 100%;
+  }
+}

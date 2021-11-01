@@ -1,17 +1,17 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { KeycloakService } from 'keycloak-angular';
 import { PopupComponent } from './../shared/popup/popup.component';
-import { RegistrationServerService } from '../../services/server/registration-server.service';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  ValidationErrors,
-  ValidatorFn,
-  AbstractControl,
-} from '@angular/forms';
+import { RegistrationService } from '../../services/registration.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
-import { isFormControlHasError, isFormControlInvalid } from '../shared/forms';
-import { checkPasswordsValidator, passwordValidator } from '../shared/validators';
+import {
+  isFormControlHasError,
+  isFormControlInvalid,
+} from '../../classes/forms';
+import {
+  checkPasswordsValidator,
+  passwordValidator,
+} from '../../classes/validators';
 
 @Component({
   selector: 'app-registration',
@@ -22,63 +22,59 @@ export class RegistrationComponent {
   public isFormControlHasError = isFormControlHasError;
   public isFormControlInvalid = isFormControlInvalid;
 
-  public firstNameControl = new FormControl('', Validators.required);
-  public lastNameControl = new FormControl('', Validators.required);
-  public emailControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-  public phoneControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(17),
-  ]);
-  public homeAddressControl = new FormControl('', Validators.required);
-  public passwordControl = new FormControl('', [passwordValidator]);
-  public repeatPasswordControl = new FormControl('', [Validators.required]);
-
-  public form: FormGroup = new FormGroup(
+  public registrationForm: FormGroup = new FormGroup(
     {
-      firstName: this.firstNameControl,
-      lastName: this.lastNameControl,
-      email: this.emailControl,
-      homeAddress: this.homeAddressControl,
-      phone: this.phoneControl,
-      password: this.passwordControl,
-      repeatPassword: this.repeatPasswordControl,
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      homeAddress: new FormControl('', Validators.required),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.minLength(17),
+      ]),
+      password: new FormControl('', [passwordValidator]),
+      repeatPassword: new FormControl('', [Validators.required]),
     },
     [checkPasswordsValidator]
   );
 
-  @ViewChild(PopupComponent, { static: false })
-  popup: PopupComponent | undefined;
+  public isRulesChecked = false;
 
   constructor(
-    private registrationService: RegistrationServerService,
+    private registrationService: RegistrationService,
     private keycloakService: KeycloakService
   ) {}
 
-  public registerButtonClick(): void {
-    this.form.updateValueAndValidity();
-    if (this.form.valid) {
-      this.registrationService.register(this.form.value).subscribe(
-        (response) => {
-          this.keycloakService.login({
-            redirectUri: window.location.origin + '/home',
-          });
+  public registerButtonClick(popup: PopupComponent): void {
+    this.registrationForm.updateValueAndValidity();
+    if (this.registrationForm.valid && this.isRulesChecked) {
+      this.registrationService.register(this.registrationForm.value).subscribe(
+        () => {
+          this.logIn();
         },
         (error) => {
-          if (error.status === 403) {
-            this.popup?.show(
-              'The actor with the following email address is already registered.',
-              true
-            );
-          } else {
-            this.popup?.show(error.error, true);
-          }
+          this.handleRegistrationError(error, popup);
         }
       );
     } else {
-      this.form.markAllAsTouched();
+      this.registrationForm.markAllAsTouched();
+    }
+  }
+
+  public logIn() {
+    this.keycloakService.login({
+      redirectUri: window.location.origin + '/home',
+    });
+  }
+
+  private handleRegistrationError(error: HttpErrorResponse, popup: PopupComponent) {
+    if (error.status === 403) {
+      popup?.show(
+        'The actor with the following email address is already registered.',
+        true
+      );
+    } else {
+      popup?.show(error.error, true);
     }
   }
 
@@ -86,5 +82,9 @@ export class RegistrationComponent {
     this.keycloakService.login({
       redirectUri: window.location.origin + '/home',
     });
+  }
+
+  public isRulesCheckedChange(value: boolean) {
+    this.isRulesChecked = value;
   }
 }

@@ -4,7 +4,7 @@
 .wrapper {
   width: 100%;
   box-sizing: border-box;
-  padding: 0 11%;
+  padding: 0 $laptop-padding;
 
   .cart {
     display: flex;
@@ -17,14 +17,14 @@
       font-weight: bold;
       font-size: 36px;
       line-height: 110%;
-      color: #404040;
+      color: $cart-and-order-cart-content-header-text-color;
       margin-bottom: 32px;
     }
 
     &__flower {
       position: relative;
       height: 106px;
-      border: 1px solid #E7E7E7;
+      border: 1px solid $cart-and-order-cart-flower-border-color;
       box-sizing: border-box;
       border-radius: 10px;
       display: grid;
@@ -64,12 +64,12 @@
     }
 
     &__header {
-      color: #404040;
+      color: $cart-and-order-cart-header-text-color;
       cursor: pointer;
     }
 
     &__category {
-      color: #B4B4B4;
+      color: $cart-and-order-cart-category-color;
     }
 
     &__counter {
@@ -86,7 +86,7 @@
       font-weight: 500;
       font-size: 14px;
       line-height: 150%;
-      color: #404040;
+      color: $cart-and-order-cart-price-color;
     }
 
     &__x {
@@ -97,7 +97,7 @@
       font-weight: normal;
       font-size: 14px;
       line-height: 150%;
-      color: #B4B4B4;
+      color: $cart-and-order-cart-x-color;
     }
 
     &__input {
@@ -108,8 +108,8 @@
       input {
         width: 45px;
         height: 33px;
-        background: #FFFFFF;
-        border: 1px solid #E7E7E7;
+        background: $cart-and-order-cart-input-background;
+        border: 1px solid $cart-and-order-cart-input-border-color;
         box-sizing: border-box;
         border-radius: 4px;
         outline: none;
@@ -125,7 +125,7 @@
       font-weight: bold;
       font-size: 14px;
       line-height: 150%;
-      color: #404040;
+      color: $cart-and-order-cart-total-price-color;
     }
 
     &__delete-button {
@@ -160,7 +160,7 @@
           font-weight: 500;
           font-size: 14px;
           line-height: 150%;
-          color: #404040;
+          color: $cart-and-order-cart-total-items-price-color;
         }
 
         &__value {
@@ -169,7 +169,7 @@
           font-weight: bold;
           font-size: 14px;
           line-height: 150%;
-          color: #404040;
+          color: $cart-and-order-cart-total-items-price-color;
         }
       }
     }
@@ -178,7 +178,7 @@
   .separator {
     margin-top: 70px;
     margin-bottom: 59px;
-    background: #404040;
+    background: $cart-and-order-cart-separator-color;
     opacity: 0.2;
   }
 
@@ -192,7 +192,7 @@
       font-weight: bold;
       font-size: 28px;
       line-height: 120%;
-      color: #404040;
+      color: $cart-and-order-order-header-color;
       margin-bottom: 32px;
     }
 
@@ -216,7 +216,7 @@
       font-weight: normal;
       font-size: 12px;
       line-height: 150%;
-      color: #000000;
+      color: $cart-and-order-order-help-color;
       margin-bottom: 32px;
     }
 
@@ -231,7 +231,7 @@
         font-weight: normal;
         font-size: 18px;
         line-height: 150%;
-        color: #000000;
+        color: $cart-and-order-order-payment-label-color;
         margin-bottom: 20px;
       }
 
@@ -242,7 +242,7 @@
         font-weight: normal;
         font-size: 12px;
         line-height: 150%;
-        color: $registration-page-error-color;
+        color: $cart-and-order-error-color;
       }
     }
 
@@ -262,7 +262,7 @@
 
 @include resolution_tablets {
   .wrapper {
-    padding: 0 7%;
+    padding: 0 $tablet-and-phone-padding;
 
     .cart {
       width: 100%;

@@ -1,8 +1,15 @@
 @import "../../../sass/vars.scss";
 @import "../../../sass/mixins.scss";
 
+::ng-deep {
+  .categories {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
 .wrapper {
-  padding: 0 11%;
+  padding: 0 $laptop-padding;
   box-sizing: border-box;
 
   .separator {
@@ -33,6 +40,6 @@
 
 @include resolution_tablets {
   .wrapper {
-    padding: 0 7%;
+    padding: 0 $tablet-and-phone-padding;
   }
 }

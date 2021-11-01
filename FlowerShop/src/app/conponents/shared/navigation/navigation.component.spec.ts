@@ -1,8 +1,9 @@
-import { Path } from './path';
+import { Path } from '../../../classes/path';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { NavigationComponent } from './navigation.component';
 import { By } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -10,9 +11,10 @@ describe('NavigationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationComponent ]
-    })
-    .compileComponents();
+      declarations: [NavigationComponent],
+      imports: [RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -26,9 +28,7 @@ describe('NavigationComponent', () => {
   });
 
   it('should set paths input property', () => {
-    const paths: Path[] = [
-      {name: 'Home', routerLink: '/home'}
-    ];
+    const paths: Path[] = [{ name: 'Home', routerLink: '/home' }];
 
     component.paths = paths;
 
@@ -38,8 +38,8 @@ describe('NavigationComponent', () => {
 
   it('should render right navigation template', () => {
     const paths: Path[] = [
-      {name: 'Home', routerLink: '/home'},
-      {name: 'News', routerLink: '/news'},
+      { name: 'Home', routerLink: '/home' },
+      { name: 'News', routerLink: '/news' },
     ];
 
     component.paths = paths;
@@ -57,13 +57,11 @@ describe('NavigationComponent', () => {
     expect(firstIteratorChildren.length).toBe(2);
     expect(firstIteratorChildren[0].classes['path__link']).toBeTrue();
     expect(firstIteratorChildren[1].classes['path__separator']).toBeTrue();
-    expect(firstIteratorChildren[0].properties.innerText).toBe("Home");
-    expect(firstIteratorChildren[0].properties.routerLink).toBe("/home");
+    expect(firstIteratorChildren[0].properties.innerText).toBe('Home');
 
     const secondIteratorChildren = pathIteratorSecond.children;
     expect(secondIteratorChildren.length).toBe(1);
     expect(secondIteratorChildren[0].classes['path__link']).toBeTrue();
-    expect(secondIteratorChildren[0].properties.innerText).toBe("News");
-    expect(secondIteratorChildren[0].properties.routerLink).toBe("/news");
+    expect(secondIteratorChildren[0].properties.innerText).toBe('News');
   });
 });

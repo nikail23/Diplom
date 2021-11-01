@@ -1,21 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-cross-button',
   templateUrl: './cross-button.component.html',
-  styleUrls: ['./cross-button.component.scss']
+  styleUrls: ['./cross-button.component.scss'],
 })
-export class CrossButtonComponent implements OnInit {
-
+export class CrossButtonComponent {
   public checked: boolean = false;
 
   @Input() isOnlyCross = false;
+  @Input() colorClass?: string = 'black';
+
   @Output() clicked = new EventEmitter<string>();
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public buttonClicked() {
     if (this.checked) {

@@ -6,7 +6,7 @@
       [(control)]="form.controls.name"
       labelText="Your name"
     >
-      <div class="error" *ngIf="isFormControlHasError(nameControl, 'required')">
+      <div class="error" *ngIf="isFormControlHasError(form.controls.name, 'required')">
         Name field can't be empty.
       </div>
     </app-text-input>
@@ -18,13 +18,13 @@
     >
       <div
         class="error"
-        *ngIf="isFormControlHasError(phoneControl, 'required')"
+        *ngIf="isFormControlHasError(form.controls.phone, 'required')"
       >
         Phone field can't be empty.
       </div>
       <div
         class="error"
-        *ngIf="isFormControlHasError(phoneControl, 'minlength')"
+        *ngIf="isFormControlHasError(form.controls.phone)"
       >
         Phone field must contain all numbers.
       </div>
@@ -35,16 +35,16 @@
       labelText="Your text"
       [isTextArea]="true"
     >
-      <div class="error" *ngIf="isFormControlHasError(textControl, 'required')">
+      <div class="error" *ngIf="isFormControlHasError(form.controls.text, 'required')">
         Text can't be empty.
       </div>
     </app-text-input>
     <app-button
       class="form__button"
-      (clicked)="sendMessageButtonClick()"
-      [filled]="false"
+      (clicked)="sendMessageButtonClick(popup)"
+      styleClass="button_type_unfilled-green"
       >Send</app-button
     >
   </form>
-  <app-popup></app-popup>
+  <app-popup #popup></app-popup>
 </div>

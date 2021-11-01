@@ -1,27 +1,22 @@
-import { ItemOrderDto } from 'src/app/services/cart';
-import { OrderStatus, PaymentType, ProductOrderDto } from './order';
-import { OrderServerService } from './server/order-server.service';
+import { Observable } from 'rxjs';
+import { ProductOrderDto } from '../classes/order';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private orderServerService: OrderServerService) { }
+  public sendOrder(dto: ProductOrderDto): Observable<ProductOrderDto> {
+    return this.http.post(environment.api.url + 'order/checkout', dto, {
+      withCredentials: true,
+    }) as Observable<ProductOrderDto>;
+  }
 
-  public sendOrder(deliveryAddress: string, deliveryName: string, email: string, paymentType: PaymentType, phone: string, productItems: ItemOrderDto[], id?: number, orderStatus?: OrderStatus, text?: string) {
-    const dto: ProductOrderDto = {
-      deliveryAddress,
-      deliveryName,
-      email,
-      paymentType,
-      phone,
-      productItems,
-      id,
-      orderStatus,
-      text
-    };
-    return this.orderServerService.post(dto);
+  public getUserOrders(): Observable<ProductOrderDto[]> {
+    return this.http.get(environment.api.url + 'order') as Observable<ProductOrderDto[]>;
   }
 }

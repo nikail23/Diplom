@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkExamplesComponent } from './work-examples.component';
@@ -8,9 +9,9 @@ describe('WorkExamplesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WorkExamplesComponent ]
-    })
-    .compileComponents();
+      declarations: [WorkExamplesComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {

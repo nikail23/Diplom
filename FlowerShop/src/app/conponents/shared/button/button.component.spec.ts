@@ -1,5 +1,6 @@
+import { By } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ButtonComponent } from './button.component';
 
 describe('ButtonComponent', () => {
@@ -8,9 +9,9 @@ describe('ButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [ButtonComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +22,12 @@ describe('ButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit clicked event', () => {
+    spyOn(component.clicked, 'emit');
+    component.buttonClicked();
+    fixture.detectChanges();
+    expect(component.clicked.emit).toHaveBeenCalled();
   });
 });

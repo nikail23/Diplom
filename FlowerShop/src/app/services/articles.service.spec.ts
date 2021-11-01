@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { articles } from '../conponents/news/article';
+import { articles } from '../classes/article';
 
 import { ArticlesService } from './articles.service';
 

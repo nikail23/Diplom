@@ -2,7 +2,7 @@
 @import '../../../../sass/mixins.scss';
 
 .wrapper {
-  padding: 0 11%;
+  padding: 0 $laptop-padding;
   height: 72px;
   width: 100%;
   box-sizing: border-box;
@@ -14,7 +14,7 @@
   z-index: 1000;
   top: 0;
   left: 0;
-  background-color: #ffffff;
+  background-color: $header-wrapper-background;
 
   &_effect_shadow {
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
@@ -37,7 +37,7 @@
     overflow: none;
     z-index: 100;
     transform: translateY(-500px);
-    background: rgba(255, 255, 255, 0.8);
+    background: $header-sidebar-background;
     backdrop-filter: blur(40px);
     display: flex;
     align-items: flex-start;
@@ -92,7 +92,7 @@
           top: 40px;
           width: 24px;
           height: 4px;
-          background: #ff5d7d;
+          background: $header-tile-color;
           border-radius: 4px 4px 0px 0px;
         }
       }
@@ -139,8 +139,8 @@
         line-height: 110%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: #FFFFFF;
-        background: #FF5D7D;
+        color: $header-items-count-icon-text-color;
+        background: $header-items-count-icon-background;
         border-radius: 8px;
       }
     }
@@ -178,7 +178,7 @@
         line-height: 110%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: #404040;
+        color: $header-profile-button-text-color;
         padding: 0;
         width: auto;
         height: auto;
@@ -186,14 +186,14 @@
       }
 
       .mat-menu-item.profile__button:hover {
-        background-color: #ffffff;
+        background-color: $header-profile-button-hover-background;
       }
 
       .profile__separator {
         position: relative;
         left: -30px;
         right: auto;
-        background-color: #E7E7E7;
+        background-color: $header-profile-separator-color;
         height: 1px;
         width: calc(100% + 60px);
         border: 0;
@@ -224,11 +224,11 @@
 
     .button_cross {
       display: block;
-      margin-left: 7%;
+      margin-left: $tablet-and-phone-padding;
     }
 
     .sidebar__label {
-      margin-left: 7%;
+      margin-left: $tablet-and-phone-padding;
       display: block;
     }
 
@@ -238,7 +238,7 @@
     }
 
     .links__group {
-      margin-right: 7%;
+      margin-right: $tablet-and-phone-padding;
 
       .link_hideable_true {
         display: none;

@@ -1,3 +1,5 @@
+import { SafePipe } from './../../pipes/safe.pipe';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContactsComponent } from './contacts.component';
@@ -8,9 +10,9 @@ describe('ContactsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContactsComponent ]
-    })
-    .compileComponents();
+      declarations: [ContactsComponent, SafePipe],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,7 +1,7 @@
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PopupComponent } from './popup.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('PopupComponent', () => {
   let component: PopupComponent;
@@ -9,9 +9,9 @@ describe('PopupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PopupComponent ]
-    })
-    .compileComponents();
+      declarations: [PopupComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -43,7 +43,9 @@ describe('PopupComponent', () => {
 
   it('should close by click', () => {
     component.show('TEST', true);
-    const button = fixture.debugElement.query(By.css('.popup__button_type_close'));
+    const button = fixture.debugElement.query(
+      By.css('.popup__button_type_close')
+    );
     button.triggerEventHandler('click', null);
 
     expect(component.isActive).toBeFalse();

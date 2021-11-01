@@ -84,7 +84,7 @@
 
     .container_checks {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       gap: 26px;
       margin-bottom: 30px;
 
@@ -186,7 +186,7 @@
         letter-spacing: 0.05em;
         text-transform: uppercase;
         color: $registration-page-or-text-color;
-        background: #ffffff;
+        background: $registration-page-or-text-background;
       }
     }
 
@@ -248,6 +248,16 @@
       }
     }
   }
+
+  .error {
+    display: block;
+    margin-top: 7px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 150%;
+    color: $input-error-color;
+  }
 }
 
 @include resolution_tablets {
@@ -258,7 +268,7 @@
 
 @include resolution_phones {
   .wrapper {
-    padding: 0 7%;
+    padding: 0 $tablet-and-phone-padding;
 
     .container-upper {
       align-items: flex-start;

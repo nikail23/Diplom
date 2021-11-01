@@ -6,7 +6,7 @@ import { ElinextService } from './../../../services/elinext.service';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ScrollService } from 'src/app/services/scroll.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ItemOrderDto } from 'src/app/services/cart';
+import { ItemOrderDto } from 'src/app/classes/cart';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +15,7 @@ import { ItemOrderDto } from 'src/app/services/cart';
 })
 export class HeaderComponent implements OnInit {
   public isLogged?: boolean;
+  public isTop = true;
   public isMenuActive: boolean = false;
   public cartFlowersInfo?: ItemOrderDto[];
 
@@ -73,18 +74,19 @@ export class HeaderComponent implements OnInit {
       this.dialog.open(SearchDialogComponent, {
         height: '100vh',
         minWidth: '100vw',
-        backdropClass: 'backdrop'
+        backdropClass: 'backdrop',
       });
     } else {
       this.router.navigate(['/search']);
     }
   }
 
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
-    if (window.pageYOffset > 0) {
-      return true;
+    if (window.pageYOffset > 1) {
+      this.isTop = true;
+    } else {
+      this.isTop = false;
     }
-    return false;
   }
 }

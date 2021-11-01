@@ -4,12 +4,11 @@
     <div
       class="flower__header"
       routerLink="/catalog/{{flower?.id}}"
-      (click)="productClicked()"
     >
       {{ flower?.name }}
     </div>
-    <div class="flower__description">
-      {{ flower?.shortDescription }}
+    <div class="flower__category">
+      {{ flower?.category?.name }}
     </div>
     <div class="flower__price flower__price_active">
       {{ flower?.priceDto?.price | price }}
@@ -21,7 +20,7 @@
     <app-button
       class="flower__button"
       (clicked)="addToCartButtonClicked(flower)"
-      [filled]="!flower?.inCart"
+      [styleClass]="flower?.inCart ? 'button_type_unfilled-green' : 'button_type_filled-green'"
     >
       <div *ngIf="!flower?.inCart">
         <img src="../../../assets/home/shopping_bag.png">

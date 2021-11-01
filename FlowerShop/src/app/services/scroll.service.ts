@@ -1,11 +1,15 @@
 import { DOCUMENT } from '@angular/common';
-import { ElementRef, Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import {
+  Inject,
+  Injectable,
+  Renderer2,
+  RendererFactory2,
+} from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScrollService {
-
   public isHide: boolean = false;
   private renderer: Renderer2;
   @Inject(DOCUMENT) document;

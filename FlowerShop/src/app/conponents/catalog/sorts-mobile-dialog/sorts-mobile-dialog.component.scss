@@ -17,8 +17,9 @@
       font-weight: bold;
       font-size: 22px;
       line-height: 120%;
-      color: #404040;
+      color: $sorts-header-color;
     }
+
   }
 
   .separator {
@@ -26,7 +27,7 @@
     left: -30px;
     width: calc(100% + 60px);
     height: 1px;
-    background: #404040;
+    background: $sorts-separator-color;
     opacity: 0.2;
     margin-bottom: 40px;
   }
@@ -37,7 +38,7 @@
       font-weight: bold;
       font-size: 18px;
       line-height: 150%;
-      color: #404040;
+      color: $sorts-group-color;
       margin-bottom: 22px;
     }
 
@@ -51,29 +52,11 @@
     }
 
     &__button {
-      width: 100%;
-      height: 57px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-style: normal;
-      font-weight: 600;
-      font-size: 15px;
-      line-height: 110%;
-      text-align: center;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-
       &_type_apply {
         position: absolute;
         bottom: 20px;
         left: 20px;
         width: calc(100% - 40px);
-        background-color: #5e9e5e;
-        color: #ffffff;
-        border: none;
-      }
-      &_type_apply:hover {
-        background-color: #4a804a;
       }
     }
   }
@@ -92,11 +75,11 @@
   .mat-radio-label {
     .mat-radio-container {
       .mat-radio-outer-circle {
-        border-color: #5E9E5E !important;
+        border-color: $sorts-radio-border-color !important;
       }
 
       .mat-radio-inner-circle {
-        background: #5E9E5E !important;
+        background: $sorts-radio-background-color !important;
       }
 
       .mat-ripple {
@@ -109,7 +92,7 @@
       font-weight: normal !important;
       font-size: 18px !important;
       line-height: 150% !important;
-      color: #404040 !important;
+      color: $sorts-radio-label-text-color !important;
       margin-left: 24px;
       padding-left: 0;
     }

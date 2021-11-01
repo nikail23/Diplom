@@ -1,0 +1,43 @@
+<div class="chat" *ngIf="chatService.isLoggedIn">
+  <div class="chat__content" *ngIf="isContentOpen">
+    <div class="chat__header">
+      <div class="chat__text-header">Chat with the consultant</div>
+      <app-cross-button
+        class="chat__close-button"
+        [isOnlyCross]="true"
+        [colorClass]="'white'"
+        (clicked)="closeContent()"
+      ></app-cross-button>
+    </div>
+    <div class="chat__messages">
+      <div
+        *ngFor="let message of chatService.messages"
+        class="chat__message"
+        [ngClass]="{
+          'chat__message_type_out': chatService.currentUserAuthorCheck(message),
+          'chat__message_type_in': !chatService.currentUserAuthorCheck(message)
+        }"
+      >
+        <img
+          *ngIf='chatService.currentUserAuthorCheck(message)'
+          class="chat__message-corner"
+          src="../../../assets/chat/corner_2.png"
+        />
+        <img
+          *ngIf='!chatService.currentUserAuthorCheck(message)'
+          class="chat__message-corner"
+          src="../../../assets/chat/corner.png"
+        />
+        {{message.message}}
+      </div>
+    </div>
+    <app-text-input #messageInput class="chat__send-input" [labelText]="'Write a message...'" [(value)]="message">
+      <button class="button" (click)="sendMessage(); messageInput.clearInput()">
+        <img src="../../../assets/chat/send-button.png" />
+      </button>
+    </app-text-input>
+  </div>
+  <div class="chat__button" (click)="toggleContent()">
+    <img src="../../../assets/chat/message-circle.png" class="chat__icon" />
+  </div>
+</div>

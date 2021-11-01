@@ -1,0 +1,130 @@
+@import "../../../../sass/vars.scss";
+@import "../../../../sass/mixins.scss";
+
+::ng-deep {
+  a[href^="http://maps.google.com/maps"] {
+    display:none !important
+  }
+
+  a[href^="https://maps.google.com/maps" ]{
+    display:none !important
+  }
+
+  .gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display: none;
+  }
+  .gmnoprint div {
+    background: none !important;
+  }
+
+  agm-map {
+    position: relative;
+    height: 540px;
+    width: 100%;
+
+    .agm-map-content {
+      display: block !important;
+    }
+
+    & > div {
+      border-radius: 10px;
+    }
+  }
+}
+
+.legend {
+  width: 220px;
+  height: 38px;
+  position: absolute;
+  top: 482px;
+  left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: $google-map-legend-background;
+  border-radius: 8px;
+
+  &__text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 150%;
+    color: $google-map-legend-text-color;
+    margin-left: 9px;
+  }
+
+  &__icon {
+    margin-left: 11px;
+  }
+}
+
+.container {
+  position: relative;
+  margin-top: 8px;
+
+  &_style_error {
+    .input {
+      border-color: $input-error-color;
+    }
+
+    .label {
+      color: $input-error-color;
+    }
+  }
+}
+
+.input {
+  outline: none;
+  background: $input-background-color;
+  border: $input-border;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $input-text-color;
+  padding: 0 29px;
+  height: 76px;
+  width: 100%;
+
+  &:focus ~ .label,
+  &:not(:placeholder-shown) ~ .label {
+    font-size: 14px;
+    transform: translateY(-18px);
+  }
+}
+
+
+.label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $input-label-color;
+  left: 29px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 25px;
+
+  &_type_star {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 150%;
+    color: $input-star-color;
+  }
+}
+
+.error {
+  display: block;
+  margin-top: 7px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 150%;
+  color: $input-error-color;
+}

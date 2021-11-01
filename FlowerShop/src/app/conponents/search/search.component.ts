@@ -1,55 +1,42 @@
-import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription, timer } from 'rxjs';
-import { CatalogService } from 'src/app/services/catalog.service';
-import { Flower } from '../home/flower';
+import { ProductsContentComponent } from './../catalog/products-content/products-content.component';
+import { FlowersResponseDto } from './../../classes/flower';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnDestroy {
-  public flowers: Flower[] = [];
+export class SearchComponent implements OnInit {
+  public result?: FlowersResponseDto;
   public isNotFoundError: boolean = false;
-  public isLoading: boolean = false;
 
-  public form = new FormGroup({
-    search: new FormControl(),
-  });
+  public searchControl: FormControl = new FormControl();
 
-  private formSubscription: Subscription = Subscription.EMPTY;
-  private timerSubscription: Subscription = Subscription.EMPTY;
+  @ViewChild(ProductsContentComponent) private productsContentComponent: ProductsContentComponent | undefined;
 
-  constructor(public catalogService: CatalogService) {
-    this.formSubscription = this.form.valueChanges.subscribe((value: any) => {
-      this.timerSubscription.unsubscribe();
-      this.timerSubscription = Subscription.EMPTY;
-      this.search(value.search, 2000);
+  constructor() {}
+
+  ngOnInit(): void {
+    this.searchControl.valueChanges.subscribe((value: any) => {
+      this.search(value, 2000);
     });
   }
 
-  ngOnDestroy(): void {
-    this.formSubscription.unsubscribe();
-    this.timerSubscription.unsubscribe();
-  }
-
-  private search(name: string, delay: number): void {
-    this.isLoading = true;
-    this.timerSubscription = timer(delay).subscribe(() => {
-      this.catalogService.search(name).subscribe(
-        (flowers: Flower[]) => {
-          this.flowers = flowers;
-        },
-        (error) => {
-          if (error.status === 404) {
-            this.isNotFoundError = true;
-          }
-        },
-        () => {
-          this.isLoading = false;
+  public search(value: string, delay: number): void {
+    if (this.productsContentComponent) {
+      this.productsContentComponent.isLoading = true;
+      this.productsContentComponent.isEmpty = false;
+    }
+    timer(delay).subscribe(() => {
+      if (value === this.searchControl.value) {
+        if (this.productsContentComponent) {
+          this.productsContentComponent.searchWord = value;
+          this.productsContentComponent.reloadData();
         }
-      );
+      }
     });
   }
 }

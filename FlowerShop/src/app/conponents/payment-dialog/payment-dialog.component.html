@@ -1,0 +1,39 @@
+<div class="payment">
+  <div class="payment__header">Card information</div>
+  <div class="card">
+    <div class="card__number">
+      <div class="stripe__card-number"></div>
+    </div>
+    <div class="card__expiry">
+      <div class="stripe__card-expiry"></div>
+    </div>
+    <div class="card__cvc">
+      <div class="stripe__card-cvc"></div>
+    </div>
+  </div>
+  <div class="card__errors"></div>
+  <div class="payment__header">Name on card</div>
+  <app-text-input
+    class="payment__card-name"
+    [(value)]="name"
+    [isStripe]="true"
+    [labelText]="'NAME SURNAME'"
+  ></app-text-input>
+  <div class="payment__error">
+    {{ error }}
+  </div>
+  <app-button
+    class="payment__submit-button"
+    [styleClass]="isSuccessPayment ? 'button_type_unfilled-green' : 'button_type_darkblue'"
+    (clicked)="sendPaymentRequest()"
+  >
+    <div *ngIf="isSuccessPayment">
+      <img src="../../../../assets/catalog/in-cart-arrow.png">
+      Succesfull payment
+    </div>
+    <div *ngIf="!isSuccessPayment">
+      Pay {{ amount | price }}
+    </div>
+  </app-button
+  >
+</div>
