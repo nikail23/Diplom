@@ -1,7 +1,10 @@
 ﻿using FlowerShop.models;
+using FlowerShop.models.db;
 using FlowerShop.models.dto;
 using FlowerShop.models.responses;
+using FlowerShop.services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,28 +21,26 @@ namespace FlowerShop.controllers
             if (!db.Flowers.Any())
             {
                 db.Flowers.Add(
-                    new Flower
+                    new FlowerDB
                     {
-                        name = "Flower 1",
-                        /*category = {
-                            id = 1,
-                            name = "Category 1",
-                            description = "Description",
-                            photo = "",
-                            thumbnail = "",
-                        },*/
-                        description = "Description",
-                        /*priceDto =
+                        Name = "Flower 1",
+                        Category = new CategoryDB ()
                         {
-                            id = 1,
-                            price = 100,
-                            date = "",
-                            itemId = 1,
-                        },*/
-                        shortDescription = "Desc",
-                        inCart = false,
-                        photo = "",
-                        thumbnail = false,
+                            Name = "Category 1",
+                            Description = "Description",
+                            Photo = "",
+                            Thumbnail = "",
+                        },
+                        Description = "Description",
+                        Price = new PriceDB()
+                        {
+                            Price = 100,
+                            Date = "",
+                        },
+                        ShortDescription = "Desc",
+                        InCart = false,
+                        Photo = "",
+                        Thumbnail = false,
                     }
                 );
 
@@ -50,10 +51,13 @@ namespace FlowerShop.controllers
         [HttpGet]
         public FlowerResponse Get()
         {
-            Flower[] flowers = db.Flowers.ToList().ToArray();
+            List<FlowerDB> databaseFlowers = db.Flowers
+                .Include("Price")
+                .Include("Category")
+                .ToList();
             FlowerResponse response = new FlowerResponse()
             {
-                flowers = flowers
+                flowers = FlowerService.GetClientFlowers(databaseFlowers)
             };
             return response;
         }
@@ -61,30 +65,33 @@ namespace FlowerShop.controllers
         [HttpGet("{id}")]
         public Flower Get(int id)
         {
-            Flower flower = db.Flowers.FirstOrDefault(x => x.id == id);
-            return flower;
+            FlowerDB databaseFlower = db.Flowers.FirstOrDefault(x => x.Id == id);
+            Flower clientFlower = FlowerService.GetClientFlower(databaseFlower);
+            return clientFlower;
         }
 
         [HttpPost]
-        public IActionResult Post(Flower flower)
+        public IActionResult Post(Flower clientFlower)
         {
             if (ModelState.IsValid)
             {
-                db.Flowers.Add(flower);
+                FlowerDB databaseFlower = FlowerService.GetDatabaseFlower(clientFlower);
+                db.Flowers.Add(databaseFlower);
                 db.SaveChanges();
-                return Ok(flower);
+                return Ok(clientFlower);
             }
             return BadRequest(ModelState);
         }
 
         [HttpPut]
-        public IActionResult Put(Flower flower)
+        public IActionResult Put(Flower clientFlower)
         {
             if (ModelState.IsValid)
             {
-                db.Update(flower);
+                FlowerDB databaseFlower = FlowerService.GetDatabaseFlower(clientFlower);
+                db.Update(databaseFlower);
                 db.SaveChanges();
-                return Ok(flower);
+                return Ok(clientFlower);
             }
             return BadRequest(ModelState);
         }
@@ -92,7 +99,7 @@ namespace FlowerShop.controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var flower = db.Flowers.FirstOrDefault(x => x.id == id);
+            var flower = db.Flowers.FirstOrDefault(x => x.Id == id);
             if (flower != null)
             {
                 db.Flowers.Remove(flower);

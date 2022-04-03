@@ -1,4 +1,5 @@
-﻿using FlowerShop.models.dto;
+﻿using FlowerShop.models.db;
+using FlowerShop.models.dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlowerShop.models
@@ -11,6 +12,8 @@ namespace FlowerShop.models
             Database.EnsureCreated();
         }
 
-        public DbSet<Flower> Flowers => Set<Flower>();
+        public DbSet<FlowerDB> Flowers => Set<FlowerDB>();
+        public DbSet<CategoryDB> Categories => Set<CategoryDB>();
+        public DbSet<PriceDB> Prices => Set<PriceDB>();
     }
 }

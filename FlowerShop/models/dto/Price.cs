@@ -4,7 +4,6 @@ namespace FlowerShop.models.dto
 {
     public class Price
     {
-        [Key]
         public int id { get; set; }
         public int price { get; set; }
         public string date { get; set; }
