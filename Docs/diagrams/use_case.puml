@@ -1,0 +1,90 @@
+@startuml
+left to right direction
+
+title Варианты использования программного средства для магазина по доставке цветов
+
+' actors
+
+actor "Гость" as Guest
+actor "Пользователь" as User
+actor "Сотрудник магазина" as Worker
+
+' use cases
+
+usecase "Регистрация" as Registration
+usecase "Редактирование каталога" as EditCatalog
+usecase "Регистрация через соц сети" as RegistrationSN
+usecase "Авторизация" as Authorisation
+usecase "Аутентификация" as Authentification
+usecase "Просмотр новостей магазина" as ViewNews
+usecase "Авторизация через соц сети" as AuthorisationSN
+usecase "Просмотр личного кабинета" as ViewAccount
+usecase "Редактирование личной информации" as ViewAccountEdit
+usecase "Просмотр каталога" as ViewCatalog
+usecase "Поиск по каталогку" as ViewCatalogSearch
+usecase "Сортировка каталога" as ViewCatalogSort
+usecase "Фильтрация каталога" as ViewCatalogFilter
+usecase "Просмотр контактной информации" as ViewContacts
+usecase "Просмотр подробной информации о товаре" as ViewFlower
+usecase "Добавление товара в корзину" as AddFlower
+usecase "Просмотр корзины" as ViewCart
+usecase "Редактирование корзины" as ViewCartEdit
+usecase "Оформление заказа" as Order
+usecase "Ввод адреса доставки" as OrderAddressInfo
+usecase "Ввод адреса вручную" as OrderAddressInfoManual
+usecase "Выбор точки на карте" as OrderAddressInfoMap
+usecase "Ввод контактной информации" as OrderContactsInfo
+usecase "Выбор способа оплаты" as OrderPayment
+usecase "Подтверждение заказа по почте" as OrderEmail
+usecase "Просмотр информации о заказах" as ViewOrders
+usecase "Изменение статуса заказа" as OrdersStatus
+usecase "Просмотр чата" as Chat
+usecase "Возможность написать в чат" as ChatMessage
+
+' actors relations
+
+Guest -|> User
+
+Guest --> Registration
+Guest --> Authorisation
+Guest --> Authentification
+
+User --> ViewAccount
+User ---> ViewCatalog
+User --> ViewContacts
+User --> ViewFlower
+User --> AddFlower
+User --> ViewCart
+User --> Order
+User --> ViewOrders
+User --> Chat
+User --> ViewNews
+
+Worker --> OrdersStatus
+Worker --> Chat
+Worker --> EditCatalog
+
+' use case relations
+
+ViewAccountEdit .up.> ViewAccount : extend
+
+ViewCatalogSearch .up.> ViewCatalog : extend
+ViewCatalogSort .up.> ViewCatalog : extend
+ViewCatalogFilter .up.> ViewCatalog : extend
+
+AuthorisationSN .up.> Authorisation : extend
+RegistrationSN .up.> Registration : extend
+
+ViewCartEdit .up.> ViewCart : extend
+
+ChatMessage .up.> Chat : extend
+
+Order .down.> OrderAddressInfo  : include
+OrderAddressInfoMap .up.> OrderAddressInfo : extends
+OrderAddressInfoManual .up.> OrderAddressInfo : extends
+
+Order .down.> OrderContactsInfo : include
+Order .down.> OrderPayment : include
+Order .down.> OrderEmail : include
+
+@enduml
