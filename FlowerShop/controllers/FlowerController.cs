@@ -18,34 +18,6 @@ namespace FlowerShop.controllers
         public FlowerController(ApplicationContext context)
         {
             db = context;
-            if (!db.Flowers.Any())
-            {
-                db.Flowers.Add(
-                    new FlowerDB
-                    {
-                        Name = "Flower 1",
-                        Category = new CategoryDB ()
-                        {
-                            Name = "Category 1",
-                            Description = "Description",
-                            Photo = "",
-                            Thumbnail = "",
-                        },
-                        Description = "Description",
-                        Price = new PriceDB()
-                        {
-                            Price = 100,
-                            Date = "",
-                        },
-                        ShortDescription = "Desc",
-                        InCart = false,
-                        Photo = "",
-                        Thumbnail = false,
-                    }
-                );
-
-                db.SaveChanges();
-            }
         }
 
         [HttpGet]

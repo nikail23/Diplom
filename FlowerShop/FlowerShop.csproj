@@ -10,4 +10,13 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\categories\fresh_flowers.png" />
+    <None Include="wwwroot\images\categories\indoor_plants.png" />
+  </ItemGroup>
+
 </Project>

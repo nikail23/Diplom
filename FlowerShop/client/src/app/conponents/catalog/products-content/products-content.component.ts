@@ -71,10 +71,12 @@ export class ProductsContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    console.log('here 1');
     this.categoriesService
       .getAll()
       .subscribe((response: CategoriesResponseDto) => {
         this.categoriesResponse = response;
+        console.log('here 2');
       });
     this.getFlowers().subscribe(() => {
       this.refreshPages();
@@ -147,6 +149,7 @@ export class ProductsContentComponent implements OnInit {
   private getCatalogObservable() {
     return this.catalogService.getAll(this.productsParameters).pipe(
       map((result) => {
+        console.log('here');
         this.flowersResponse = result;
         this.cartService.setInCartFlowersState(this.flowersResponse.flowers);
         this.isEmpty = false;

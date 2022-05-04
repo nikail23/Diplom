@@ -1,5 +1,7 @@
 ﻿using FlowerShop.models;
 using FlowerShop.models.db;
+using System;
+using System.Collections.Generic;
 
 namespace FlowerShop.services
 {
@@ -14,6 +16,23 @@ namespace FlowerShop.services
                 name = databaseCategory.Name,
                 photo = databaseCategory.Photo,
                 thumbnail = databaseCategory.Thumbnail,
+            };
+        }
+
+        public static Category[] GetClientCategories(List<CategoryDB> databaseFlowers)
+        {
+            return databaseFlowers.ConvertAll(new Converter<CategoryDB, Category>(GetClientCategory)).ToArray();
+        }
+
+        public static CategoryDB GetDatabaseCategory(Category clientCategory)
+        {
+            return new CategoryDB()
+            {
+                Name = clientCategory.name,
+                Description = clientCategory.description,
+                Id = clientCategory.id,
+                Photo = clientCategory.photo,
+                Thumbnail = clientCategory.thumbnail,   
             };
         }
     }
