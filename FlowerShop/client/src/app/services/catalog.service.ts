@@ -24,9 +24,9 @@ export class CatalogService {
   ): Observable<FlowersResponseDto> {
     const params = parameters ?? {};
 
-    return this.http.get(environment.api.url + 'items'/*, { params }*/)
+    return this.http.get(environment.api.url + 'items', { params })
       .pipe(
-        mergeMap((response) =>
+        map((response) =>
           this.convertGetResponseToFlowersResponse(response)
         )
       );
@@ -34,33 +34,33 @@ export class CatalogService {
 
   public get(id: number): Observable<Flower> {
     return this.http.get(environment.api.url + `items/${id}`)
-      .pipe(mergeMap((result) => this.convertGetResponseToFlower(result)));
+      .pipe(map((result) => this.convertGetResponseToFlower(result)));
   }
 
   public search(name: string): Observable<FlowersResponseDto> {
     return this.http.get(environment.api.url + 'items/search', { params: {name} })
       .pipe(
-        mergeMap((result) =>
+        map((result) =>
           this.convertSearchResponseToFlowerResponseDto(result)
         )
       );
   }
 
-  private getFlowersLoadImagesObservable(flowers: Flower[]) {
-    const observables$: Observable<any>[] = [];
+  // private getFlowersLoadImagesObservable(flowers: Flower[]) {
+  //   const observables$: Observable<any>[] = [];
 
-    flowers.forEach(flower => {
-      observables$.push(this.imagesService.getImage(flower.photo).pipe(
-        mergeMap((blob) => this.setFlowerImage(blob, flower))
-      ));
-    });
+  //   flowers.forEach(flower => {
+  //     observables$.push(this.imagesService.getImage(flower.photo).pipe(
+  //       mergeMap((blob) => this.setFlowerImage(blob, flower))
+  //     ));
+  //   });
 
-    return forkJoin(observables$);
-  }
+  //   return forkJoin(observables$);
+  // }
 
   private convertGetResponseToFlowersResponse(
     response: any
-  ): Observable<FlowersResponseDto> {
+  ): FlowersResponseDto {
       const flowers: Flower[] = response.flowers.map((value: any) => {
         const flower: Flower = {
           category: value.category,
@@ -76,14 +76,11 @@ export class CatalogService {
         };
         return flower;
       });
-      return this.getFlowersLoadImagesObservable(flowers).pipe(
-        map(() => {
-          return { flowers, response };
-        })
-      );
+
+      return { flowers, response };
   }
 
-  private convertGetResponseToFlower(value: any): Observable<Flower> {
+  private convertGetResponseToFlower(value: any): Flower {
     const flower: Flower = {
       category: value.category,
       id: value.id,
@@ -96,40 +93,41 @@ export class CatalogService {
       loadedPhoto: '',
       inCart: false,
     };
-    return this.imagesService
-      .getImage(flower.photo)
-      .pipe(
-        mergeMap((blob) => this.setFlowerImage(blob, flower)),
-        map(() => flower)
-      );
+    return flower;
+    // return this.imagesService
+    //   .getImage(flower.photo)
+    //   .pipe(
+    //     mergeMap((blob) => this.setFlowerImage(blob, flower)),
+    //     map(() => flower)
+    //   );
   }
 
   private convertSearchResponseToFlowerResponseDto(
     response: any
-  ): Observable<FlowersResponseDto> {
+  ): FlowersResponseDto {
     const fakeGetResponse = { content: response };
     return this.convertGetResponseToFlowersResponse(fakeGetResponse);
   }
 
-  private setFlowerImage(blob: Blob, flower: Flower): Observable<any> {
-    return new Observable((subscriber) => {
-      const reader = new FileReader();
-      reader.addEventListener(
-        'load',
-        () => {
-          const base64data = reader.result;
-          const safeSrc = this.sanitazer.bypassSecurityTrustUrl(
-            '' + base64data
-          );
-          flower.loadedPhoto = safeSrc;
-          subscriber.next();
-          subscriber.complete();
-        },
-        false
-      );
-      if (blob) {
-        reader.readAsDataURL(blob);
-      }
-    });
-  }
+  // private setFlowerImage(blob: Blob, flower: Flower): Observable<any> {
+  //   return new Observable((subscriber) => {
+  //     const reader = new FileReader();
+  //     reader.addEventListener(
+  //       'load',
+  //       () => {
+  //         const base64data = reader.result;
+  //         const safeSrc = this.sanitazer.bypassSecurityTrustUrl(
+  //           '' + base64data
+  //         );
+  //         flower.loadedPhoto = safeSrc;
+  //         subscriber.next();
+  //         subscriber.complete();
+  //       },
+  //       false
+  //     );
+  //     if (blob) {
+  //       reader.readAsDataURL(blob);
+  //     }
+  //   });
+  // }
 }

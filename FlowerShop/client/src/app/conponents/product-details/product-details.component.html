@@ -2,13 +2,16 @@
 <div class="wrapper">
   <div class="content__up">
     <div class="images">
-      <img [src]="currentImage" class="images__image images__image_active" />
-      <img
-        *ngFor="let image of images"
-        [src]="image"
-        class="images__image"
-        (click)="currentImage = image"
-      />
+      <div class="images__image images__image_active images__wrapper">
+        <img [src]="currentFlower?.photo" class="images__image images__image_active" />
+      </div>
+      <!-- <div *ngFor="let image of images" class="images__image images__image_active images__wrapper">
+        <img
+          [src]="image"
+          class="images__image"
+          (click)="currentImage = image"
+        />
+      </div> -->
     </div>
     <div class="info">
       <div class="info__name">{{ currentFlower?.name }}</div>

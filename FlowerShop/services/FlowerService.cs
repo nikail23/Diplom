@@ -20,7 +20,7 @@ namespace FlowerShop.services
                 name = databaseFlower.Name,
                 description = databaseFlower.Description,
                 id = databaseFlower.Id,
-                priceDto = PriceService.GetClientPrice(databaseFlower.Price),
+                priceDto = PriceService.GetLastPrice(databaseFlower),
                 shortDescription = databaseFlower.ShortDescription,
                 inCart = databaseFlower.InCart,
                 photo = databaseFlower.Photo,
@@ -48,11 +48,13 @@ namespace FlowerShop.services
                     Photo = clientFlower.category.photo,
                     Thumbnail = clientFlower.category.thumbnail,
                 },
-                Price = new PriceDB()
+                Prices = new List<PriceDB>()
                 {
-                    Date = clientFlower.priceDto.date,
-                    Id = clientFlower.priceDto.id,
-                    Price = clientFlower.priceDto.price,
+                    new PriceDB() {
+                        Date = clientFlower.priceDto.date,
+                        Id = clientFlower.priceDto.id,
+                        Price = clientFlower.priceDto.price,
+                    },
                 }
             };
         }

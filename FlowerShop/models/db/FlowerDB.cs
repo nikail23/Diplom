@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlowerShop.models.db
 {
@@ -13,7 +14,7 @@ namespace FlowerShop.models.db
         public bool Thumbnail { get; set; }
         public bool InCart { get; set; }
 
-        public virtual PriceDB Price { get; set; }
+        public virtual List<PriceDB> Prices { get; set; }
         public virtual CategoryDB Category { get; set; }
     }
 }

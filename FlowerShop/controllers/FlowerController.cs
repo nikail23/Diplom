@@ -24,7 +24,7 @@ namespace FlowerShop.controllers
         public FlowerResponse Get()
         {
             List<FlowerDB> databaseFlowers = db.Flowers
-                .Include("Price")
+                .Include("Prices")
                 .Include("Category")
                 .ToList();
             FlowerResponse response = new FlowerResponse()
@@ -37,7 +37,10 @@ namespace FlowerShop.controllers
         [HttpGet("{id}")]
         public Flower Get(int id)
         {
-            FlowerDB databaseFlower = db.Flowers.FirstOrDefault(x => x.Id == id);
+            FlowerDB databaseFlower = db.Flowers
+                .Include("Prices")
+                .Include("Category")
+                .FirstOrDefault(x => x.Id == id);
             Flower clientFlower = FlowerService.GetClientFlower(databaseFlower);
             return clientFlower;
         }

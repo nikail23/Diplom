@@ -1,16 +1,21 @@
 USE [FlowerShop]
 
-SET IDENTITY_INSERT [dbo].[Categories] ON;
-SET IDENTITY_INSERT [dbo].[Flowers] ON;
-
-SET IDENTITY_INSERT [dbo].[Prices] ON;
-GO
-
-DELETE Flowers
-DELETE Categories
+/* deleting */
+SET IDENTITY_INSERT [dbo].[Flowers] OFF;
+SET IDENTITY_INSERT [dbo].[Categories] OFF;
 DELETE Prices
-GO
 
+SET IDENTITY_INSERT [dbo].[Flowers] ON;
+SET IDENTITY_INSERT [dbo].[Categories] OFF;
+DELETE Flowers
+
+SET IDENTITY_INSERT [dbo].[Flowers] OFF;
+SET IDENTITY_INSERT [dbo].[Categories] ON;
+DELETE Categories
+
+/* inserting */
+SET IDENTITY_INSERT [dbo].[Flowers] OFF;
+SET IDENTITY_INSERT [dbo].[Categories] ON;
 INSERT INTO [dbo].[Categories]
            ([Id]
 		   ,[Name]
@@ -60,34 +65,9 @@ INSERT INTO [dbo].[Categories]
 				'images/categories/landscape_design.png',
 				0
 			)
-GO
 
-INSERT INTO [dbo].[Prices]
-           ([Id]
-		   ,[Price]
-		   ,[Date]
-		   ,[FlowerId])
-     VALUES
-           (
-				1,
-				60,
-				'04.05.2022',
-				1
-			),
-			(
-				2,
-				70,
-				'04.05.2022',
-				2
-			),
-			(
-				3,
-				70,
-				'04.05.2022',
-				3
-			);
-GO
-
+SET IDENTITY_INSERT [dbo].[Categories] OFF;
+SET IDENTITY_INSERT [dbo].[Flowers] ON;
 INSERT INTO [dbo].[Flowers]
            ([Id]
 		   ,[Name]
@@ -107,9 +87,9 @@ INSERT INTO [dbo].[Flowers]
 				and are always confident that your order will be delivered at the right time to 
 				the right place.',
 				'Short Description',
-				'',
+				'images/flowers/lifes_peach.png',
 				0,
-				1,
+				0,
 				1
 			),
 			(
@@ -121,9 +101,9 @@ INSERT INTO [dbo].[Flowers]
 				and are always confident that your order will be delivered at the right time to 
 				the right place.',
 				'Short Description',
-				'',
+				'images/flowers/smiles_and_sunshine.png',
 				0,
-				1,
+				0,
 				2
 			),
 			(
@@ -135,14 +115,79 @@ INSERT INTO [dbo].[Flowers]
 				and are always confident that your order will be delivered at the right time to 
 				the right place.',
 				'Short Description',
-				'',
+				'images/flowers/light_of_my_live.png',
 				0,
-				1,
+				0,
 				2
+			),
+			(
+				4,
+				'Bouquet 117 (21 gerberas)',
+				'For several years now, our company has been delighting
+				customers with the delivery of flowers and congratulations. 
+				We are really proud of the clear and well-coordinated work of our employees 
+				and are always confident that your order will be delivered at the right time to 
+				the right place.',
+				'Short Description',
+				'images/flowers/bouquet_117.png',
+				0,
+				0,
+				1
+			),
+			(
+				5,
+				'Summer in the Cape',
+				'For several years now, our company has been delighting
+				customers with the delivery of flowers and congratulations. 
+				We are really proud of the clear and well-coordinated work of our employees 
+				and are always confident that your order will be delivered at the right time to 
+				the right place.',
+				'Short Description',
+				'images/flowers/summer_in_the_cape.png',
+				0,
+				0,
+				1
 			);
-GO
 
-SET IDENTITY_INSERT [dbo].[Categories] OFF;
-SET IDENTITY_INSERT [dbo].[Flowers] OFF;
-
-SET IDENTITY_INSERT [dbo].[Prices] OFF;
+INSERT INTO [dbo].[Prices]
+           ([Id]
+		   ,[Price]
+		   ,[Date]
+		   ,[FlowerId])
+     VALUES
+           (
+				1,
+				60.99,
+				'05/04/2022',
+				1
+			),
+			(
+				2,
+				70.99,
+				'05/05/2022',
+				1
+			),
+			(
+				3,
+				70.99,
+				'05/04/2022',
+				2
+			),
+			(
+				4,
+				110.99,
+				'05/04/2022',
+				3
+			),
+			(
+				5,
+				100.99,
+				'05/04/2022',
+				4
+			),
+			(
+				6,
+				90.99,
+				'05/04/2022',
+				5
+			);

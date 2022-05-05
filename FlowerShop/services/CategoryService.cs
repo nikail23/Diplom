@@ -26,14 +26,18 @@ namespace FlowerShop.services
 
         public static CategoryDB GetDatabaseCategory(Category clientCategory)
         {
-            return new CategoryDB()
+            if (clientCategory is not null)
             {
-                Name = clientCategory.name,
-                Description = clientCategory.description,
-                Id = clientCategory.id,
-                Photo = clientCategory.photo,
-                Thumbnail = clientCategory.thumbnail,   
-            };
+                return new CategoryDB()
+                {
+                    Name = clientCategory.name,
+                    Description = clientCategory.description,
+                    Id = clientCategory.id,
+                    Photo = clientCategory.photo,
+                    Thumbnail = clientCategory.thumbnail,
+                };
+            }
+            return null;
         }
     }
 }

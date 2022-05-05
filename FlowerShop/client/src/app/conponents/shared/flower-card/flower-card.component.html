@@ -1,6 +1,6 @@
 <div class="flower__mask">
   <div class="flower" [ngClass]="{'flower_type_in-cart': flower?.inCart}">
-    <img class="flower__image" [src]="flower?.loadedPhoto" />
+    <img class="flower__image" [src]="flower?.photo" />
     <div
       class="flower__header"
       routerLink="/catalog/{{flower?.id}}"

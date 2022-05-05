@@ -87,6 +87,7 @@ export class PriceHistoryDialogComponent implements OnInit {
 
     priceHistory.forEach(price => {
       const priceDate = new Date(price.date);
+      console.log(priceDate);
       if (priceDate > limitationDate && +priceDate < Date.now()) {
         categories.push(this.getCategoryFromDate(priceDate));
         lastDate = priceDate;
