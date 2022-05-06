@@ -41,9 +41,13 @@ namespace FlowerShop.controllers
             FlowerService.SortFlowers(flowers, direction, sortProperty);
             List<Flower> filteredAndSortedFlowers = FlowerService.FilterFlowers(flowers, minPrice, maxPrice, categoryId);
 
+            int pagesCount;
+            List<Flower> currentPage = FlowerService.GetFlowersPage(filteredAndSortedFlowers, size, page, out pagesCount);
+
             FlowerResponse response = new FlowerResponse()
             {
-                flowers = filteredAndSortedFlowers.ToArray()
+                flowers = currentPage.ToArray(),
+                totalPages = pagesCount,
             };
 
             return response;

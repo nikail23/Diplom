@@ -125,5 +125,31 @@ namespace FlowerShop.services
                 }
             );
         }
+
+        public static List<Flower> GetFlowersPage(List<Flower> flowers, int pageSize, int pageNumber, out int pagesCount)
+        {
+            if (pageSize != 0)
+            {
+                pagesCount = flowers.Count % pageSize > 0 ? (flowers.Count / pageSize) + 1 : flowers.Count / pageSize;
+
+                var pages = new Dictionary<int, List<Flower>>();
+
+                for (int i = 0; i < pagesCount; i++)
+                {
+                    if (i == pagesCount - 1)
+                    {
+                        pages.Add(i, flowers.GetRange(i * pageSize, flowers.Count % pageSize));
+                    } else
+                    {
+                        pages.Add(i, flowers.GetRange(i * pageSize, pageSize));
+                    }
+                }
+
+                return pages[pageNumber];
+            }
+
+            pagesCount = 1;
+            return flowers;
+        } 
     }
 }

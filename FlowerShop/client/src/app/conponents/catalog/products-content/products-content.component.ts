@@ -58,7 +58,7 @@ export class ProductsContentComponent implements OnInit {
   public productsParameters: ProductsParameters = {
     direction: DirectionType.ASC,
     page: 0,
-    size: 10,
+    size: 3,
     sortProperty: SortPropertyType.NAME,
   };
 
