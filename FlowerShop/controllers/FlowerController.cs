@@ -21,16 +21,25 @@ namespace FlowerShop.controllers
         }
 
         [HttpGet]
-        public FlowerResponse Get()
+        public FlowerResponse Get(
+            [FromQuery(Name = "direction")] string direction,
+            [FromQuery(Name = "sortProperty")] string sortProperty
+            )
         {
             List<FlowerDB> databaseFlowers = db.Flowers
                 .Include("Prices")
                 .Include("Category")
                 .ToList();
+
+            List<Flower> clientFlowers = FlowerService.GetClientFlowersList(databaseFlowers);
+
+            FlowerService.SortFlowers(clientFlowers, direction, sortProperty);
+
             FlowerResponse response = new FlowerResponse()
             {
-                flowers = FlowerService.GetClientFlowers(databaseFlowers)
+                flowers = clientFlowers.ToArray()
             };
+
             return response;
         }
 

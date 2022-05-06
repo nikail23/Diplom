@@ -1,6 +1,7 @@
 ﻿using FlowerShop.models;
 using FlowerShop.models.db;
 using FlowerShop.models.dto;
+using FlowerShop.models.enums;
 using System;
 using System.Collections.Generic;
 
@@ -8,9 +9,14 @@ namespace FlowerShop.services
 {
     public static class FlowerService
     {
-        public static Flower[] GetClientFlowers(List<FlowerDB> databaseFlowers)
+        public static Flower[] GetClientFlowersArray(List<FlowerDB> databaseFlowers)
         {
             return databaseFlowers.ConvertAll(new Converter<FlowerDB, Flower>(GetClientFlower)).ToArray();
+        }
+
+        public static List<Flower> GetClientFlowersList(List<FlowerDB> databaseFlowers)
+        {
+            return databaseFlowers.ConvertAll(new Converter<FlowerDB, Flower>(GetClientFlower));
         }
 
         public static Flower GetClientFlower(FlowerDB databaseFlower)
@@ -57,6 +63,42 @@ namespace FlowerShop.services
                     },
                 }
             };
+        }
+
+        public static void SortFlowers(List<Flower> flowers, string direction, string sortProperty)
+        {
+            flowers.Sort(
+                delegate (Flower firstFlower, Flower secondFlower)
+                {
+                    if (sortProperty == SortProperty.Price)
+                    {
+                        if (direction == Direction.ASC)
+                        {
+                            return firstFlower.priceDto.price > secondFlower.priceDto.price ? 1 : -1;
+                        }
+
+                        if (direction == Direction.DESC)
+                        {
+                            return firstFlower.priceDto.price < secondFlower.priceDto.price ? 1 : -1;
+                        }
+                    }
+
+                    if (sortProperty == SortProperty.Name)
+                    {
+                        if (direction == Direction.ASC)
+                        {
+                            return firstFlower.name.CompareTo(secondFlower.name);
+                        }
+
+                        if (direction == Direction.DESC)
+                        {
+                            return secondFlower.name.CompareTo(firstFlower.name);
+                        }
+                    }
+
+                    return 0;
+                }
+            );
         }
     }
 }

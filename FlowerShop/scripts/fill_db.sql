@@ -147,6 +147,34 @@ INSERT INTO [dbo].[Flowers]
 				0,
 				0,
 				1
+			),
+			(
+				6,
+				'Fiesta',
+				'For several years now, our company has been delighting
+				customers with the delivery of flowers and congratulations. 
+				We are really proud of the clear and well-coordinated work of our employees 
+				and are always confident that your order will be delivered at the right time to 
+				the right place.',
+				'Short Description',
+				'images/flowers/fiesta.png',
+				0,
+				0,
+				3
+			),
+			(
+				7,
+				'Smooth Sailing',
+				'For several years now, our company has been delighting
+				customers with the delivery of flowers and congratulations. 
+				We are really proud of the clear and well-coordinated work of our employees 
+				and are always confident that your order will be delivered at the right time to 
+				the right place.',
+				'Short Description',
+				'images/flowers/smooth_sailing.png',
+				0,
+				0,
+				1
 			);
 
 INSERT INTO [dbo].[Prices]
@@ -190,4 +218,16 @@ INSERT INTO [dbo].[Prices]
 				90.99,
 				'05/04/2022',
 				5
+			),
+			(
+				7,
+				85.99,
+				'05/04/2022',
+				6
+			),
+			(
+				8,
+				65.99,
+				'05/04/2022',
+				7
 			);
