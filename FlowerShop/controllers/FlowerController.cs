@@ -23,7 +23,12 @@ namespace FlowerShop.controllers
         [HttpGet]
         public FlowerResponse Get(
             [FromQuery(Name = "direction")] string direction,
-            [FromQuery(Name = "sortProperty")] string sortProperty
+            [FromQuery(Name = "sortProperty")] string sortProperty,
+            [FromQuery(Name = "minPrice")] float minPrice,
+            [FromQuery(Name = "maxPrice")] float maxPrice,
+            [FromQuery(Name = "categoryId")] int categoryId,
+            [FromQuery(Name = "page")] int page,
+            [FromQuery(Name = "size")] int size
             )
         {
             List<FlowerDB> databaseFlowers = db.Flowers
@@ -31,13 +36,14 @@ namespace FlowerShop.controllers
                 .Include("Category")
                 .ToList();
 
-            List<Flower> clientFlowers = FlowerService.GetClientFlowersList(databaseFlowers);
+            List<Flower> flowers = FlowerService.GetClientFlowersList(databaseFlowers);
 
-            FlowerService.SortFlowers(clientFlowers, direction, sortProperty);
+            FlowerService.SortFlowers(flowers, direction, sortProperty);
+            List<Flower> filteredAndSortedFlowers = FlowerService.FilterFlowers(flowers, minPrice, maxPrice, categoryId);
 
             FlowerResponse response = new FlowerResponse()
             {
-                flowers = clientFlowers.ToArray()
+                flowers = filteredAndSortedFlowers.ToArray()
             };
 
             return response;

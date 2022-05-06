@@ -100,5 +100,30 @@ namespace FlowerShop.services
                 }
             );
         }
+
+        public static List<Flower> FilterFlowers(List<Flower> flowers, Single minPrice, Single maxPrice, int categoryId)
+        {
+            return flowers.FindAll(
+                delegate (Flower flower)
+                {
+                    if (flower.priceDto.price < minPrice)
+                    {
+                        return false;
+                    }
+
+                    if (maxPrice != 0 && flower.priceDto.price > maxPrice)
+                    {
+                        return false;
+                    }
+
+                    if (categoryId != 0 && flower.category.id != categoryId)
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }
+            );
+        }
     }
 }
