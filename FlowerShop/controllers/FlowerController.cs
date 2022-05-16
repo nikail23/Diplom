@@ -3,6 +3,7 @@ using FlowerShop.models.db;
 using FlowerShop.models.dto;
 using FlowerShop.models.responses;
 using FlowerShop.services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace FlowerShop.controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "user")]
         public FlowerResponse Get(
             [FromQuery(Name = "direction")] string direction,
             [FromQuery(Name = "sortProperty")] string sortProperty,

@@ -12,7 +12,6 @@ export class OrderService {
 
   public sendOrder(dto: ProductOrderDto): Observable<ProductOrderDto> {
     return this.http.post(environment.api.url + 'order/checkout', dto, {
-      withCredentials: true,
     }) as Observable<ProductOrderDto>;
   }
 
