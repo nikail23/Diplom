@@ -138,12 +138,12 @@ import { CommonModule } from '@angular/common';
   providers: [
     ScrollService,
     FormBuilder,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService],
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initializeKeycloak,
+    //   multi: true,
+    //   deps: [KeycloakService],
+    // },
     CartService,
     CookieService,
     UserService,

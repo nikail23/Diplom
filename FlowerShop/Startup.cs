@@ -49,7 +49,7 @@ namespace FlowerShop
 
             services.AddControllers().AddNewtonsoftJson();
 
-            services.AddAuthentication(options =>
+            /*services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -79,7 +79,7 @@ namespace FlowerShop
             {
                 options.AddPolicy("Manager", policy => policy.RequireClaim("user_roles", "[Manager]"));
                 options.AddPolicy("User", policy => policy.RequireClaim("user_roles", "[User]"));
-            });
+            });*/
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -109,8 +109,8 @@ namespace FlowerShop
                    );
 
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+           /* app.UseAuthentication();
+            app.UseAuthorization();*/
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

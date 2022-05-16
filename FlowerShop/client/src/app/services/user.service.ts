@@ -19,30 +19,30 @@ export class UserService {
 
   public getLoggedState(): Observable<boolean> {
       // TODO
-      const isLoggedObservable$ = from(this.keycloakService.isLoggedIn());
+      // const isLoggedObservable$ = from(this.keycloakService.isLoggedIn());
 
-      return isLoggedObservable$.pipe(
-        mergeMap((isLogged) => {
-          this.isLogged = isLogged;
-          if (!this.isLogged) {
-            const tempId = localStorage.getItem('TEMP_ID');
-            if (!tempId) {
-              return this.http.get(environment.api.url + 'users/tempid', {
-                responseType: 'text',
-              });
-            }
-          }
-          return of(undefined);
-        }),
-        map((tempId) => {
-          if (tempId) {
-            localStorage.setItem('TEMP_ID', tempId)
-          }
-          return this.isLogged;
-        }),
-      );
+      // return isLoggedObservable$.pipe(
+      //   mergeMap((isLogged) => {
+      //     this.isLogged = isLogged;
+      //     if (!this.isLogged) {
+      //       const tempId = localStorage.getItem('TEMP_ID');
+      //       if (!tempId) {
+      //         return this.http.get(environment.api.url + 'users/tempid', {
+      //           responseType: 'text',
+      //         });
+      //       }
+      //     }
+      //     return of(undefined);
+      //   }),
+      //   map((tempId) => {
+      //     if (tempId) {
+      //       localStorage.setItem('TEMP_ID', tempId)
+      //     }
+      //     return this.isLogged;
+      //   }),
+      // );
 
-      // return of(true);
+      return of(true);
   }
 
   public getCurrentUserInfo(): Observable<any> {
