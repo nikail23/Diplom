@@ -1,8 +1,6 @@
 @startuml
 left to right direction
 
-title Варианты использования программного средства для магазина по доставке цветов
-
 ' actors
 
 actor "Гость" as Guest
