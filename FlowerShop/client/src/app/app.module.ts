@@ -67,6 +67,7 @@ import { OrdersComponent } from './conponents/orders/orders.component';
 import { OrderComponent } from './conponents/shared/order/order.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
+import { LogInComponent } from './conponents/log-in/log-in.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { CommonModule } from '@angular/common';
     PaymentDialogComponent,
     OrdersComponent,
     OrderComponent,
+    LogInComponent,
   ],
   imports: [
     BrowserModule,
