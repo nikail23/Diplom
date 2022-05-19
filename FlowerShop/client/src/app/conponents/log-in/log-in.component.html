@@ -1,1 +1,76 @@
-<p>log-in works!</p>
+<app-navigation></app-navigation>
+<div class="wrapper">
+  <div class="container-upper">
+    <div class="container-upper__header">Log In</div>
+    <a class="container-upper__sign-in-link">
+      Register
+    </a>
+  </div>
+  <form class="form" [formGroup]="logInForm">
+    <app-text-input
+      class="form__email"
+      [(control)]="logInForm.controls.email"
+      [required]="true"
+      labelText="Email"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(logInForm.controls.email, 'required')"
+      >
+        Email field can't be empty.
+      </div>
+      <div class="error" *ngIf="isFormControlHasError(logInForm.controls.email, 'email')">
+        Email field must contain email.
+      </div>
+    </app-text-input>
+    <app-text-input
+      class="form__password"
+      [(control)]="logInForm.controls.password"
+      [required]="true"
+      labelText="Password"
+    >
+      <div
+        class="error"
+        *ngIf="isFormControlHasError(logInForm.controls.password, 'required')"
+      >
+        Password field can't be empty.
+      </div>
+    </app-text-input>
+    <button class="form__button">
+      Log In
+    </button>
+    <div class="or">
+      <hr />
+      <div class="or__text">or</div>
+    </div>
+    <div class="other-ways-container">
+      <div class="other-ways-container__help">
+        Use accounts of other services for quick login
+      </div>
+      <button
+        class="
+          other-ways-container__button
+          other-ways-container__button_type_facebook
+        "
+      >
+        <img
+          class="button__icon"
+          src="../../../assets/registration/facebook.png"
+        />
+        sign in with Facebook
+      </button>
+      <button
+        class="
+          other-ways-container__button other-ways-container__button_type_google
+        "
+      >
+        <img
+          class="button__icon"
+          src="../../../assets/registration/google.png"
+        />
+        sign in with Google
+      </button>
+    </div>
+  </form>
+  <app-popup #popup></app-popup>
+</div>

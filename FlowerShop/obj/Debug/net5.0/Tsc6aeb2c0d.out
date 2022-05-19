@@ -20,6 +20,12 @@ C:\Diplom\FlowerShop\client\dist\out-tsc\app\services\cart.service.js
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\services\cart.service.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\services\scroll.service.js
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\services\scroll.service.js.map
+C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\forms.js
+C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\forms.js.map
+C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\validators.js
+C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\validators.js.map
+C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\log-in\log-in.component.js
+C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\log-in\log-in.component.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\order.js
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\order.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\services\order.service.js
@@ -56,10 +62,6 @@ C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\catalog\catalog.componen
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\catalog\catalog.component.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\shared\popup\popup.component.js
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\shared\popup\popup.component.js.map
-C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\validators.js
-C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\validators.js.map
-C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\forms.js
-C:\Diplom\FlowerShop\client\dist\out-tsc\app\classes\forms.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\profile\profile.component.js
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\profile\profile.component.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\services\registration.service.js
@@ -206,6 +208,8 @@ C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\contacts\contact-us\cont
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\contacts\contact-us\contact-us.component.spec.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\home\home.component.spec.js
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\home\home.component.spec.js.map
+C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\log-in\log-in.component.spec.js
+C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\log-in\log-in.component.spec.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\news\news.component.spec.js
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\news\news.component.spec.js.map
 C:\Diplom\FlowerShop\client\dist\out-tsc\app\conponents\news\pagination-list\pagination-list.component.spec.js

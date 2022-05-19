@@ -22,7 +22,6 @@ namespace FlowerShop.controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "user")]
         public FlowerResponse Get(
             [FromQuery(Name = "direction")] string direction,
             [FromQuery(Name = "sortProperty")] string sortProperty,

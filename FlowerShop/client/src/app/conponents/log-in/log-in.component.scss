@@ -1,0 +1,279 @@
+@import "../../../sass/vars.scss";
+@import "../../../sass/mixins.scss";
+
+.wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 31.25%;
+
+  .container-upper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+
+    &__header {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 36px;
+      line-height: 110%;
+      color: $registration-page-header-color;
+    }
+
+    &__sign-in-link {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 150%;
+      color: $registration-page-link-color;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+
+    &__map {
+      width: 100%;
+      height: 396px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      border: 0;
+    }
+
+    &__first-name {
+      margin-bottom: 30px;
+    }
+
+    &__last-name {
+      margin-bottom: 30px;
+    }
+
+    &__email {
+      margin-bottom: 30px;
+    }
+
+    &__phone {
+      margin-bottom: 30px;
+    }
+
+    &__address {
+      margin-bottom: 7px;
+    }
+
+    &__password {
+      margin-bottom: 30px;
+    }
+
+    &__repeat-password {
+      margin-bottom: 30px;
+    }
+
+    &__help {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 150%;
+      color: $registration-page-help-color;
+      margin-bottom: 30px;
+    }
+
+    .container_checks {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      margin-bottom: 30px;
+
+      &__checkbox {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+
+        & + label {
+          display: inline-flex;
+          align-items: center;
+          user-select: none;
+        }
+        & + label::before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background: $registration-page-checkbox-color-1;
+          border: $registration-page-checkbox-border;
+          border-radius: 4px;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+        &:checked + label::before {
+          border-color: $registration-page-checkbox-color-2;
+          background-color: $registration-page-checkbox-color-2;
+          background-image: url(../../../assets/registration/arrow.png);
+        }
+      }
+
+      &__text {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 150%;
+        color: $registration-page-checks-text-color;
+      }
+
+      &__link {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 150%;
+        color: $registration-page-checks-link-color;
+      }
+    }
+
+    &__button {
+      cursor: pointer;
+      outline: none;
+      height: 57px;
+      width: 100%;
+      margin-bottom: 68px;
+      background: $registration-page-register-button-color-1;
+      border: 0;
+      border-radius: 10px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 110%;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: $registration-page-register-button-color-2;
+
+      &:hover {
+        background: $registration-page-register-button-color-2;
+        border: 1px solid $registration-page-register-button-color-1;
+        color: $registration-page-register-button-color-1;
+      }
+    }
+
+    .or {
+      position: relative;
+      margin-bottom: 80px;
+
+      hr {
+        position: relative;
+        z-index: 1;
+        background: $registration-page-or-hr-color;
+        opacity: 0.2;
+        outline: none;
+      }
+
+      &__text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: calc(50% - 33px);
+        width: 66px;
+        height: 20px;
+        position: relative;
+        z-index: 2;
+        top: -20px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 110%;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: $registration-page-or-text-color;
+        background: $registration-page-or-text-background;
+      }
+    }
+
+    .other-ways-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 108px;
+
+      &__help {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 150%;
+        color: $registration-page-other-ways-help-color;
+        margin-bottom: 40px;
+      }
+
+      &__button {
+        width: 100%;
+        height: 57px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 23px;
+
+        &_type {
+          &_facebook {
+            background: $registration-page-other-ways-button-facebook-color-2;
+            border-radius: 10px;
+            margin-bottom: 23px;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 110%;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: $registration-page-other-ways-button-facebook-color-1;
+            border: 0;
+          }
+
+          &_google {
+            background: $registration-page-other-ways-button-google-color-2;
+            border: $registration-page-other-ways-button-google-border;
+            box-sizing: border-box;
+            border-radius: 10px;
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 110%;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: $registration-page-other-ways-button-google-color-1;
+          }
+        }
+      }
+    }
+  }
+
+  .error {
+    display: block;
+    margin-top: 7px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 150%;
+    color: $input-error-color;
+  }
+}
+
+@include resolution_tablets {
+  .wrapper {
+    padding: 0 11.5%;
+  }
+}
+
+@include resolution_phones {
+  .wrapper {
+    padding: 0 $tablet-and-phone-padding;
+
+    .container-upper {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 19px;
+    }
+  }
+}

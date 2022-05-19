@@ -1,3 +1,4 @@
+import { LogInComponent } from './conponents/log-in/log-in.component';
 import { OrdersComponent } from './conponents/orders/orders.component';
 import { SearchComponent } from './conponents/search/search.component';
 import { SearchDialogComponent } from './conponents/shared/header/search-dialog/search-dialog.component';
@@ -22,6 +23,7 @@ export const routes: Routes = [
   {path: 'about-us', component: AboutUsComponent},
   {path: 'contacts', component: ContactsComponent},
   {path: 'registration', component: RegistrationComponent},
+  {path: 'log-in', component: LogInComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'catalog', component: CatalogComponent},
   {path: 'catalog/:id', component: ProductDetailsComponent},

@@ -42,7 +42,7 @@ export class UserService {
       //   }),
       // );
 
-      return of(true);
+      return of(false);
   }
 
   public getCurrentUserInfo(): Observable<any> {
