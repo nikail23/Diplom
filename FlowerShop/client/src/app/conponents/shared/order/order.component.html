@@ -16,7 +16,7 @@
     </div>
     <div class="details__flowers">
       <div *ngFor="let flower of flowers; let i = index" class="flower">
-        <img class="flower__image" [src]="flower.loadedPhoto">
+        <img class="flower__image" [src]="flower.photo">
         <div class="flower__name">{{flower.name}}</div>
         <div class="flower__category">{{flower.category.name}}</div>
         <div class="flower__price">{{flowersCalculatings[i].price | price}}</div>
