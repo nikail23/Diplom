@@ -1,4 +1,9 @@
 @startuml
+
+skinparam ActorFontSize 20
+skinparam ActorFontStyle bold
+skinparam UsecaseFontStyle bold
+
 left to right direction
 
 ' actors
