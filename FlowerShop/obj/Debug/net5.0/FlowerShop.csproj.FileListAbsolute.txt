@@ -62,5 +62,3 @@ C:\Diplom\FlowerShop\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Diplom\FlowerShop\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Diplom\FlowerShop\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\Diplom\FlowerShop\bin\Debug\net5.0\keycloak-backup\realm-export.json
-C:\Diplom\FlowerShop\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
-C:\Diplom\FlowerShop\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

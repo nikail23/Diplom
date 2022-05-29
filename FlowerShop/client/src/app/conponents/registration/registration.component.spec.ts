@@ -60,11 +60,6 @@ describe('RegistrationComponent', () => {
     expect(registrationService.register).toHaveBeenCalled();
   });
 
-  it('should call keycloak login when login button clicked', () => {
-    component.logInButtonClick();
-    expect(keycloakService.login).toHaveBeenCalled();
-  });
-
   it('should change isRulesChecked on button click', () => {
     component.isRulesCheckedChange(true);
     expect(component.isRulesChecked).toEqual(true);

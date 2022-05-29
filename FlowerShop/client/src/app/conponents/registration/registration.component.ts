@@ -12,6 +12,7 @@ import {
   checkPasswordsValidator,
   passwordValidator,
 } from '../../classes/validators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -42,7 +43,7 @@ export class RegistrationComponent {
 
   constructor(
     private registrationService: RegistrationService,
-    private keycloakService: KeycloakService
+    private router: Router,
   ) {}
 
   public registerButtonClick(popup: PopupComponent): void {
@@ -62,12 +63,11 @@ export class RegistrationComponent {
   }
 
   public logIn() {
-    this.keycloakService.login({
-      redirectUri: window.location.origin + '/home',
-    });
+    this.router.navigate(['/log-in']);
   }
 
   private handleRegistrationError(error: HttpErrorResponse, popup: PopupComponent) {
+    console.log(error);
     if (error.status === 403) {
       popup?.show(
         'The actor with the following email address is already registered.',
@@ -76,12 +76,6 @@ export class RegistrationComponent {
     } else {
       popup?.show(error.error, true);
     }
-  }
-
-  public logInButtonClick() {
-    this.keycloakService.login({
-      redirectUri: window.location.origin + '/home',
-    });
   }
 
   public isRulesCheckedChange(value: boolean) {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FlowerShop.models
+﻿namespace FlowerShop.models
 {
     public class Category
     {

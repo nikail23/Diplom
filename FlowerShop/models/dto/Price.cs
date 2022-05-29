@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FlowerShop.models.dto
+﻿namespace FlowerShop.models.dto
 {
     public class Price
     {

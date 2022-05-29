@@ -1,5 +1,4 @@
-﻿using FlowerShop.models;
-using FlowerShop.models.db;
+﻿using FlowerShop.models.db;
 using FlowerShop.models.dto;
 using FlowerShop.models.enums;
 using System;
@@ -139,7 +138,8 @@ namespace FlowerShop.services
                     if (i == pagesCount - 1)
                     {
                         pages.Add(i, flowers.GetRange(i * pageSize, flowers.Count % pageSize));
-                    } else
+                    }
+                    else
                     {
                         pages.Add(i, flowers.GetRange(i * pageSize, pageSize));
                     }
@@ -150,6 +150,6 @@ namespace FlowerShop.services
 
             pagesCount = 1;
             return flowers;
-        } 
+        }
     }
 }
