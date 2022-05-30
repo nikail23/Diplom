@@ -61,7 +61,7 @@ export class CartService {
       orderItems: [],
       text: '',
     };
-    return this.userService.getLoggedState().pipe(
+    return this.userService.loggedState.pipe(
       tap((isLoggedIn) => (this.isLoggedIn = isLoggedIn)),
       mergeMap(() => this.http.get(environment.api.url + 'cart') as Observable<ShoppingCartDto>),
       tap((cart) => {

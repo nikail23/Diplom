@@ -20,17 +20,17 @@ export function getTestChangePasswordDto() {
   };
 }
 
-export const userServiceSpy = jasmine.createSpyObj<UserService>('UserService', [
+/*export const userServiceSpy = jasmine.createSpyObj<UserService>('UserService', [
   'getLoggedState',
   'getCurrentUserInfo',
   'updateCurrentUser',
   'changePassword',
   'logOut',
   'logIn'
-]);
-userServiceSpy.getLoggedState.and.returnValue(of(true));
+]);*/
+/*userServiceSpy.updateLoggedState.and.returnValue(of(true));
 userServiceSpy.changePassword.and.returnValue(of(getTestUserDto()));
 userServiceSpy.getCurrentUserInfo.and.returnValue(of(getTestUserDto()));
 userServiceSpy.updateCurrentUser.and.returnValue(of(getTestUserDto()));
 userServiceSpy.logIn.and.callFake(() => {});
-userServiceSpy.logOut.and.callFake(() => {});
+userServiceSpy.logOut.and.callFake(() => {});*/

@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getLoggedState().subscribe((isLogged: boolean) => {
+    this.userService.loggedState.subscribe((isLogged: boolean) => {
       this.isLogged = isLogged;
     });
     this.cartService.cartRefreshed.subscribe((value) => {

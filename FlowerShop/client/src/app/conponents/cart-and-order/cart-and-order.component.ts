@@ -239,7 +239,6 @@ export class CartAndOrderComponent implements OnInit, OnDestroy {
   public setCount(id: number, event: any) {
     if (this.cartFlowersInfo[id]) {
       this.cartFlowersInfo[id].quantity = event;
-      // console.log(event)
     }
   }
 }

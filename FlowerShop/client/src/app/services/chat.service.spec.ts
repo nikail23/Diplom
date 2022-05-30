@@ -1,4 +1,4 @@
-import { userServiceSpy } from 'src/app/testing/user.mock';
+// import { userServiceSpy } from 'src/app/testing/user.mock';
 import { Message } from './../classes/chat';
 import { UserService } from './user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -19,7 +19,7 @@ describe('ChatService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         { provide: KeycloakService, useValue: keycloakSpy },
-        { provide: UserService, useValue: userServiceSpy },
+       //{ provide: UserService, useValue: userServiceSpy },
         { provide: ChatServerService, useValue: chatServerServiceSpy }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -10,7 +10,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { keycloakSpy } from 'src/app/testing/keycloak.mock';
 import { cartServiceSpy } from 'src/app/testing/cart.mock';
-import { userServiceSpy } from 'src/app/testing/user.mock';
+/*import { userServiceSpy } from 'src/app/testing/user.mock';*/
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -28,7 +28,7 @@ describe('HeaderComponent', () => {
       ],
       providers: [
         { provide: KeycloakService, useValue: keycloakSpy },
-        { provide: UserService, useValue: userServiceSpy },
+        /*{ provide: UserService, useValue: userServiceSpy },*/
         { provide: CartService, useValue: cartServiceSpy },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -7,17 +7,17 @@ namespace FlowerShop.controllers
 {
     [Route("api/users/user")]
     [ApiController]
-    public class UsersController : Controller
+    public class UserController : Controller
     {
         ApplicationContext db;
-        public UsersController(ApplicationContext context)
+        public UserController(ApplicationContext context)
         {
             db = context;
         }
 
 
-        [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        [HttpGet]
+        public IActionResult Get([FromQuery(Name = "id")] int id)
         {
             UserDB user = db.User.Find(id);
 

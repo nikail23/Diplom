@@ -37,7 +37,6 @@ export class ProfileComponent implements OnInit {
       Validators.email,
     ]),
     homeAddress: new FormControl('', Validators.required),
-    shippingAddress: new FormControl('', Validators.required),
     phone: new FormControl('', [
       Validators.required,
       Validators.minLength(17),
@@ -56,6 +55,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUserInfo().subscribe((user: any) => {
+      delete(user.password);
       this.accountForm.setValue(user);
       this.accountForm.updateValueAndValidity();
     });

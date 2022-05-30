@@ -20,7 +20,7 @@ export class ChatService {
     private chatServerService: ChatServerService
   ) {
     this.userService
-      .getLoggedState()
+      .loggedState
       .pipe(
         tap((isLoggedIn: boolean) => (this.isLoggedIn = isLoggedIn)),
         filter((isLoggedIn: boolean) => isLoggedIn),

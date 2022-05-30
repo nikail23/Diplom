@@ -27,7 +27,7 @@ namespace FlowerShop.controllers
                 return Ok(UsersService.GetClientUser(dbUser));
             }
 
-            return Forbid();
+            return StatusCode(404);
         }
     }
 

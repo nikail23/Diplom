@@ -9,10 +9,10 @@ namespace FlowerShop.controllers
 {
     [Route("api/users/register")]
     [ApiController]
-    public class RegisterCotroller : Controller
+    public class RegisterController : Controller
     {
         ApplicationContext db;
-        public RegisterCotroller(ApplicationContext context)
+        public RegisterController(ApplicationContext context)
         {
             db = context;
         }

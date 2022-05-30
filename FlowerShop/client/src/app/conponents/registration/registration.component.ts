@@ -67,14 +67,13 @@ export class RegistrationComponent {
   }
 
   private handleRegistrationError(error: HttpErrorResponse, popup: PopupComponent) {
-    console.log(error);
     if (error.status === 403) {
       popup?.show(
         'The actor with the following email address is already registered.',
         true
       );
     } else {
-      popup?.show(error.error, true);
+      popup?.show('Something went wrong!', true);
     }
   }
 

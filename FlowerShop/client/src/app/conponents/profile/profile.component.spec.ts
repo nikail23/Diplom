@@ -7,7 +7,7 @@ import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { ProfileComponent } from './profile.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { keycloakSpy } from 'src/app/testing/keycloak.mock';
-import { getTestUserDto, userServiceSpy,  } from 'src/app/testing/user.mock';
+import { getTestUserDto, /*userServiceSpy,*/  } from 'src/app/testing/user.mock';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -22,7 +22,7 @@ describe('ProfileComponent', () => {
       declarations: [ProfileComponent, PopupComponent],
       providers: [
         { provide: KeycloakService, useValue: keycloakSpy },
-        { provide: UserService, useValue: userServiceSpy },
+        /*{ provide: UserService, useValue: userServiceSpy },*/
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

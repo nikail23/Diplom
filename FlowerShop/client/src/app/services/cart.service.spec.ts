@@ -1,7 +1,7 @@
 import { ShoppingCartDto } from './../classes/cart';
 import { CatalogService } from 'src/app/services/catalog.service';
 import { environment } from './../../environments/environment';
-import { userServiceSpy } from 'src/app/testing/user.mock';
+/*import { userServiceSpy } from 'src/app/testing/user.mock';*/
 import { TestBed } from '@angular/core/testing';
 import { CartService } from './cart.service';
 import { UserService } from './user.service';
@@ -22,7 +22,7 @@ describe('CartService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        { provide: UserService, useValue: userServiceSpy },
+        /*{ provide: UserService, useValue: userServiceSpy },*/
         { provide: CatalogService, useValue: catalogServiceSpy }
       ],
     });
@@ -42,7 +42,7 @@ describe('CartService', () => {
   it('should load cart', () => {
     service.loadCart().subscribe((cart) => {
       expect(cart).toEqual(shoppingCart);
-      expect(userService.getLoggedState).toHaveBeenCalled();
+      expect(userService.updateLoggedState).toHaveBeenCalled();
     });
 
     const getCart = httpControler.expectOne(environment.api.url + 'cart');
@@ -55,7 +55,7 @@ describe('CartService', () => {
   it('should post cart if load throw error', () => {
     service.loadCart().subscribe((cart) => {
       expect(cart).toEqual(shoppingCart);
-      expect(userService.getLoggedState).toHaveBeenCalled();
+      expect(userService.updateLoggedState).toHaveBeenCalled();
     });
 
     const getCart = httpControler.expectOne(environment.api.url + 'cart');

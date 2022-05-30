@@ -1,10 +1,11 @@
 import { UpdateUserDto, ChangePasswordDto } from '../classes/user';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-import { map, mergeMap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { map, mergeMap, tap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,45 +13,57 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   public isLogged: boolean = false;
 
+  public get loggedState(): Observable<boolean> {
+    return this._loggedState.asObservable();
+  }
+
+  private _loggedState: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  private _userId?: number;
+
   constructor(
-    private keycloakService: KeycloakService,
+    private router: Router,
     private http: HttpClient
-  ) {}
+  ) {
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => {
+    //   return false;
+    // };
+  }
 
-  public getLoggedState(): Observable<boolean> {
-      // TODO
-      // const isLoggedObservable$ = from(this.keycloakService.isLoggedIn());
+  public updateLoggedState(): void {
+    const userId = localStorage.getItem('USER_ID');
 
-      // return isLoggedObservable$.pipe(
-      //   mergeMap((isLogged) => {
-      //     this.isLogged = isLogged;
-      //     if (!this.isLogged) {
-      //       const tempId = localStorage.getItem('TEMP_ID');
-      //       if (!tempId) {
-      //         return this.http.get(environment.api.url + 'users/tempid', {
-      //           responseType: 'text',
-      //         });
-      //       }
-      //     }
-      //     return of(undefined);
-      //   }),
-      //   map((tempId) => {
-      //     if (tempId) {
-      //       localStorage.setItem('TEMP_ID', tempId)
-      //     }
-      //     return this.isLogged;
-      //   }),
-      // );
+    console.log(userId);
 
-      return of(false);
+    if (!userId) {
+      const tempId = localStorage.getItem('TEMP_ID');
+      if (!tempId) {
+        this.http.get(environment.api.url + 'users/tempid', {responseType: 'text'})
+          .subscribe((tempId: string) => {
+            localStorage.setItem('TEMP_ID', tempId);
+          });
+      } else {
+        localStorage.removeItem('TEMP_ID');
+      }
+
+      this.isLogged = false;
+      this._loggedState.next(false);
+    } else {
+      this._userId = parseInt(userId);
+      this.isLogged = true;
+      this._loggedState.next(true);
+    }
   }
 
   public getCurrentUserInfo(): Observable<any> {
-    return this.http.get(environment.api.url + 'users/user');
+    const params: HttpParams = this._userId ? new HttpParams().append('id', this._userId) : new HttpParams();
+
+    return this.http.get(environment.api.url + 'users/user', {params});
   }
 
   public updateCurrentUser(updateUserDto: UpdateUserDto): Observable<any> {
-    return this.http.patch(environment.api.url + 'users', updateUserDto);
+    const params: HttpParams = this._userId ? new HttpParams().append('id', this._userId) : new HttpParams();
+
+    return this.http.patch(environment.api.url + 'users/user', updateUserDto, {params});
   }
 
   public changePassword(password: ChangePasswordDto): Observable<any> {
@@ -62,19 +75,15 @@ export class UserService {
 
   public logOut(): void {
     if (this.isLogged) {
-      this.keycloakService
-        .logout(window.location.origin + '/home')
-        .then(() => {});
+      localStorage.removeItem('USER_ID');
+      this.updateLoggedState();
+      this.router.navigate(['home']);
     }
   }
 
   public logIn(): void {
     if (!this.isLogged) {
-      this.keycloakService
-        .login({
-          redirectUri: window.location.origin + '/home',
-        })
-        .then(() => {});
+      this.router.navigate(['log-in']);
     }
   }
 }
