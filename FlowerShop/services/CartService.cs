@@ -24,6 +24,11 @@ namespace FlowerShop.services
             return databaseItems.ConvertAll(new Converter<CartItemDB, ItemOrder>(GetClientItem)).ToArray();
         }
 
+        public static CartItemDB[] GetDatabaseItemsArray(List<ItemOrder> clientItems)
+        {
+            /*return clientItems.ConvertAll(new Converter<ItemOrder, CartItemDB>(GetDatabaseItem)).ToArray();*/
+        }
+
         public static ItemOrder GetClientItem(CartItemDB databaseItem)
         {
             return new ItemOrder()

@@ -53,5 +53,41 @@ namespace FlowerShop.controllers
 
             return BadRequest();
         }
+
+        [HttpPut]
+        public IActionResult Put([FromQuery(Name = "id")] int id, [FromBody] Cart cart)
+        {
+            /*UserDB user = db.User.ToList().FirstOrDefault(
+                delegate (UserDB user)
+                {
+                    return user.Id == id;
+                }
+                );
+
+            if (user != null)
+            {
+                CartDB dbCart = db.Cart.Find(user.Id);
+
+                if (dbCart != null)
+                {
+                    *//*List<CartItemDB> dbItems = db.CartItem
+                        .Include(cartItem => cartItem.Flower)
+                        .ThenInclude(flower => flower.Prices)
+                        .Include(cartItem => cartItem.Cart)
+                        .Where(
+                        delegate (CartItemDB cartItemDB)
+                        {
+                            return cartItemDB.Cart.Id == dbCart.Id;
+                        }
+                        ).ToList();*//*
+
+                    CartService.GetDatabaseItem();
+
+                    return Ok(CartService.GetClientCart(dbCart, CartService.GetClientItemsArray(dbItems)));
+                }
+            }
+
+            return BadRequest();*/
+        }
     }
 }

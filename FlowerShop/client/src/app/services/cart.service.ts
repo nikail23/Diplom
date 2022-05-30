@@ -119,7 +119,13 @@ export class CartService {
 
   public delete(flowerId: number): Observable<ShoppingCartDto> {
     const itemId = this.getItemId(flowerId);
-    return (this.http.delete(environment.api.url + `cart/item/${itemId}`) as Observable<ShoppingCartDto>).pipe(
+    const params: HttpParams = this.userService.userId
+      ? new HttpParams()
+        .append('itemId', itemId)
+        .append('cartId', this.userService.userId)
+      : new HttpParams()
+        .append('itemId', itemId);
+    return (this.http.delete(environment.api.url + `cart/item`, {params}) as Observable<ShoppingCartDto>).pipe(
       tap((cart) => {
         this.cart = cart;
         this.cartRefreshed.emit(this.cart?.orderItems);
@@ -128,8 +134,9 @@ export class CartService {
   }
 
   public updateCart(): Observable<ShoppingCartDto | undefined> {
+    const params: HttpParams = this.userService.userId ? new HttpParams().append('id', this.userService.userId) : new HttpParams();
     if (this.cart) {
-      return (this.http.put(environment.api.url + 'cart', this.cart) as Observable<ShoppingCartDto>).pipe(
+      return (this.http.put(environment.api.url + 'cart', this.cart, {params}) as Observable<ShoppingCartDto>).pipe(
         tap((cart: ShoppingCartDto) => {
           this.cart = cart;
           this.cartRefreshed.emit(this.cart?.orderItems);
