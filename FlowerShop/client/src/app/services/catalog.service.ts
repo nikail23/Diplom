@@ -105,7 +105,7 @@ export class CatalogService {
   private convertSearchResponseToFlowerResponseDto(
     response: any
   ): FlowersResponseDto {
-    const fakeGetResponse = { content: response };
+    const fakeGetResponse = { content: response, flowers: response.flowers };
     return this.convertGetResponseToFlowersResponse(fakeGetResponse);
   }
 

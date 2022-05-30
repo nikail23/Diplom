@@ -151,5 +151,14 @@ namespace FlowerShop.services
             pagesCount = 1;
             return flowers;
         }
+
+        public static List<Flower> Search(List<Flower> flowers, string name)
+        {
+            return flowers.FindAll(
+                delegate (Flower flower)
+                {
+                    return flower.name.Contains(name, StringComparison.OrdinalIgnoreCase);
+                });
+        }
     }
 }
