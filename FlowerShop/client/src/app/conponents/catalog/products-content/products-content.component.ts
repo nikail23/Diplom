@@ -159,7 +159,6 @@ export class ProductsContentComponent implements OnInit {
     if (this.searchWord) {
       return this.catalogService.search(this.searchWord).pipe(
         map((searchResponse) => {
-          console.log(searchResponse);
           this.handleSearchResponse(searchResponse);
         })
       );

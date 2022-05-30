@@ -17,6 +17,10 @@ export class UserService {
     return this._loggedState.asObservable();
   }
 
+  public get userId(): number | undefined {
+    return this._userId;
+  }
+
   private _loggedState: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   private _userId?: number;
 
@@ -31,8 +35,6 @@ export class UserService {
 
   public updateLoggedState(): void {
     const userId = localStorage.getItem('USER_ID');
-
-    console.log(userId);
 
     if (!userId) {
       const tempId = localStorage.getItem('TEMP_ID');

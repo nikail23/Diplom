@@ -6,7 +6,7 @@ import { UserService } from './user.service';
 import { Observable, of, forkJoin } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -61,16 +61,18 @@ export class CartService {
       orderItems: [],
       text: '',
     };
+    this.userService.updateLoggedState();
+    const params: HttpParams = this.userService.userId ? new HttpParams().append('id', this.userService.userId) : new HttpParams();
     return this.userService.loggedState.pipe(
       tap((isLoggedIn) => (this.isLoggedIn = isLoggedIn)),
-      mergeMap(() => this.http.get(environment.api.url + 'cart') as Observable<ShoppingCartDto>),
+      mergeMap(() => this.http.get(environment.api.url + 'cart', {params}) as Observable<ShoppingCartDto>),
       tap((cart) => {
         this.cart = cart;
         this.cartRefreshed.emit(this.cart?.orderItems);
       }),
       catchError((error) => {
         if (error.status === 404) {
-          return this.http.post(environment.api.url + 'cart', emptyCart) as Observable<ShoppingCartDto>;
+          return this.http.post(environment.api.url + 'cart', emptyCart, {params}) as Observable<ShoppingCartDto>;
         }
         return of(undefined);
       })
@@ -88,6 +90,7 @@ export class CartService {
   }
 
   public add(id: number): Observable<ShoppingCartDto> {
+    const params: HttpParams = this.userService.userId ? new HttpParams().append('id', this.userService.userId) : new HttpParams();
     return this.catalogService.get(id).pipe(
       mergeMap((flower) => {
         const flowerDto = {
@@ -95,7 +98,7 @@ export class CartService {
           priceId: flower.priceDto.id,
           quantity: 1,
         };
-        return this.http.post(environment.api.url + 'cart/item', flowerDto) as Observable<ShoppingCartDto>;
+        return this.http.post(environment.api.url + 'cart/item', flowerDto, {params}) as Observable<ShoppingCartDto>;
       }),
       tap((cart) => {
         this.cart = cart;

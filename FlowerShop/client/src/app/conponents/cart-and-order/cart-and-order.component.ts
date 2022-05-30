@@ -88,15 +88,6 @@ export class CartAndOrderComponent implements OnInit, OnDestroy {
     ).subscribe((flowers) => {
       this.flowers = flowers;
     });
-
-    this.catalogService.get(1).subscribe((flower: Flower) => {
-      this.flowers = [flower];
-      this.cartFlowersInfo = [{
-        itemId: flower.id,
-        priceId: flower.priceDto.id,
-        quantity: 1
-      }];
-    });
   }
 
   private getLoadFlowersObservables(cartFlowersInfo: ItemOrderDto[]) {
