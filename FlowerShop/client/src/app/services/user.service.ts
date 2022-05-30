@@ -63,7 +63,7 @@ export class UserService {
   public updateCurrentUser(updateUserDto: UpdateUserDto): Observable<any> {
     const params: HttpParams = this._userId ? new HttpParams().append('id', this._userId) : new HttpParams();
 
-    return this.http.patch(environment.api.url + 'users/user', updateUserDto, {params});
+    return this.http.post(environment.api.url + 'users/user', updateUserDto, {params});
   }
 
   public changePassword(password: ChangePasswordDto): Observable<any> {

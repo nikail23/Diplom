@@ -62,7 +62,6 @@ export class ProfileComponent implements OnInit {
   }
 
   public saveChangesClick(popup: PopupComponent): void {
-    this.accountForm.controls.shippingAddress.patchValue(this.accountForm.controls.homeAddress.value);
     this.accountForm.updateValueAndValidity();
     if (this.accountForm.valid) {
       this.userService
@@ -73,12 +72,13 @@ export class ProfileComponent implements OnInit {
         )
         .subscribe(
           (user) => {
+            delete(user.password);
             this.accountForm.setValue(user);
             this.accountForm.updateValueAndValidity();
             popup.show('Succesfully changed!', false);
           },
           (error: HttpErrorResponse) => {
-            popup.show(error.message, true);
+            popup.show('Something went wrong!', true);
           }
         );
     }

@@ -4,7 +4,6 @@ export interface UpdateUserDto {
   homeAddress: string;
   lastName: string;
   phone: string;
-  shippingAddress: string;
 }
 
 export interface ChangePasswordDto {
