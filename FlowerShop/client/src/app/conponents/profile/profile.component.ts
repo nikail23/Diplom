@@ -98,7 +98,7 @@ export class ProfileComponent implements OnInit {
           (error: HttpErrorResponse) => {
             if (error.status === 400) {
               this.changePasswordForm.controls.oldPassword.setErrors({ wrongPassword: true });
-              popup.show(error.message, true);
+              popup.show("Wrong password!", true);
             }
           }
         );

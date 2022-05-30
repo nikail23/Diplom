@@ -67,9 +67,12 @@ export class UserService {
   }
 
   public changePassword(password: ChangePasswordDto): Observable<any> {
+    const params: HttpParams = this._userId ? new HttpParams().append('id', this._userId) : new HttpParams();
+
     return this.http.post(
       environment.api.url + 'users/change_password',
-      password
+      password,
+      {params}
     );
   }
 
