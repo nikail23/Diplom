@@ -1,8 +1,13 @@
 @startuml
 
-skinparam ActorFontSize 20
+skinparam actorStyle awesome
+skinparam ActorFontSize 50
 skinparam ActorFontStyle bold
+skinparam ActorStereotypeFontSize 10
+skinparam UsecaseFontSize 30
 skinparam UsecaseFontStyle bold
+skinparam UsecaseBackgroundColor none
+skinparam LabelFontSize 30
 
 left to right direction
 
@@ -46,7 +51,7 @@ usecase "Возможность написать в чат" as ChatMessage
 
 ' actors relations
 
-Guest -|> User
+Guest -|> User 
 
 Guest --> Registration
 Guest --> Authorisation
@@ -69,25 +74,25 @@ Worker --> EditCatalog
 
 ' use case relations
 
-ViewAccountEdit .up.> ViewAccount : extend
+ViewAccountEdit .up.> ViewAccount : "<font size=30><b>EXTEND"
 
-ViewCatalogSearch .up.> ViewCatalog : extend
-ViewCatalogSort .up.> ViewCatalog : extend
-ViewCatalogFilter .up.> ViewCatalog : extend
+ViewCatalogSearch .up.> ViewCatalog : "<font size=30><b>EXTEND"
+ViewCatalogSort .up.> ViewCatalog : "<font size=30><b>EXTEND"
+ViewCatalogFilter .up.> ViewCatalog : "<font size=30><b>EXTEND"
 
-AuthorisationSN .up.> Authorisation : extend
-RegistrationSN .up.> Registration : extend
+AuthorisationSN .up.> Authorisation : "<font size=30><b>EXTEND"
+RegistrationSN .up.> Registration : "<font size=30><b>EXTEND"
 
-ViewCartEdit .up.> ViewCart : extend
+ViewCartEdit .up.> ViewCart : "<font size=30><b>EXTEND"
 
-ChatMessage .up.> Chat : extend
+ChatMessage .up.> Chat : "<font size=30><b>EXTEND"
 
-Order .down.> OrderAddressInfo  : include
-OrderAddressInfoMap .up.> OrderAddressInfo : extends
-OrderAddressInfoManual .up.> OrderAddressInfo : extends
+Order .down.> OrderAddressInfo  : "<font size=30><b>INCLUDE"
+OrderAddressInfoMap .up.> OrderAddressInfo : "<font size=30><b>EXTEND 0 "
+OrderAddressInfoManual .up.> OrderAddressInfo : "<font size=30><b>EXTEND 0 "
 
-Order .down.> OrderContactsInfo : include
-Order .down.> OrderPayment : include
-Order .down.> OrderEmail : include
+Order .down.> OrderContactsInfo : "<font size=30><b>INCLUDE"
+Order .down.> OrderPayment : "<font size=30><b>INCLUDE"
+Order .down.> OrderEmail : "<font size=30><b>INCLUDE"
 
 @enduml
