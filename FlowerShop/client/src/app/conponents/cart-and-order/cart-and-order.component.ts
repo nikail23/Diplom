@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import {
   paymentDialogHeight,
   paymentDialogWidth,
@@ -70,6 +71,7 @@ export class CartAndOrderComponent implements OnInit, OnDestroy {
   constructor(
     private catalogService: CatalogService,
     private cartService: CartService,
+    private userService: UserService,
     private orderService: OrderService,
     private router: Router,
     private dialog: MatDialog
@@ -88,6 +90,13 @@ export class CartAndOrderComponent implements OnInit, OnDestroy {
     ).subscribe((flowers) => {
       this.flowers = flowers;
     });
+    if (this.userService.isLogged) {
+      this.userService.getCurrentUserInfo().subscribe((user) => {
+        this.orderForm.controls.deliveryAddress.setValue(user.homeAddress);
+        this.orderForm.controls.email.setValue(user.email);
+        this.orderForm.controls.phone.setValue(user.phone);
+      });
+    }
   }
 
   private getLoadFlowersObservables(cartFlowersInfo: ItemOrderDto[]) {
@@ -167,7 +176,7 @@ export class CartAndOrderComponent implements OnInit, OnDestroy {
           this.generateDeliveryName();
           this.orderForm.updateValueAndValidity();
           if (this.orderForm.valid) {
-            return this.orderService.sendOrder(this.orderForm.value);
+            return this.orderService.sendOrder(this.orderForm.value, this.userService.userId);
           } else {
             this.orderForm.markAllAsTouched();
             return of(undefined);

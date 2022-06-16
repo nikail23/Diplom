@@ -15,7 +15,7 @@ namespace FlowerShop.models
         public DbSet<CategoryDB> Categories => Set<CategoryDB>();
         public DbSet<PriceDB> Prices => Set<PriceDB>();
         public DbSet<UserDB> User => Set<UserDB>();
-        public DbSet<OrdersDB> Orders => Set<OrdersDB>();
+        public DbSet<OrderDB> Orders => Set<OrderDB>();
         public DbSet<CartItemDB> CartItem => Set<CartItemDB>();
         public DbSet<CartDB> Cart => Set<CartDB>();
     }

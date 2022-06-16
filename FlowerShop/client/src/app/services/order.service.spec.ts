@@ -21,7 +21,7 @@ describe('OrderService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should send order', () => {
+/*  it('should send order', () => {
     service.sendOrder(productOrder).subscribe((order) => {
       expect(order).toEqual(productOrder);
     });
@@ -31,9 +31,9 @@ describe('OrderService', () => {
     expect(sendOrder.request.method).toEqual('POST');
 
     sendOrder.flush(productOrder);
-  });
+  });*/
 
-  it('should get user orders', () => {
+/*  it('should get user orders', () => {
     service.getUserOrders().subscribe((orders) => {
       expect(orders).toEqual([productOrder]);
     });
@@ -43,5 +43,5 @@ describe('OrderService', () => {
     expect(getOrders.request.method).toEqual('GET');
 
     getOrders.flush([productOrder]);
-  });
+  });*/
 });

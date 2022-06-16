@@ -13,6 +13,6 @@ namespace FlowerShop.models.db
         public string Address { get; set; }
         public string Phone { get; set; }
 
-        public OrdersDB Orders { get; set; }
+        public OrderDB Orders { get; set; }
     }
 }

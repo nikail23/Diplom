@@ -9,13 +9,13 @@ export interface Article {
 export const articles: Article[] = [
   {
     id: 0,
-    date: 'June 25, 2021',
-    header: 'Flower delivery in Minsk 1',
+    date: 'March 8, 2022',
+    header: 'Promotions by March 8',
     shortParagraph: `For several years now, our company has been delighting customers with the delivery of flowers and congratulations.
     We are really proud of the clear and well-coordinated work of our employees and are
     always confident that your order will be delivered at the right time to the right place.`,
     fullContent: `
-      <div class="header">Flower delivery in Minsk 1</div>
+      <div class="header">Promotions by March 8</div>
       <div class="paragraph_color_black">
           For several years now, our company has been delighting customers with the delivery of flowers and congratulations.
           We are really proud of the clear and well-coordinated work of our employees and are always confident that your order will be delivered at the right time to the right place.
@@ -40,13 +40,13 @@ export const articles: Article[] = [
   },
   {
     id: 1,
-    date: 'June 25, 2021',
-    header: 'Flower delivery in Minsk 2',
+    date: 'February 25, 2022',
+    header: 'We opened a new store!',
     shortParagraph: `For several years now, our company has been delighting customers with the delivery of flowers and congratulations.
     We are really proud of the clear and well-coordinated work of our employees and are
     always confident that your order will be delivered at the right time to the right place.`,
     fullContent: `
-    <div class="header">Flower delivery in Minsk 2</div>
+    <div class="header">We opened a new store!</div>
     <div class="paragraph_color_black">
         For several years now, our company has been delighting customers with the delivery of flowers and congratulations.
         We are really proud of the clear and well-coordinated work of our employees and are always confident that your order will be delivered at the right time to the right place.

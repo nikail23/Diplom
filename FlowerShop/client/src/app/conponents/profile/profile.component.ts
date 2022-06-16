@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
         )
         .subscribe(
           (user) => {
-            delete(user.password);
+            delete((user as any).password);
             this.accountForm.setValue(user);
             this.accountForm.updateValueAndValidity();
             popup.show('Succesfully changed!', false);

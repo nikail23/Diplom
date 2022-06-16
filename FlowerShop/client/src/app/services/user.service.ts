@@ -54,16 +54,16 @@ export class UserService {
     }
   }
 
-  public getCurrentUserInfo(): Observable<any> {
+  public getCurrentUserInfo(): Observable<UpdateUserDto> {
     const params: HttpParams = this._userId ? new HttpParams().append('id', this._userId) : new HttpParams();
 
-    return this.http.get(environment.api.url + 'users/user', {params});
+    return this.http.get<UpdateUserDto>(environment.api.url + 'users/user', {params});
   }
 
-  public updateCurrentUser(updateUserDto: UpdateUserDto): Observable<any> {
+  public updateCurrentUser(updateUserDto: UpdateUserDto): Observable<UpdateUserDto> {
     const params: HttpParams = this._userId ? new HttpParams().append('id', this._userId) : new HttpParams();
 
-    return this.http.post(environment.api.url + 'users/user', updateUserDto, {params});
+    return this.http.post<UpdateUserDto>(environment.api.url + 'users/user', updateUserDto, {params});
   }
 
   public changePassword(password: ChangePasswordDto): Observable<any> {

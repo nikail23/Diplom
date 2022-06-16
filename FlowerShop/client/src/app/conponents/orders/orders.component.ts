@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { CatalogService } from './../../services/catalog.service';
 import { OrderStatus, PaymentType, ProductOrderDto } from './../../classes/order';
 import { OrderService } from 'src/app/services/order.service';
@@ -18,33 +19,11 @@ export class OrdersComponent implements OnInit {
 
   public orders?: ProductOrderDto[];
 
-  constructor(private orderService: OrderService, private catalogService: CatalogService) {}
+  constructor(private orderService: OrderService, private catalogService: CatalogService, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.orderService.getUserOrders().subscribe((orders: ProductOrderDto[]) => {
+    this.orderService.getUserOrders(this.userService.userId).subscribe((orders: ProductOrderDto[]) => {
       this.orders = orders;
     });
-
-    this.catalogService.get(1).subscribe((flower: Flower) => {
-      this.orders = [
-        {
-          deliveryAddress: 'г. Минск, ул. Янки Мавра, д. 21',
-          deliveryName: 'Илья',
-          email: 'nikail232323232323@gmail.com',
-          paymentType: PaymentType.CARD,
-          phone: '+375 (29) 858-36-75',
-          text: '6 подъезд, выйду и встречу вас',
-          orderStatus: OrderStatus.PENDING_PAYMENT,
-          productItems: [
-            {
-              id: 0,
-              itemId: flower.id,
-              priceId: flower.priceDto.id,
-              quantity: 1,
-            }
-          ]
-        }
-      ];
-    })
   }
 }
