@@ -62,7 +62,7 @@ export class CartService {
       text: '',
     };
     this.userService.updateLoggedState();
-    const params: HttpParams = this.userService.userId ? new HttpParams().append('id', this.userService.userId) : new HttpParams();
+    const params: HttpParams = new HttpParams().append('id', this.userService.userId);
     return this.userService.loggedState.pipe(
       tap((isLoggedIn) => (this.isLoggedIn = isLoggedIn)),
       mergeMap(() => this.http.get(environment.api.url + 'cart', {params}) as Observable<ShoppingCartDto>),

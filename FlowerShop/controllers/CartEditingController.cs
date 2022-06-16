@@ -36,6 +36,12 @@ namespace FlowerShop.controllers
                         .Include(cartItem => cartItem.Flower)
                         .ThenInclude(flower => flower.Prices)
                         .Include(cartItem => cartItem.Cart)
+                        .Where(
+                        delegate (CartItemDB cartItemDB)
+                        {
+                            return cartItemDB.Cart.Id == dbCart.Id;
+                        }
+                        )
                         .ToList();
                     ItemOrder[] clientItems = CartService.GetClientItemsArray(dbItems);
                     return Ok(CartService.GetClientCart(dbCart, clientItems));
@@ -55,8 +61,7 @@ namespace FlowerShop.controllers
 
             if (dbCart != null)
             {
-                FlowerDB flower = db.Flowers.Find(itemId);
-                if (db.CartItem.Find(itemId) != null && flower != null)
+                if (db.CartItem.Find(itemId) != null)
                 {
                     CartItemDB dbItem = db.CartItem
                         .Include(item => item.Flower)
@@ -74,6 +79,12 @@ namespace FlowerShop.controllers
                         .Include(cartItem => cartItem.Flower)
                         .ThenInclude(flower => flower.Prices)
                         .Include(cartItem => cartItem.Cart)
+                        .Where(
+                        delegate (CartItemDB cartItemDB)
+                        {
+                            return cartItemDB.Cart.Id == dbCart.Id;
+                        }
+                        )
                         .ToList();
                     ItemOrder[] clientItems = CartService.GetClientItemsArray(dbItems);
                     return Ok(CartService.GetClientCart(dbCart, clientItems));

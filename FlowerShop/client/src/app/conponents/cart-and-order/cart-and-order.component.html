@@ -27,9 +27,8 @@
         <div class="cart__input">
           <input
             type="number"
-            [value]="cartFlowersInfo[i] ? cartFlowersInfo[i].quantity : 0"
-            (valueChange)="setCount(i, $event)"
-            [min]="1"
+            [ngModel]="cartFlowersInfo[i] ? cartFlowersInfo[i].quantity : 0"
+            (ngModelChange)="setCount(i, $event)"
           />
         </div>
       </div>

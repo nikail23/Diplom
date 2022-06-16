@@ -14,9 +14,9 @@ namespace FlowerShop.controllers
         }
 
         [HttpGet]
-        public string GetTempId()
+        public int GetTempId()
         {
-            return "tempid";
+            return 11;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FlowerShop.models.db;
+﻿using FlowerShop.models;
+using FlowerShop.models.db;
 using FlowerShop.models.dto;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,32 @@ namespace FlowerShop.services
             return databaseItems.ConvertAll(new Converter<CartItemDB, ItemOrder>(GetClientItem)).ToArray();
         }
 
-        public static CartItemDB[] GetDatabaseItemsArray(List<ItemOrder> clientItems)
+        public static void UpdateCart(CartDB dbCart, Cart clientCart, ApplicationContext db)
         {
-            /*return clientItems.ConvertAll(new Converter<ItemOrder, CartItemDB>(GetDatabaseItem)).ToArray();*/
+            foreach (var clientItem in clientCart.orderItems)
+            {
+                FlowerDB dbFlower = db.Flowers.Find(clientItem.itemId);
+
+                if (dbFlower != null)
+                {
+                    CartItemDB dbItem = db.CartItem.Find(clientItem.id);
+
+                    if (dbItem == null)
+                    {
+                        db.CartItem.Add(new CartItemDB()
+                        {
+                            Count = clientItem.quantity,
+                            Cart = dbCart,
+                            Flower = dbFlower,
+                        });
+                    }
+                    else
+                    {
+                        dbItem.Count = clientItem.quantity;
+                        db.CartItem.Update(dbItem);
+                    }
+                }
+            }
         }
 
         public static ItemOrder GetClientItem(CartItemDB databaseItem)

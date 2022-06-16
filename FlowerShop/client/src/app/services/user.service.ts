@@ -1,3 +1,4 @@
+import { CartService } from 'src/app/services/cart.service';
 import { UpdateUserDto, ChangePasswordDto } from '../classes/user';
 import { from, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -17,36 +18,33 @@ export class UserService {
     return this._loggedState.asObservable();
   }
 
-  public get userId(): number | undefined {
-    return this._userId;
+  public get userId(): number {
+    return this._userId ?? this._tempId ?? 0;
   }
 
   private _loggedState: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   private _userId?: number;
+  private _tempId?: number;
 
   constructor(
     private router: Router,
-    private http: HttpClient
-  ) {
-    // this.router.routeReuseStrategy.shouldReuseRoute = () => {
-    //   return false;
-    // };
-  }
+    private http: HttpClient,
+  ) {}
 
   public updateLoggedState(): void {
     const userId = localStorage.getItem('USER_ID');
 
     if (!userId) {
-      const tempId = localStorage.getItem('TEMP_ID');
+      const tempId: number = parseInt(localStorage.getItem('TEMP_ID') ?? '0');
       if (!tempId) {
-        this.http.get(environment.api.url + 'users/tempid', {responseType: 'text'})
-          .subscribe((tempId: string) => {
+        this.http.get(environment.api.url + 'users/tempid')
+          .subscribe((tempId: any) => {
             localStorage.setItem('TEMP_ID', tempId);
+            this._tempId = tempId;
           });
-      } else {
-        localStorage.removeItem('TEMP_ID');
       }
 
+      this._tempId = tempId;
       this.isLogged = false;
       this._loggedState.next(false);
     } else {
@@ -81,6 +79,7 @@ export class UserService {
   public logOut(): void {
     if (this.isLogged) {
       localStorage.removeItem('USER_ID');
+      this._userId = undefined;
       this.updateLoggedState();
       this.router.navigate(['home']);
     }

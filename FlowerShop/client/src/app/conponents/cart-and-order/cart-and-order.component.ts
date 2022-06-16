@@ -101,6 +101,7 @@ export class CartAndOrderComponent implements OnInit, OnDestroy {
   }
 
   public deleteFlowerButtonClicked(flower: Flower) {
+    console.log(flower);
     this.cartService.delete(flower.id).pipe(
       mergeMap((cart) => {
         this.cartFlowersInfo = cart.orderItems;

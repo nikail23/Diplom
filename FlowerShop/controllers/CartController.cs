@@ -57,7 +57,7 @@ namespace FlowerShop.controllers
         [HttpPut]
         public IActionResult Put([FromQuery(Name = "id")] int id, [FromBody] Cart cart)
         {
-            /*UserDB user = db.User.ToList().FirstOrDefault(
+            UserDB user = db.User.ToList().FirstOrDefault(
                 delegate (UserDB user)
                 {
                     return user.Id == id;
@@ -70,7 +70,10 @@ namespace FlowerShop.controllers
 
                 if (dbCart != null)
                 {
-                    *//*List<CartItemDB> dbItems = db.CartItem
+                    CartService.UpdateCart(dbCart, cart, db);
+                    db.SaveChanges();
+
+                    List<CartItemDB> dbItems = db.CartItem
                         .Include(cartItem => cartItem.Flower)
                         .ThenInclude(flower => flower.Prices)
                         .Include(cartItem => cartItem.Cart)
@@ -79,15 +82,13 @@ namespace FlowerShop.controllers
                         {
                             return cartItemDB.Cart.Id == dbCart.Id;
                         }
-                        ).ToList();*//*
-
-                    CartService.GetDatabaseItem();
+                        ).ToList();
 
                     return Ok(CartService.GetClientCart(dbCart, CartService.GetClientItemsArray(dbItems)));
                 }
             }
 
-            return BadRequest();*/
+            return BadRequest();
         }
     }
 }
